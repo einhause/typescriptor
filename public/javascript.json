@@ -1,91 +1,91 @@
 {
   "snippets": [
     {
-      "language": "JavaScript",
+      "language": "javascript",
       "description": "Calculate the factorial of a number",
       "linesOfCode": 10,
       "code": "function factorial(n) {\n\tif (n === 0) return 1;\n\treturn n * factorial(n - 1);\n}\n\nfor (let i = 1; i <= 10; i++) {\n\tconsole.log(`Factorial of ${i}: ${factorial(i)}`);\n}"
     },
     {
-      "language": "JavaScript",
+      "language": "javascript",
       "description": "Check if a number is prime",
       "linesOfCode": 13,
       "code": "function isPrime(num) {\n\tif (num < 2) return false;\n\tfor (let i = 2; i <= Math.sqrt(num); i++) {\n\t\tif (num % i === 0) return false;\n\t}\n\treturn true;\n}\n\nfor (let i = 1; i <= 20; i++) {\n\tif (isPrime(i)) {\n\t\tconsole.log(`${i} is a prime number`);\n\t}\n}"
     },
     {
-      "language": "JavaScript",
+      "language": "javascript",
       "description": "Implement a simple calculator class",
       "linesOfCode": 16,
       "code": "class Calculator {\n\tadd(x, y) {\n\t\treturn x + y;\n\t}\n\tsubtract(x, y) {\n\t\treturn x - y;\n\t}\n\tmultiply(x, y) {\n\t\treturn x * y;\n\t}\n\tdivide(x, y) {\n\t\tif (y !== 0) return x / y;\n\t\treturn 'Cannot divide by zero';\n\t}\n}\n\nconst calc = new Calculator();\nconsole.log(calc.add(10, 5));\nconsole.log(calc.divide(10, 0));"
     },
     {
-      "language": "JavaScript",
+      "language": "javascript",
       "description": "Generate random password",
       "linesOfCode": 14,
       "code": "function generatePassword(length = 8) {\n\tconst chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%';\n\tlet password = '';\n\tfor (let i = 0; i < length; i++) {\n\t\tpassword += chars.charAt(Math.floor(Math.random() * chars.length));\n\t}\n\treturn password;\n}\n\nconsole.log('Generated password:', generatePassword(12));"
     },
     {
-      "language": "JavaScript",
+      "language": "javascript",
       "description": "Reverse a string",
       "linesOfCode": 8,
       "code": "function reverseString(str) {\n\treturn str.split('').reverse().join('');\n}\n\nconst original = 'hello world';\nconst reversed = reverseString(original);\nconsole.log('Reversed string:', reversed);"
     },
     {
-      "language": "JavaScript",
+      "language": "javascript",
       "description": "Sort an array using Bubble Sort",
       "linesOfCode": 15,
       "code": "function bubbleSort(arr) {\n\tfor (let i = 0; i < arr.length; i++) {\n\t\tfor (let j = 0; j < arr.length - i - 1; j++) {\n\t\t\tif (arr[j] > arr[j + 1]) {\n\t\t\t\t[arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];\n\t\t\t}\n\t\t}\n\t}\n}\n\nconst numbers = [64, 34, 25, 12, 22, 11, 90];\nbubbleSort(numbers);\nconsole.log('Sorted array:', numbers);"
     },
     {
-      "language": "JavaScript",
+      "language": "javascript",
       "description": "Find the longest word in an array",
       "linesOfCode": 10,
       "code": "function longestWord(words) {\n\tlet longest = '';\n\tfor (const word of words) {\n\t\tif (word.length > longest.length) {\n\t\t\tlongest = word;\n\t\t}\n\t}\n\treturn longest;\n}\n\nconsole.log('Longest word:', longestWord(['apple', 'banana', 'watermelon', 'grape']));"
     },
     {
-      "language": "JavaScript",
+      "language": "javascript",
       "description": "Count occurrences of a word in a string",
       "linesOfCode": 12,
       "code": "function wordCount(str, word) {\n\tconst words = str.split(' ');\n\tlet count = 0;\n\tfor (const w of words) {\n\t\tif (w === word) count++;\n\t}\n\treturn count;\n}\n\nconst sentence = 'hello world hello universe';\nconsole.log('Occurrences of hello:', wordCount(sentence, 'hello'));"
     },
     {
-      "language": "JavaScript",
+      "language": "javascript",
       "description": "Simulate a dice roll",
       "linesOfCode": 8,
       "code": "function rollDice(sides = 6) {\n\treturn Math.floor(Math.random() * sides) + 1;\n}\n\nfor (let i = 0; i < 10; i++) {\n\tconsole.log('Dice roll:', rollDice());\n}"
     },
     {
-      "language": "JavaScript",
+      "language": "javascript",
       "description": "Print Fibonacci sequence up to n terms",
       "linesOfCode": 10,
       "code": "function fibonacci(n) {\n\tconst sequence = [0, 1];\n\tfor (let i = 2; i < n; i++) {\n\t\tsequence.push(sequence[i - 1] + sequence[i - 2]);\n\t}\n\treturn sequence;\n}\n\nconsole.log('Fibonacci sequence:', fibonacci(10));"
     },
     {
-      "language": "JavaScript",
+      "language": "javascript",
       "description": "Simulate a simple Tic-Tac-Toe game",
       "linesOfCode": 28,
       "code": "const board = [['', '', ''], ['', '', ''], ['', '', '']];\n\nfunction printBoard() {\n\tboard.forEach(row => console.log(row.join(' | ')));\n\tconsole.log('\\n');\n}\n\nfunction checkWin(player) {\n\tfor (let i = 0; i < 3; i++) {\n\t\tif (board[i].every(cell => cell === player) || board.map(row => row[i]).every(cell => cell === player)) return true;\n\t}\n\treturn (board[0][0] === player && board[1][1] === player && board[2][2] === player) ||\n\t\t   (board[0][2] === player && board[1][1] === player && board[2][0] === player);\n}\n\nfunction playMove(player, x, y) {\n\tif (board[x][y] === '') {\n\t\tboard[x][y] = player;\n\t\tprintBoard();\n\t\tif (checkWin(player)) {\n\t\t\tconsole.log(`${player} wins!`);\n\t\t\treturn;\n\t\t}\n\t}\n}\n\nplayMove('X', 0, 0);\nplayMove('O', 1, 1);\nplayMove('X', 0, 1);\nplayMove('O', 1, 2);\nplayMove('X', 0, 2);"
     },
     {
-      "language": "JavaScript",
+      "language": "javascript",
       "description": "Class representing a basic bank account with deposit and withdrawal",
       "linesOfCode": 25,
       "code": "class BankAccount {\n\tconstructor(owner, balance = 0) {\n\t\tthis.owner = owner;\n\t\tthis.balance = balance;\n\t}\n\n\tdeposit(amount) {\n\t\tif (amount > 0) {\n\t\t\tthis.balance += amount;\n\t\t\tconsole.log(`Deposited $${amount}. New balance: $${this.balance}`);\n\t\t} else {\n\t\t\tconsole.log('Deposit amount must be positive');\n\t\t}\n\t}\n\n\twithdraw(amount) {\n\t\tif (amount > 0 && amount <= this.balance) {\n\t\t\tthis.balance -= amount;\n\t\t\tconsole.log(`Withdrew $${amount}. New balance: $${this.balance}`);\n\t\t} else {\n\t\t\tconsole.log('Insufficient balance or invalid amount');\n\t\t}\n\t}\n}\n\nconst account = new BankAccount('Alice', 1000);\naccount.deposit(500);\naccount.withdraw(300);"
     },
     {
-      "language": "JavaScript",
+      "language": "javascript",
       "description": "Create a stopwatch with start, stop, and reset functionality",
       "linesOfCode": 28,
       "code": "class Stopwatch {\n\tconstructor() {\n\t\tthis.startTime = 0;\n\t\tthis.endTime = 0;\n\t\tthis.running = false;\n\t}\n\n\tstart() {\n\t\tif (!this.running) {\n\t\t\tthis.startTime = Date.now();\n\t\t\tthis.running = true;\n\t\t\tconsole.log('Stopwatch started');\n\t\t}\n\t}\n\n\tstop() {\n\t\tif (this.running) {\n\t\t\tthis.endTime = Date.now();\n\t\t\tthis.running = false;\n\t\t\tconsole.log(`Stopwatch stopped. Duration: ${(this.endTime - this.startTime) / 1000} seconds`);\n\t\t}\n\t}\n\n\treset() {\n\t\tthis.startTime = 0;\n\t\tthis.endTime = 0;\n\t\tthis.running = false;\n\t\tconsole.log('Stopwatch reset');\n\t}\n}\n\nconst stopwatch = new Stopwatch();\nstopwatch.start();\nsetTimeout(() => stopwatch.stop(), 3000);"
     },
     {
-      "language": "JavaScript",
+      "language": "javascript",
       "description": "Weather data fetcher using promises",
       "linesOfCode": 26,
       "code": "function getWeather(city) {\n\treturn new Promise((resolve, reject) => {\n\t\tsetTimeout(() => {\n\t\t\tconst fakeData = { temp: 25, condition: 'Sunny' };\n\t\t\tresolve(fakeData);\n\t\t}, 1000);\n\t});\n}\n\nfunction fetchWeather(city) {\n\tgetWeather(city)\n\t\t.then(data => {\n\t\t\tconsole.log(`Weather in ${city}:`);\n\t\t\tconsole.log(`Temperature: ${data.temp}°C`);\n\t\t\tconsole.log(`Condition: ${data.condition}`);\n\t\t})\n\t\t.catch(err => console.error('Error fetching weather:', err));\n}\n\nfetchWeather('Paris');\nfetchWeather('New York');\nfetchWeather('Tokyo');"
     },
     {
-      "language": "JavaScript",
+      "language": "javascript",
       "description": "Simulate a Rock, Paper, Scissors game",
       "linesOfCode": 27,
       "code": "const choices = ['Rock', 'Paper', 'Scissors'];\n\nfunction getComputerChoice() {\n\treturn choices[Math.floor(Math.random() * choices.length)];\n}\n\nfunction getWinner(playerChoice, computerChoice) {\n\tif (playerChoice === computerChoice) return 'Draw';\n\tif (\n\t\t(playerChoice === 'Rock' && computerChoice === 'Scissors') ||\n\t\t(playerChoice === 'Paper' && computerChoice === 'Rock') ||\n\t\t(playerChoice === 'Scissors' && computerChoice === 'Paper')\n\t) {\n\t\treturn 'Player wins';\n\t}\n\treturn 'Computer wins';\n}\n\nfunction playGame(playerChoice) {\n\tconst computerChoice = getComputerChoice();\n\tconsole.log(`Player: ${playerChoice}, Computer: ${computerChoice}`);\n\tconsole.log(getWinner(playerChoice, computerChoice));\n}\n\nplayGame('Rock');\nplayGame('Paper');\nplayGame('Scissors');"

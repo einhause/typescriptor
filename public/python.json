@@ -1,91 +1,91 @@
 {
   "snippets": [
     {
-      "language": "Python",
+      "language": "python",
       "description": "Calculate Fibonacci sequence up to nth term",
       "linesOfCode": 10,
       "code": "def fibonacci(n):\n\tfib_sequence = [0, 1]\n\tfor i in range(2, n):\n\t\tfib_sequence.append(fib_sequence[-1] + fib_sequence[-2])\n\treturn fib_sequence\n\nn = 10\nprint(f\"Fibonacci sequence up to {n}th term:\", fibonacci(n))"
     },
     {
-      "language": "Python",
+      "language": "python",
       "description": "Check if a number is prime",
       "linesOfCode": 13,
       "code": "def is_prime(num):\n\tif num < 2:\n\t\treturn False\n\tfor i in range(2, int(num ** 0.5) + 1):\n\t\tif num % i == 0:\n\t\t\treturn False\n\treturn True\n\nfor number in range(1, 21):\n\tif is_prime(number):\n\t\tprint(f\"{number} is a prime number\")"
     },
     {
-      "language": "Python",
+      "language": "python",
       "description": "Sort a list using Bubble Sort",
       "linesOfCode": 16,
       "code": "def bubble_sort(arr):\n\tn = len(arr)\n\tfor i in range(n):\n\t\tfor j in range(0, n-i-1):\n\t\t\tif arr[j] > arr[j+1]:\n\t\t\t\tarr[j], arr[j+1] = arr[j+1], arr[j]\n\nnumbers = [64, 34, 25, 12, 22, 11, 90]\nbubble_sort(numbers)\nprint(\"Sorted array:\", numbers)"
     },
     {
-      "language": "Python",
+      "language": "python",
       "description": "Implement a simple calculator class",
       "linesOfCode": 20,
       "code": "class Calculator:\n\tdef add(self, x, y):\n\t\treturn x + y\n\tdef subtract(self, x, y):\n\t\treturn x - y\n\tdef multiply(self, x, y):\n\t\treturn x * y\n\tdef divide(self, x, y):\n\t\tif y != 0:\n\t\t\treturn x / y\n\t\telse:\n\t\t\treturn \"Cannot divide by zero\"\n\ncalc = Calculator()\nprint(calc.add(10, 5))\nprint(calc.subtract(10, 5))\nprint(calc.multiply(10, 5))\nprint(calc.divide(10, 0))"
     },
     {
-      "language": "Python",
+      "language": "python",
       "description": "Simulate a coin toss",
       "linesOfCode": 10,
       "code": "import random\n\ndef coin_toss():\n\treturn 'Heads' if random.randint(0, 1) == 1 else 'Tails'\n\nfor _ in range(10):\n\tprint(coin_toss())"
     },
     {
-      "language": "Python",
+      "language": "python",
       "description": "Create a timer function using decorators",
       "linesOfCode": 15,
       "code": "import time\n\ndef timer(func):\n\tdef wrapper(*args, **kwargs):\n\t\tstart_time = time.time()\n\t\tresult = func(*args, **kwargs)\n\t\tend_time = time.time()\n\t\tprint(f\"Execution time: {end_time - start_time} seconds\")\n\t\treturn result\n\treturn wrapper\n\n@timer\ndef compute():\n\ttime.sleep(1)\n\ncompute()"
     },
     {
-      "language": "Python",
+      "language": "python",
       "description": "Generate random password",
       "linesOfCode": 14,
       "code": "import random\nimport string\n\ndef generate_password(length=8):\n\tcharacters = string.ascii_letters + string.digits + string.punctuation\n\tpassword = ''.join(random.choice(characters) for _ in range(length))\n\treturn password\n\nprint(\"Generated password:\", generate_password(12))"
     },
     {
-      "language": "Python",
+      "language": "python",
       "description": "Count word frequency in a sentence",
       "linesOfCode": 15,
       "code": "def word_frequency(sentence):\n\twords = sentence.split()\n\tfrequency = {}\n\tfor word in words:\n\t\tfrequency[word] = frequency.get(word, 0) + 1\n\treturn frequency\n\nsentence = \"hello world hello universe\"\nprint(\"Word frequency:\", word_frequency(sentence))"
     },
     {
-      "language": "Python",
+      "language": "python",
       "description": "Plot a sine wave",
       "linesOfCode": 16,
       "code": "import numpy as np\nimport matplotlib.pyplot as plt\n\nx = np.linspace(0, 2 * np.pi, 100)\ny = np.sin(x)\n\nplt.plot(x, y)\nplt.title(\"Sine Wave\")\nplt.xlabel(\"x\")\nplt.ylabel(\"sin(x)\")\nplt.grid()\nplt.show()"
     },
     {
-      "language": "Python",
+      "language": "python",
       "description": "Find the longest word in a list",
       "linesOfCode": 11,
       "code": "def longest_word(word_list):\n\tlongest = \"\"\n\tfor word in word_list:\n\t\tif len(word) > len(longest):\n\t\t\tlongest = word\n\treturn longest\n\nwords = [\"apple\", \"banana\", \"watermelon\", \"grape\"]\nprint(\"Longest word:\", longest_word(words))"
     },
     {
-      "language": "Python",
+      "language": "python",
       "description": "Simulate a simple Tic-Tac-Toe game",
       "linesOfCode": 29,
       "code": "board = [['', '', ''], ['', '', ''], ['', '', '']]\n\n\ndef print_board():\n\tfor row in board:\n\t\tprint(' | '.join(row))\n\t\tprint('-' * 9)\n\n\ndef check_win(player):\n\t# Check rows and columns\n\tfor i in range(3):\n\t\tif all(cell == player for cell in board[i]) or all(board[j][i] == player for j in range(3)):\n\t\t\treturn True\n\t# Check diagonals\n\tif (board[0][0] == player and board[1][1] == player and board[2][2] == player) or \\\n\t   (board[0][2] == player and board[1][1] == player and board[2][0] == player):\n\t\treturn True\n\treturn False\n\n\ndef play_move(player, x, y):\n\tif board[x][y] == '':\n\t\tboard[x][y] = player\n\t\tprint_board()\n\t\tif check_win(player):\n\t\t\tprint(f'{player} wins!')\n\t\t\treturn\n\telse:\n\t\tprint('Invalid move. Try again.')\n\n# Sample game play\nplay_move('X', 0, 0)\nplay_move('O', 1, 1)\nplay_move('X', 0, 1)\nplay_move('O', 1, 2)\nplay_move('X', 0, 2)"
     },
     {
-      "language": "Python",
+      "language": "python",
       "description": "Basic implementation of a bank account class",
       "linesOfCode": 27,
       "code": "class BankAccount:\n\tdef __init__(self, owner, balance=0):\n\t\tself.owner = owner\n\t\tself.balance = balance\n\n\tdef deposit(self, amount):\n\t\tif amount > 0:\n\t\t\tself.balance += amount\n\t\t\tprint(f'Deposited ${amount}. New balance: ${self.balance}')\n\t\telse:\n\t\t\tprint('Deposit amount must be positive')\n\n\tdef withdraw(self, amount):\n\t\tif 0 < amount <= self.balance:\n\t\t\tself.balance -= amount\n\t\t\tprint(f'Withdrew ${amount}. New balance: ${self.balance}')\n\t\telse:\n\t\t\tprint('Insufficient balance or invalid amount')\n\naccount = BankAccount('Alice', 1000)\naccount.deposit(500)\naccount.withdraw(300)\naccount.withdraw(1500)"
     },
     {
-      "language": "Python",
+      "language": "python",
       "description": "Simple stopwatch class with start, stop, and reset methods",
       "linesOfCode": 29,
       "code": "import time\n\nclass Stopwatch:\n\tdef __init__(self):\n\t\tself.start_time = 0\n\t\tself.running = False\n\n\tdef start(self):\n\t\tif not self.running:\n\t\t\tself.start_time = time.time()\n\t\t\tself.running = True\n\t\t\tprint('Stopwatch started')\n\n\tdef stop(self):\n\t\tif self.running:\n\t\t\telapsed_time = time.time() - self.start_time\n\t\t\tself.running = False\n\t\t\tprint(f'Stopwatch stopped. Elapsed time: {elapsed_time:.2f} seconds')\n\n\tdef reset(self):\n\t\tself.start_time = 0\n\t\tself.running = False\n\t\tprint('Stopwatch reset')\n\n# Example usage\nwatch = Stopwatch()\nwatch.start()\ntime.sleep(2)\nwatch.stop()\nwatch.reset()"
     },
     {
-      "language": "Python",
+      "language": "python",
       "description": "Fetch weather data using an API (mocked)",
       "linesOfCode": 28,
       "code": "import requests\n\ndef get_weather(city):\n\t# Mocked response as we can't call an actual API here\n\tfake_response = {'temp': 25, 'condition': 'Sunny'}\n\treturn fake_response\n\n\ndef fetch_weather(city):\n\ttry:\n\t\tdata = get_weather(city)\n\t\tprint(f'Weather in {city}:')\n\t\tprint(f'Temperature: {data['temp']}°C')\n\t\tprint(f'Condition: {data['condition']}')\n\texcept Exception as e:\n\t\tprint('Error fetching weather:', e)\n\nfetch_weather('Paris')\nfetch_weather('New York')\nfetch_weather('Tokyo')"
     },
     {
-      "language": "Python",
+      "language": "python",
       "description": "Simple implementation of Rock, Paper, Scissors game",
       "linesOfCode": 26,
       "code": "import random\n\nchoices = ['Rock', 'Paper', 'Scissors']\n\ndef get_computer_choice():\n\treturn random.choice(choices)\n\n\ndef get_winner(player_choice, computer_choice):\n\tif player_choice == computer_choice:\n\t\treturn 'Draw'\n\telif (player_choice == 'Rock' and computer_choice == 'Scissors') or \\\n\t\t (player_choice == 'Paper' and computer_choice == 'Rock') or \\\n\t\t (player_choice == 'Scissors' and computer_choice == 'Paper'):\n\t\treturn 'Player wins'\n\telse:\n\t\treturn 'Computer wins'\n\n\ndef play_game(player_choice):\n\tcomputer_choice = get_computer_choice()\n\tprint(f'Player: {player_choice}, Computer: {computer_choice}')\n\tprint(get_winner(player_choice, computer_choice))\n\nplay_game('Rock')\nplay_game('Paper')\nplay_game('Scissors')"

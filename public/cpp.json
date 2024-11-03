@@ -1,79 +1,79 @@
 {
   "snippets": [
     {
-      "language": "C++",
+      "language": "cpp",
       "description": "Calculate the factorial of a number",
       "linesOfCode": 11,
       "code": "#include <iostream>\nusing namespace std;\n\nint factorial(int n) {\n\tif (n == 0) return 1;\n\treturn n * factorial(n - 1);\n}\n\nint main() {\n\tfor (int i = 1; i <= 10; i++) {\n\t\tcout << \"Factorial of \" << i << \": \" << factorial(i) << endl;\n\t}\n\treturn 0;\n}"
     },
     {
-      "language": "C++",
+      "language": "cpp",
       "description": "Check if a number is prime",
       "linesOfCode": 15,
       "code": "#include <iostream>\nusing namespace std;\n\nbool isPrime(int num) {\n\tif (num < 2) return false;\n\tfor (int i = 2; i * i <= num; i++) {\n\t\tif (num % i == 0) return false;\n\t}\n\treturn true;\n}\n\nint main() {\n\tfor (int i = 1; i <= 20; i++) {\n\t\tif (isPrime(i)) cout << i << \" is a prime number\" << endl;\n\t}\n\treturn 0;\n}"
     },
     {
-      "language": "C++",
+      "language": "cpp",
       "description": "Simple class representing a rectangle",
       "linesOfCode": 16,
       "code": "#include <iostream>\nusing namespace std;\n\nclass Rectangle {\n\tprivate:\n\t\tdouble length, width;\n\tpublic:\n\t\tRectangle(double l, double w) : length(l), width(w) {}\n\t\tdouble area() { return length * width; }\n};\n\nint main() {\n\tRectangle rect(5, 3);\n\tcout << \"Area: \" << rect.area() << endl;\n\treturn 0;\n}"
     },
     {
-      "language": "C++",
+      "language": "cpp",
       "description": "Swap two numbers using pointers",
       "linesOfCode": 14,
       "code": "#include <iostream>\nusing namespace std;\n\nvoid swap(int* a, int* b) {\n\tint temp = *a;\n\t*a = *b;\n\t*b = temp;\n}\n\nint main() {\n\tint x = 5, y = 10;\n\tswap(&x, &y);\n\tcout << \"x: \" << x << \", y: \" << y << endl;\n\treturn 0;\n}"
     },
     {
-      "language": "C++",
+      "language": "cpp",
       "description": "Convert Celsius to Fahrenheit",
       "linesOfCode": 17,
       "code": "#include <iostream>\nusing namespace std;\n\ndouble celsiusToFahrenheit(double celsius) {\n\treturn (celsius * 9.0 / 5.0) + 32;\n}\n\nint main() {\n\tfor (double c = 0; c <= 100; c += 10) {\n\t\tcout << c << \"°C = \" << celsiusToFahrenheit(c) << \"°F\" << endl;\n\t}\n\treturn 0;\n}"
     },
     {
-      "language": "C++",
+      "language": "cpp",
       "description": "Basic implementation of a bank account class",
       "linesOfCode": 20,
       "code": "#include <iostream>\nusing namespace std;\n\nclass BankAccount {\n\tprivate:\n\t\tstring owner;\n\t\tdouble balance;\n\tpublic:\n\t\tBankAccount(string owner) : owner(owner), balance(0) {}\n\t\tvoid deposit(double amount) {\n\t\t\tif (amount > 0) {\n\t\t\t\tbalance += amount;\n\t\t\t\tcout << \"Deposited: \" << amount << endl;\n\t\t\t}\n\t\t}\n\t\tvoid display() {\n\t\t\tcout << \"Owner: \" << owner << \", Balance: \" << balance << endl;\n\t\t}\n};\n\nint main() {\n\tBankAccount account(\"Alice\");\n\taccount.deposit(500);\n\taccount.display();\n\treturn 0;\n}"
     },
     {
-      "language": "C++",
+      "language": "cpp",
       "description": "Find the largest element in an array",
       "linesOfCode": 22,
       "code": "#include <iostream>\nusing namespace std;\n\nint findLargest(int arr[], int size) {\n\tint largest = arr[0];\n\tfor (int i = 1; i < size; i++) {\n\t\tif (arr[i] > largest) {\n\t\t\tlargest = arr[i];\n\t\t}\n\t}\n\treturn largest;\n}\n\nint main() {\n\tint numbers[] = {3, 5, 7, 2, 8};\n\tint size = sizeof(numbers) / sizeof(numbers[0]);\n\tcout << \"Largest number: \" << findLargest(numbers, size) << endl;\n\treturn 0;\n}"
     },
     {
-      "language": "C++",
+      "language": "cpp",
       "description": "Calculate the sum of an array of integers",
       "linesOfCode": 24,
       "code": "#include <iostream>\nusing namespace std;\n\nint sumArray(int arr[], int size) {\n\tint sum = 0;\n\tfor (int i = 0; i < size; i++) {\n\t\tsum += arr[i];\n\t}\n\treturn sum;\n}\n\nint main() {\n\tint numbers[] = {1, 2, 3, 4, 5};\n\tint size = sizeof(numbers) / sizeof(numbers[0]);\n\tcout << \"Sum of array: \" << sumArray(numbers, size) << endl;\n\treturn 0;\n}"
     },
     {
-      "language": "C++",
+      "language": "cpp",
       "description": "Bubble sort algorithm implementation",
       "linesOfCode": 26,
       "code": "#include <iostream>\nusing namespace std;\n\nvoid bubbleSort(int arr[], int size) {\n\tfor (int i = 0; i < size - 1; i++) {\n\t\tfor (int j = 0; j < size - i - 1; j++) {\n\t\t\tif (arr[j] > arr[j + 1]) {\n\t\t\t\tswap(arr[j], arr[j + 1]);\n\t\t\t}\n\t\t}\n\t}\n}\n\nint main() {\n\tint arr[] = {64, 34, 25, 12, 22, 11, 90};\n\tint size = sizeof(arr) / sizeof(arr[0]);\n\tbubbleSort(arr, size);\n\tcout << \"Sorted array: \";\n\tfor (int i = 0; i < size; i++) cout << arr[i] << \" \";\n\treturn 0;\n}"
     },
     {
-      "language": "C++",
+      "language": "cpp",
       "description": "Implement a simple queue using an array",
       "linesOfCode": 30,
       "code": "#include <iostream>\nusing namespace std;\n\nclass Queue {\n\tprivate:\n\t\tint arr[100];\n\t\tint front, rear;\n\t\tint capacity;\n\tpublic:\n\t\tQueue(int c) {\n\t\t\tcapacity = c;\n\t\t\tfront = rear = 0;\n\t\t}\n\n\t\tvoid enqueue(int item) {\n\t\t\tif (rear == capacity) {\n\t\t\t\tcout << \"Queue is full\" << endl;\n\t\t\t\treturn;\n\t\t\t}\n\t\t\tarr[rear++] = item;\n\t\t}\n\n\t\tvoid dequeue() {\n\t\t\tif (front == rear) {\n\t\t\t\tcout << \"Queue is empty\" << endl;\n\t\t\t\treturn;\n\t\t\t}\n\t\t\tfront++;\n\t\t}\n\n\t\tvoid display() {\n\t\t\tfor (int i = front; i < rear; i++) {\n\t\t\t\tcout << arr[i] << \" \";\n\t\t\t}\n\t\t\tcout << endl;\n\t\t}\n};\n\nint main() {\n\tQueue q(5);\n\tq.enqueue(10);\n\tq.enqueue(20);\n\tq.display();\n\tq.dequeue();\n\tq.display();\n\treturn 0;\n}"
     },
     {
-      "language": "C++",
+      "language": "cpp",
       "description": "Create a simple linked list with insertion and display",
       "linesOfCode": 28,
       "code": "#include <iostream>\nusing namespace std;\n\nclass Node {\n\tpublic:\n\t\tint data;\n\t\tNode* next;\n\t\tNode(int val) : data(val), next(nullptr) {}\n};\n\nclass LinkedList {\n\tprivate:\n\t\tNode* head;\n\tpublic:\n\t\tLinkedList() : head(nullptr) {}\n\t\tvoid insert(int val) {\n\t\t\tNode* newNode = new Node(val);\n\t\t\tif (!head) {\n\t\t\t\thead = newNode;\n\t\t\t} else {\n\t\t\t\tNode* temp = head;\n\t\t\t\twhile (temp->next) {\n\t\t\t\t\ttemp = temp->next;\n\t\t\t\t}\n\t\t\t\ttemp->next = newNode;\n\t\t\t}\n\t\t}\n\t\tvoid display() {\n\t\t\tNode* temp = head;\n\t\t\twhile (temp) {\n\t\t\t\tcout << temp->data << \" \";\n\t\t\t\ttemp = temp->next;\n\t\t\t}\n\t\t\tcout << endl;\n\t\t}\n};\n\nint main() {\n\tLinkedList list;\n\tlist.insert(1);\n\tlist.insert(2);\n\tlist.insert(3);\n\tlist.display();\n\treturn 0;\n}"
     },
     {
-      "language": "C++",
+      "language": "cpp",
       "description": "Implement a simple stack using an array",
       "linesOfCode": 29,
       "code": "#include <iostream>\nusing namespace std;\n\nclass Stack {\n\tprivate:\n\t\tint arr[100];\n\t\tint top;\n\tpublic:\n\t\tStack() {\n\t\t\ttop = -1;\n\t\t}\n\n\t\tvoid push(int x) {\n\t\t\tif (top >= 99) {\n\t\t\t\tcout << \"Stack Overflow\" << endl;\n\t\t\t\treturn;\n\t\t\t}\n\t\t\tarr[++top] = x;\n\t\t}\n\n\t\tvoid pop() {\n\t\t\tif (top < 0) {\n\t\t\t\tcout << \"Stack Underflow\" << endl;\n\t\t\t\treturn;\n\t\t\t}\n\t\t\tcout << \"Popped: \" << arr[top--] << endl;\n\t\t}\n\n\t\tvoid display() {\n\t\t\tif (top < 0) {\n\t\t\t\tcout << \"Stack is empty\" << endl;\n\t\t\t\treturn;\n\t\t\t}\n\t\t\tfor (int i = top; i >= 0; i--) {\n\t\t\t\tcout << arr[i] << \" \";\n\t\t\t}\n\t\t\tcout << endl;\n\t\t}\n};\n\nint main() {\n\tStack s;\n\ts.push(10);\n\ts.push(20);\n\ts.display();\n\ts.pop();\n\ts.display();\n\treturn 0;\n}"
     },
     {
-      "language": "C++",
+      "language": "cpp",
       "description": "Create a simple binary search tree with insertion and in-order traversal",
       "linesOfCode": 30,
       "code": "#include <iostream>\nusing namespace std;\n\nclass Node {\n\tpublic:\n\t\tint data;\n\t\tNode* left;\n\t\tNode* right;\n\t\tNode(int val) : data(val), left(nullptr), right(nullptr) {}\n};\n\nclass BST {\n\tprivate:\n\t\tNode* root;\n\t\tvoid insert(Node*& node, int val) {\n\t\t\tif (!node) {\n\t\t\t\tnode = new Node(val);\n\t\t\t} else if (val < node->data) {\n\t\t\t\tinsert(node->left, val);\n\t\t\t} else {\n\t\t\t\tinsert(node->right, val);\n\t\t\t}\n\t\t}\n\t\tvoid inorder(Node* node) {\n\t\t\tif (node) {\n\t\t\t\tinorder(node->left);\n\t\t\t\tcout << node->data << \" \";\n\t\t\t\tinorder(node->right);\n\t\t\t}\n\t\t}\n\tpublic:\n\t\tBST() : root(nullptr) {}\n\t\tvoid insert(int val) {\n\t\t\tinsert(root, val);\n\t\t}\n\t\tvoid inorder() {\n\t\t\tinorder(root);\n\t\t}\n};\n\nint main() {\n\tBST tree;\n\ttree.insert(5);\n\ttree.insert(3);\n\ttree.insert(7);\n\ttree.insert(1);\n\tcout << \"In-order Traversal: \";\n\ttree.inorder();\n\tcout << endl;\n\treturn 0;\n}"

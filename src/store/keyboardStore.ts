@@ -12,6 +12,7 @@ interface KeyboardState {
   handleKeyUp: (event: KeyboardEvent) => void;
   isKeyPressed: (key: string) => boolean;
   advanceCharacter: (char: string) => void;
+  resetKeyboardProgress: () => void;
 }
 
 // Regular expression to filter valid character keys
@@ -84,8 +85,11 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
 
   advanceCharacter: (char: string) => {
     const { currentCharIndex } = get();
-    const { filteredSnippets, currentCodeSnippetIndex } = useCodeSnippetStore.getState();
-    const codeSnippet = filteredSnippets[currentCodeSnippetIndex].code;
+    const { currentSnippet } = useCodeSnippetStore.getState();
+    if (!currentSnippet) {
+      return;
+    }
+    const codeSnippet = currentSnippet.code;
     const targetChar = codeSnippet[currentCharIndex];
 
     // Handling Enter and Tab specifically for newline and tab characters
@@ -119,6 +123,14 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
       // Mark as incorrect if the character doesn’t match
       set({ incorrectKey: true });
     }
+  },
+
+  resetKeyboardProgress: () => {
+    set({
+      currentCharIndex: 0,
+      currentLineIndex: 0,
+      incorrectKey: false,
+    });
   },
 }));
 

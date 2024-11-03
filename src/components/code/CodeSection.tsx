@@ -3,16 +3,11 @@ import { Fragment } from 'react';
 import useKeyboardStore from '../../store/keyboardStore';
 import useCodeSnippetStore from '../../store/codeSnippetStore';
 import './CodeSection.css';
+import ChangeSnippetButton from './ChangeSnippetButton';
 
 export default function CodeSection() {
   const { currentCharIndex, incorrectKey } = useKeyboardStore();
-  const { filteredSnippets, currentCodeSnippetIndex } = useCodeSnippetStore();
-
-  const currentSnippet = filteredSnippets[currentCodeSnippetIndex];
-
-  if (!currentSnippet) {
-    return <div>Loading snippet...</div>; // Display loading or fallback message if not loaded
-  }
+  const { currentSnippet } = useCodeSnippetStore();
 
   const renderCursor = (isCurrentChar: boolean) =>
     isCurrentChar && (
@@ -69,9 +64,17 @@ export default function CodeSection() {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="w-full max-w-screen min-h-96 bg-gray-800 text-white tracking-tighter font-mono rounded-xl p-4 border-white border relative">
-        {currentSnippet.code.split('').map((char, index) => renderChar(char, index))}
+    <div className="relative">
+      <div className="absolute right-0 top-0 z-10 m-4">
+        <ChangeSnippetButton changeSnippetDirection="prev" />
+        <ChangeSnippetButton changeSnippetDirection="next" />
+      </div>
+      <div className="flex flex-col items-center">
+        <div className="w-full max-w-screen min-h-96 bg-gray-800 text-white tracking-tighter font-mono rounded-xl p-4 border-white border relative">
+          {currentSnippet === null
+            ? 'Loading Snippet...'
+            : currentSnippet.code.split('').map((char, index) => renderChar(char, index))}
+        </div>
       </div>
     </div>
   );

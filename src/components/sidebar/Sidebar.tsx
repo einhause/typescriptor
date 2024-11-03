@@ -8,29 +8,26 @@ import {
 import { ChangeEvent, FormEvent, useState } from 'react';
 import MultiRangeSlider from 'multi-range-slider-react';
 
-type Languages = {
-  python: boolean;
-  cpp: boolean;
-  java: boolean;
-  javascript: boolean;
-};
-type SortType = 'ascending' | 'descending' | 'random';
+import useCodeSnippetStore, { SortType, LanguageFilter } from '@/store/codeSnippetStore';
 
 export function Sidebar() {
+  const codeSnippetStore = useCodeSnippetStore();
+
   const [expanded, setExpanded] = useState<boolean>(false);
-  const [languages, setLanguages] = useState<Languages>({
-    python: true,
-    cpp: false,
-    java: false,
-    javascript: false,
-  });
-  const [minLinesOfCode, setMinLinesOfCode] = useState<number>(10);
-  const [maxLinesOfCode, setMaxLinesOfCode] = useState<number>(30);
-  const [sortType, setSortType] = useState<SortType>('random');
+  const [languageFilter, setLanguageFilter] = useState<LanguageFilter>(
+    codeSnippetStore.languageFilter
+  );
+  const [minCodeSnippetLength, setMinCodeSnippetLength] = useState<number>(
+    codeSnippetStore.minCodeSnippetLength
+  );
+  const [maxCodeSnippetLength, setMaxCodeSnippetLength] = useState<number>(
+    codeSnippetStore.maxCodeSnippetLength
+  );
+  const [sortType, setFormType] = useState<SortType>(codeSnippetStore.sortType);
 
   const handleLanguageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
-    setLanguages((prev) => ({
+    setLanguageFilter((prev) => ({
       ...prev,
       [name]: checked,
     }));
@@ -41,11 +38,39 @@ export function Sidebar() {
   };
 
   const handleApplyFiltersSubmit = (e: FormEvent<HTMLButtonElement>) => {
+    const {
+      sortRandomly,
+      sortByIncreasingLength,
+      sortByDecreasingLength,
+      setLanguageFilter,
+      setCodeSnippetLengthFilter,
+    } = codeSnippetStore;
     e.preventDefault();
+    const sortTypeChanged = sortType !== codeSnippetStore.sortType;
+    const languageFilterChanged = languageFilter !== codeSnippetStore.languageFilter;
+    const lengthChanged =
+      minCodeSnippetLength !== codeSnippetStore.minCodeSnippetLength ||
+      maxCodeSnippetLength !== codeSnippetStore.maxCodeSnippetLength;
+
+    if (sortTypeChanged) {
+      if (sortType === 'ascending') {
+        sortByIncreasingLength();
+      } else if (sortType === 'descending') {
+        sortByDecreasingLength();
+      } else {
+        sortRandomly();
+      }
+    }
+    if (languageFilterChanged) {
+      setLanguageFilter(languageFilter);
+    }
+    if (lengthChanged) {
+      setCodeSnippetLengthFilter(minCodeSnippetLength, maxCodeSnippetLength);
+    }
   };
 
   return (
-    <aside className="float-end">
+    <aside className="float-end z-50">
       <div className="h-full flex flex-col bg-gray-600 border-l border-indigo-300 shadow-sm">
         <div className="p-4 pb-2 flex justify-between items-center mb-4">
           <button
@@ -66,7 +91,7 @@ export function Sidebar() {
                   type="checkbox"
                   name="python"
                   className="h-5 w-5 rounded"
-                  checked={languages.python}
+                  checked={languageFilter.python}
                   onChange={handleLanguageChange}
                 />
                 <span className="ml-2">Python</span>
@@ -76,7 +101,7 @@ export function Sidebar() {
                   type="checkbox"
                   name="cpp"
                   className="h-5 w-5 rounded"
-                  checked={languages.cpp}
+                  checked={languageFilter.cpp}
                   onChange={handleLanguageChange}
                 />
                 <span className="ml-2">C++</span>
@@ -86,7 +111,7 @@ export function Sidebar() {
                   type="checkbox"
                   name="java"
                   className="h-5 w-5 rounded"
-                  checked={languages.java}
+                  checked={languageFilter.java}
                   onChange={handleLanguageChange}
                 />
                 <span className="ml-2">Java</span>
@@ -96,7 +121,7 @@ export function Sidebar() {
                   type="checkbox"
                   name="javascript"
                   className="h-5 w-5 rounded"
-                  checked={languages.javascript}
+                  checked={languageFilter.javascript}
                   onChange={handleLanguageChange}
                 />
                 <span className="ml-2">JavaScript</span>
@@ -109,12 +134,12 @@ export function Sidebar() {
               max={30}
               step={5}
               stepOnly={true}
-              minValue={minLinesOfCode}
-              maxValue={maxLinesOfCode}
+              minValue={minCodeSnippetLength}
+              maxValue={maxCodeSnippetLength}
               canMinMaxValueSame={false}
               onChange={(e) => {
-                setMinLinesOfCode(e.minValue);
-                setMaxLinesOfCode(e.maxValue);
+                setMinCodeSnippetLength(e.minValue);
+                setMaxCodeSnippetLength(e.maxValue);
               }}
               label={true}
               ruler={false}
@@ -133,7 +158,7 @@ export function Sidebar() {
                   type="radio"
                   value="random"
                   checked={sortType === 'random'}
-                  onChange={(e) => setSortType(e.target.value as SortType)}
+                  onChange={(e) => setFormType(e.target.value as SortType)}
                   className="form-radio h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500"
                 />
                 <span className="ml-2">Random Order</span>
@@ -144,7 +169,7 @@ export function Sidebar() {
                   type="radio"
                   value="ascending"
                   checked={sortType === 'ascending'}
-                  onChange={(e) => setSortType(e.target.value as SortType)}
+                  onChange={(e) => setFormType(e.target.value as SortType)}
                   className="form-radio h-5 w-5 text-blue-800 border-gray-300 focus:ring-blue-500"
                 />
                 <span className="ml-2">Ascending Lines of Code</span>
@@ -155,7 +180,7 @@ export function Sidebar() {
                   type="radio"
                   value="descending"
                   checked={sortType === 'descending'}
-                  onChange={(e) => setSortType(e.target.value as SortType)}
+                  onChange={(e) => setFormType(e.target.value as SortType)}
                   className="form-radio h-5 w-5 text-blue-800 border-gray-300 focus:ring-blue-500"
                 />
                 <span className="ml-2">Descending Lines of Code</span>
