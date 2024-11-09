@@ -34,6 +34,13 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
       // Prevent default browser behavior for Tab key+
       event.preventDefault();
     }
+    if (key === ' ') {
+      // Prevent auto scrolling down on overflowing content in CodeSecton
+      event.preventDefault();
+    }
+    if (key === 'Enter') {
+      event.preventDefault();
+    }
 
     const newPressedKeys = new Set(pressedKeys);
     if (code === 'ShiftLeft' || code === 'ShiftRight') {
@@ -84,8 +91,8 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
   },
 
   advanceCharacter: (char: string) => {
-    const { currentCharIndex } = get();
-    const { currentSnippet } = useCodeSnippetStore.getState();
+    const { currentCharIndex, resetKeyboardProgress } = get();
+    const { currentSnippet, setNextSnippet } = useCodeSnippetStore.getState();
     if (!currentSnippet) {
       return;
     }
@@ -98,6 +105,7 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
       (targetChar === '\t' && char === 'Tab') ||
       char === targetChar
     ) {
+      console.log(`Curr ${currentCharIndex} Len ${codeSnippet.length}`);
       // If the typed character matches, move to the next character
       if (targetChar === '\n') {
         // Advance to the next character after the newline
@@ -112,6 +120,9 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
           currentCharIndex: nextIndex, // Move to the first non-tab character
           incorrectKey: false,
         });
+      } else if (char === targetChar && currentCharIndex === codeSnippet.length - 1) {
+        setNextSnippet();
+        resetKeyboardProgress();
       } else {
         // Move to the next character for other matches
         set({
