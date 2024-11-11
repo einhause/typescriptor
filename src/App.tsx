@@ -10,7 +10,7 @@ export default function App() {
   const { handleKeyDown, handleKeyUp } = useKeyboardStore();
   const { fetchSnippets } = useCodeSnippetStore();
 
-  const codeSectionRef = useRef<HTMLDivElement | null>(null);
+  const codeSectionContainerRef = useRef<HTMLDivElement | null>(null);
   const [codeSectionWidth, setCodeSectionWidth] = useState<number>(0);
 
   useEffect(() => {
@@ -32,8 +32,8 @@ export default function App() {
       }
     });
 
-    if (codeSectionRef.current) {
-      resizeObserver.observe(codeSectionRef.current);
+    if (codeSectionContainerRef.current) {
+      resizeObserver.observe(codeSectionContainerRef.current);
     }
 
     fetchSnippets();
@@ -48,8 +48,9 @@ export default function App() {
         <div
           className="h-[66.6666667%] max-h-[66.6666667%] overflow-auto border-white border rounded-lg bg-gray-800 max-w-screen relative"
           tabIndex={0}
+          ref={codeSectionContainerRef}
         >
-          <CodeSection ref={codeSectionRef} />
+          <CodeSection />
         </div>
         <DraggableKeyboard codeSectionWidth={codeSectionWidth} />
       </main>

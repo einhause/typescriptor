@@ -1,4 +1,4 @@
-import { forwardRef, Fragment } from 'react';
+import { useEffect, useRef, Fragment } from 'react';
 
 import useKeyboardStore from '../../store/keyboardStore';
 import useCodeSnippetStore from '../../store/codeSnippetStore';
@@ -6,7 +6,7 @@ import './CodeSection.css';
 import ChangeSnippetButton from './ChangeSnippetButton';
 import Modal from '../modal/Modal';
 
-const CodeSection = forwardRef<HTMLDivElement>((_, ref) => {
+export default function CodeSection() {
   const {
     currentCharIndex,
     incorrectKey,
@@ -19,10 +19,29 @@ const CodeSection = forwardRef<HTMLDivElement>((_, ref) => {
   } = useKeyboardStore();
   const { currentSnippet, setNextSnippet } = useCodeSnippetStore();
 
+  const codeSectionRef = useRef<HTMLDivElement | null>(null);
+  const currentCharRef = useRef<HTMLSpanElement | null>(null);
+
   const onModalClose = () => {
     setNextSnippet();
     resetKeyboardProgress();
   };
+
+  useEffect(() => {
+    if (currentCharRef.current) {
+      currentCharRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      });
+    }
+  }, [currentCharIndex]);
+
+  // Scroll to the top when the snippet is completed
+  useEffect(() => {
+    if (showModal && codeSectionRef.current) {
+      codeSectionRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [showModal]);
 
   const renderCursor = (isCurrentChar: boolean) =>
     isCurrentChar && (
@@ -51,7 +70,10 @@ const CodeSection = forwardRef<HTMLDivElement>((_, ref) => {
     if (char === '\n')
       return (
         <Fragment key={index}>
-          <span className="relative inline-block">
+          <span
+            className="relative inline-block"
+            ref={isCurrentChar ? currentCharRef : null}
+          >
             <span className="px-[0.25px]"></span>
             {renderCursor(isCurrentChar)}
           </span>
@@ -61,7 +83,11 @@ const CodeSection = forwardRef<HTMLDivElement>((_, ref) => {
 
     if (char === '\t')
       return (
-        <span key={index} className={`${textColor} ${backgroundColor}`}>
+        <span
+          key={index}
+          className={`${textColor} ${backgroundColor}`}
+          ref={isCurrentChar ? currentCharRef : null}
+        >
           {Array(4)
             .fill('\u00A0')
             .map((_, i) => (
@@ -71,7 +97,11 @@ const CodeSection = forwardRef<HTMLDivElement>((_, ref) => {
       );
 
     return (
-      <span key={index} className={`relative inline-block ${backgroundColor}`}>
+      <span
+        key={index}
+        className={`relative inline-block ${backgroundColor}`}
+        ref={isCurrentChar ? currentCharRef : null}
+      >
         <span className={`${textColor} px-[.5px]`}>{char === ' ' ? '\u00A0' : char}</span>
         {renderCursor(isCurrentChar)}
       </span>
@@ -79,7 +109,7 @@ const CodeSection = forwardRef<HTMLDivElement>((_, ref) => {
   };
 
   return (
-    <div ref={ref}>
+    <div>
       <Modal isOpen={showModal} onClose={onModalClose}>
         <p className="text-3xl font-bold mb-4">Snippet Complete!</p>
         <p className="text-2xl font-bold mb-4">
@@ -99,7 +129,7 @@ const CodeSection = forwardRef<HTMLDivElement>((_, ref) => {
         <ChangeSnippetButton changeSnippetDirection="prev" />
         <ChangeSnippetButton changeSnippetDirection="next" />
       </div>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center" ref={codeSectionRef}>
         <div className="w-full text-white tracking-tighter font-mono p-4 relative">
           {currentSnippet === null
             ? 'Loading Snippet...'
@@ -113,6 +143,4 @@ const CodeSection = forwardRef<HTMLDivElement>((_, ref) => {
       )}
     </div>
   );
-});
-
-export default CodeSection;
+}
