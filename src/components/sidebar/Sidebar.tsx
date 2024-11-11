@@ -4,11 +4,16 @@ import {
   SlidersHorizontal,
   ArrowUpDown,
   LucideIcon,
+  CircleEllipsis,
 } from 'lucide-react';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import MultiRangeSlider from 'multi-range-slider-react';
 
-import useCodeSnippetStore, { SortType, LanguageFilter } from '@/store/codeSnippetStore';
+import useCodeSnippetStore, {
+  SortType,
+  LanguageFilter,
+  AutoOptions,
+} from '@/store/codeSnippetStore';
 
 export function Sidebar() {
   const codeSnippetStore = useCodeSnippetStore();
@@ -24,10 +29,21 @@ export function Sidebar() {
     codeSnippetStore.maxCodeSnippetLength
   );
   const [sortType, setFormType] = useState<SortType>(codeSnippetStore.sortType);
+  const [autoOptions, setAutoOptions] = useState<AutoOptions>(
+    codeSnippetStore.autoOptions
+  );
 
   const handleLanguageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
     setLanguageFilter((prev) => ({
+      ...prev,
+      [name]: checked,
+    }));
+  };
+
+  const handleAutoOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    setAutoOptions((prev) => ({
       ...prev,
       [name]: checked,
     }));
@@ -43,11 +59,13 @@ export function Sidebar() {
       sortByIncreasingLength,
       sortByDecreasingLength,
       setLanguageFilter,
+      setAutoOptions,
       setCodeSnippetLengthFilter,
     } = codeSnippetStore;
     e.preventDefault();
     const sortTypeChanged = sortType !== codeSnippetStore.sortType;
     const languageFilterChanged = languageFilter !== codeSnippetStore.languageFilter;
+    const autoOptionsChanged = autoOptions !== codeSnippetStore.autoOptions;
     const lengthChanged =
       minCodeSnippetLength !== codeSnippetStore.minCodeSnippetLength ||
       maxCodeSnippetLength !== codeSnippetStore.maxCodeSnippetLength;
@@ -63,6 +81,9 @@ export function Sidebar() {
     }
     if (languageFilterChanged) {
       setLanguageFilter(languageFilter);
+    }
+    if (autoOptionsChanged) {
+      setAutoOptions(autoOptions);
     }
     if (lengthChanged) {
       setCodeSnippetLengthFilter(minCodeSnippetLength, maxCodeSnippetLength);
@@ -184,6 +205,30 @@ export function Sidebar() {
                   className="form-radio h-5 w-5 text-blue-800 border-gray-300 focus:ring-blue-500"
                 />
                 <span className="ml-2">Descending Lines of Code</span>
+              </label>
+            </div>
+          </SidebarItem>
+          <SidebarItem Icon={CircleEllipsis} text="Options">
+            <div className="flex flex-col">
+              <label className="inline-flex items-center my-1">
+                <input
+                  type="checkbox"
+                  name="autoTab"
+                  className="h-5 w-5 rounded"
+                  checked={autoOptions.autoTab}
+                  onChange={handleAutoOptionChange}
+                />
+                <span className="ml-2">Auto-tab</span>
+              </label>
+              <label className="inline-flex items-center my-1">
+                <input
+                  type="checkbox"
+                  name="autoNewline"
+                  className="h-5 w-5 rounded"
+                  checked={autoOptions.autoNewline}
+                  onChange={handleAutoOptionChange}
+                />
+                <span className="ml-2">Auto-newline</span>
               </label>
             </div>
           </SidebarItem>

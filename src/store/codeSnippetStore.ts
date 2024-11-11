@@ -10,9 +10,14 @@ interface CodeSnippet {
 }
 
 type Language = 'python' | 'cpp' | 'java' | 'javascript';
+type AutoOption = 'autoTab' | 'autoNewline';
 
 export type LanguageFilter = {
   [key in Language]: boolean;
+};
+
+export type AutoOptions = {
+  [key in AutoOption]: boolean;
 };
 
 export type SortType = 'ascending' | 'descending' | 'random';
@@ -21,6 +26,7 @@ interface CodeSnippetStore {
   snippets: CodeSnippet[];
   filteredSnippets: CodeSnippet[];
   languageFilter: LanguageFilter;
+  autoOptions: AutoOptions;
   minCodeSnippetLength: number;
   maxCodeSnippetLength: number;
   sortType: SortType;
@@ -30,6 +36,7 @@ interface CodeSnippetStore {
   setPrevSnippet: () => void;
   setNextSnippet: () => void;
   setLanguageFilter: (languages: LanguageFilter) => void;
+  setAutoOptions: (autoOptions: AutoOptions) => void;
   setCodeSnippetLengthFilter: (min: number, max: number) => void;
   applyFilters: () => void;
   sortByIncreasingLength: () => void;
@@ -45,6 +52,10 @@ const useCodeSnippetStore = create<CodeSnippetStore>((set, get) => ({
     cpp: false,
     java: false,
     javascript: false,
+  },
+  autoOptions: {
+    autoTab: true,
+    autoNewline: true,
   },
   minCodeSnippetLength: 10,
   maxCodeSnippetLength: 30,
@@ -92,6 +103,11 @@ const useCodeSnippetStore = create<CodeSnippetStore>((set, get) => ({
   setLanguageFilter: (languages) => {
     set({ languageFilter: languages });
     get().applyFilters();
+    useKeyboardStore.getState().resetKeyboardProgress();
+  },
+
+  setAutoOptions: (options) => {
+    set({ autoOptions: options });
     useKeyboardStore.getState().resetKeyboardProgress();
   },
 

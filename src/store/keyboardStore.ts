@@ -124,55 +124,54 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
       stopTimer,
       calculateSnippetStatistics,
     } = get();
-    const { currentSnippet } = useCodeSnippetStore.getState();
+    const { currentSnippet, autoOptions } = useCodeSnippetStore.getState();
+    const { autoTab, autoNewline } = autoOptions;
+
     if (!currentSnippet || showModal) {
       return;
     }
+
     const codeSnippet = currentSnippet.code;
     const targetChar = codeSnippet[currentCharIndex];
 
-    // Handling Enter and Tab specifically for newline and tab characters
+    // Check if the typed character matches the current character in the snippet
     if (
       (targetChar === '\n' && char === 'Enter') ||
       (targetChar === '\t' && char === 'Tab') ||
       char === targetChar
     ) {
-      // If the typed character matches, move to the next character
-      if (targetChar === '\n') {
-        // Advance to the next character after the newline
-        let nextIndex = currentCharIndex + 1;
+      let nextIndex = currentCharIndex + 1;
 
-        // Automatically advance through tab characters
+      // Automatically advance through tabs/newlines if auto options are enabled
+      if (nextIndex < codeSnippet.length) {
         while (
           nextIndex < codeSnippet.length &&
-          (codeSnippet[nextIndex] === '\t' || codeSnippet[nextIndex] === '\n')
+          targetChar === '\n' &&
+          ((autoTab && codeSnippet[nextIndex] === '\t') ||
+            (autoNewline && codeSnippet[nextIndex] === '\n'))
         ) {
           nextIndex++;
         }
+      }
 
-        set({
-          currentCharIndex: nextIndex, // Move to the first non-tab character
-          incorrectKey: false,
-        });
-      } else {
-        // Move to the next character for other matches
+      // Update state after advancing through auto characters
+      set({
+        currentCharIndex: nextIndex,
+        charactersTyped: charactersTyped + 1,
+        correctCharacters: correctCharacters + 1,
+        incorrectKey: false,
+      });
 
-        if (currentCharIndex === 0) {
-          startTimer();
-        }
+      // Start timer if this is the first character typed
+      if (currentCharIndex === 0) {
+        startTimer();
+      }
 
-        set({
-          currentCharIndex: currentCharIndex + 1,
-          charactersTyped: charactersTyped + 1,
-          correctCharacters: correctCharacters + 1,
-          incorrectKey: false,
-        });
-
-        if (currentCharIndex + 1 === codeSnippet.length) {
-          stopTimer();
-          calculateSnippetStatistics();
-          set({ showModal: true });
-        }
+      // Check if the snippet is complete
+      if (nextIndex === codeSnippet.length) {
+        stopTimer();
+        calculateSnippetStatistics();
+        set({ showModal: true });
       }
     } else {
       // Mark as incorrect if the character doesn’t match
