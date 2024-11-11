@@ -4,10 +4,25 @@ import useKeyboardStore from '../../store/keyboardStore';
 import useCodeSnippetStore from '../../store/codeSnippetStore';
 import './CodeSection.css';
 import ChangeSnippetButton from './ChangeSnippetButton';
+import Modal from '../modal/Modal';
 
 const CodeSection = forwardRef<HTMLDivElement>((_, ref) => {
-  const { currentCharIndex, incorrectKey } = useKeyboardStore();
-  const { currentSnippet } = useCodeSnippetStore();
+  const {
+    currentCharIndex,
+    incorrectKey,
+    charactersTyped,
+    wordsPerMinute,
+    correctCharacters,
+    incorrectCharacters,
+    showModal,
+    resetKeyboardProgress,
+  } = useKeyboardStore();
+  const { currentSnippet, setNextSnippet } = useCodeSnippetStore();
+
+  const onModalClose = () => {
+    setNextSnippet();
+    resetKeyboardProgress();
+  };
 
   const renderCursor = (isCurrentChar: boolean) =>
     isCurrentChar && (
@@ -64,7 +79,22 @@ const CodeSection = forwardRef<HTMLDivElement>((_, ref) => {
   };
 
   return (
-    <div className="relative" ref={ref}>
+    <div ref={ref}>
+      <Modal isOpen={showModal} onClose={onModalClose}>
+        <p className="text-3xl font-bold mb-4">Snippet Complete!</p>
+        <p className="text-2xl font-bold mb-4">
+          Words per minute (WPM): <span className="underline">{wordsPerMinute}</span>
+        </p>
+        <p className="text-lg mb-1">Characters Typed: {charactersTyped}</p>
+        <p>Correct Characters: {correctCharacters}</p>
+        <p>Incorrect Characters: {incorrectCharacters}</p>
+        <button
+          onClick={onModalClose}
+          className="mt-4 bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded float-right"
+        >
+          Next Snippet
+        </button>
+      </Modal>
       <div className="absolute right-0 top-0 z-10 m-4">
         <ChangeSnippetButton changeSnippetDirection="prev" />
         <ChangeSnippetButton changeSnippetDirection="next" />
@@ -76,6 +106,11 @@ const CodeSection = forwardRef<HTMLDivElement>((_, ref) => {
             : currentSnippet.code.split('').map((char, index) => renderChar(char, index))}
         </div>
       </div>
+      {currentCharIndex === 0 && (
+        <div className="absolute bottom-0 left-0 bg-slate-50 bg-opacity-10 w-full flex justify-center items-center">
+          <p className="p-4 text-2xl">Correctly type the first character to begin.</p>
+        </div>
+      )}
     </div>
   );
 });

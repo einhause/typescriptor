@@ -1,6 +1,11 @@
 import { create } from 'zustand';
 import useCodeSnippetStore from './codeSnippetStore';
 
+// Constants
+const AVERAGE_WORD_LENGTH = 5;
+const SECONDS_PER_MINUTE = 60;
+const MILLISECONDS_PER_SECOND = 1000;
+
 interface KeyboardState {
   pressedKeys: Set<string>;
   isShiftActive: boolean;
@@ -8,10 +13,20 @@ interface KeyboardState {
   currentCharIndex: number;
   currentLineIndex: number;
   incorrectKey: boolean;
+  startTime: number | null;
+  endTime: number | null;
+  charactersTyped: number;
+  correctCharacters: number;
+  incorrectCharacters: number;
+  wordsPerMinute: number;
+  showModal: boolean;
   handleKeyDown: (event: KeyboardEvent) => void;
   handleKeyUp: (event: KeyboardEvent) => void;
   isKeyPressed: (key: string) => boolean;
   advanceCharacter: (char: string) => void;
+  startTimer: () => void;
+  stopTimer: () => void;
+  calculateSnippetStatistics: () => void;
   resetKeyboardProgress: () => void;
 }
 
@@ -25,6 +40,13 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
   currentLineIndex: 0,
   currentCharIndex: 0,
   incorrectKey: false,
+  startTime: null,
+  endTime: null,
+  charactersTyped: 0,
+  correctCharacters: 0,
+  incorrectCharacters: 0,
+  wordsPerMinute: 0,
+  showModal: false,
 
   handleKeyDown: (event: KeyboardEvent) => {
     const { key, code } = event;
@@ -91,9 +113,19 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
   },
 
   advanceCharacter: (char: string) => {
-    const { currentCharIndex, resetKeyboardProgress } = get();
-    const { currentSnippet, setNextSnippet } = useCodeSnippetStore.getState();
-    if (!currentSnippet) {
+    const {
+      currentCharIndex,
+      startTime,
+      charactersTyped,
+      correctCharacters,
+      incorrectCharacters,
+      showModal,
+      startTimer,
+      stopTimer,
+      calculateSnippetStatistics,
+    } = get();
+    const { currentSnippet } = useCodeSnippetStore.getState();
+    if (!currentSnippet || showModal) {
       return;
     }
     const codeSnippet = currentSnippet.code;
@@ -105,14 +137,16 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
       (targetChar === '\t' && char === 'Tab') ||
       char === targetChar
     ) {
-      console.log(`Curr ${currentCharIndex} Len ${codeSnippet.length}`);
       // If the typed character matches, move to the next character
       if (targetChar === '\n') {
         // Advance to the next character after the newline
         let nextIndex = currentCharIndex + 1;
 
         // Automatically advance through tab characters
-        while (nextIndex < codeSnippet.length && codeSnippet[nextIndex] === '\t') {
+        while (
+          nextIndex < codeSnippet.length &&
+          (codeSnippet[nextIndex] === '\t' || codeSnippet[nextIndex] === '\n')
+        ) {
           nextIndex++;
         }
 
@@ -120,19 +154,64 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
           currentCharIndex: nextIndex, // Move to the first non-tab character
           incorrectKey: false,
         });
-      } else if (char === targetChar && currentCharIndex === codeSnippet.length - 1) {
-        setNextSnippet();
-        resetKeyboardProgress();
       } else {
         // Move to the next character for other matches
+
+        if (currentCharIndex === 0) {
+          startTimer();
+        }
+
         set({
           currentCharIndex: currentCharIndex + 1,
+          charactersTyped: charactersTyped + 1,
+          correctCharacters: correctCharacters + 1,
           incorrectKey: false,
         });
+
+        if (currentCharIndex + 1 === codeSnippet.length) {
+          stopTimer();
+          calculateSnippetStatistics();
+          set({ showModal: true });
+        }
       }
     } else {
       // Mark as incorrect if the character doesn’t match
       set({ incorrectKey: true });
+      if (startTime !== null) {
+        set({
+          charactersTyped: charactersTyped + 1,
+          incorrectCharacters: incorrectCharacters + 1,
+        });
+      }
+    }
+  },
+
+  startTimer: () => {
+    const { startTime } = get();
+    if (startTime === null) {
+      set({
+        startTime: Date.now(),
+      });
+    }
+  },
+
+  stopTimer: () => {
+    const { startTime } = get();
+    if (startTime !== null) {
+      set({
+        endTime: Date.now(),
+      });
+    }
+  },
+
+  calculateSnippetStatistics: () => {
+    const { startTime, endTime, charactersTyped } = get();
+    if (startTime !== null && endTime !== null) {
+      const timeElapsed = (endTime - startTime) / MILLISECONDS_PER_SECOND;
+      const wordsPerMinute = Math.round(
+        (charactersTyped / AVERAGE_WORD_LENGTH) * (SECONDS_PER_MINUTE / timeElapsed)
+      );
+      set({ wordsPerMinute });
     }
   },
 
@@ -141,6 +220,11 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
       currentCharIndex: 0,
       currentLineIndex: 0,
       incorrectKey: false,
+      startTime: null,
+      endTime: null,
+      charactersTyped: 0,
+      wordsPerMinute: 0,
+      showModal: false,
     });
   },
 }));
