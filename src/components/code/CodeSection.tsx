@@ -2,30 +2,19 @@ import { useEffect, useRef, Fragment } from 'react';
 
 import useKeyboardStore from '../../store/keyboardStore';
 import useCodeSnippetStore from '../../store/codeSnippetStore';
-import './CodeSection.css';
+
 import ChangeSnippetButton from './ChangeSnippetButton';
-import Modal from '../modal/Modal';
+import BottomBanner from './BottomBanner';
+import SnippetCompleteModal from '../modal/SnippetCompleteModal';
+
+import './CodeSection.css';
 
 export default function CodeSection() {
-  const {
-    currentCharIndex,
-    incorrectKey,
-    charactersTyped,
-    wordsPerMinute,
-    correctCharacters,
-    incorrectCharacters,
-    showModal,
-    resetKeyboardProgress,
-  } = useKeyboardStore();
-  const { currentSnippet, setNextSnippet } = useCodeSnippetStore();
+  const { currentCharIndex, incorrectKey, showModal } = useKeyboardStore();
+  const { currentSnippet } = useCodeSnippetStore();
 
   const codeSectionRef = useRef<HTMLDivElement | null>(null);
   const currentCharRef = useRef<HTMLSpanElement | null>(null);
-
-  const onModalClose = () => {
-    setNextSnippet();
-    resetKeyboardProgress();
-  };
 
   useEffect(() => {
     if (currentCharRef.current) {
@@ -109,38 +98,20 @@ export default function CodeSection() {
   };
 
   return (
-    <div>
-      <Modal isOpen={showModal} onClose={onModalClose}>
-        <p className="text-3xl font-bold mb-4">Snippet Complete!</p>
-        <p className="text-2xl font-bold mb-4">
-          Words per minute (WPM): <span className="underline">{wordsPerMinute}</span>
-        </p>
-        <p className="text-lg mb-1">Characters Typed: {charactersTyped}</p>
-        <p>Correct Characters: {correctCharacters}</p>
-        <p>Incorrect Characters: {incorrectCharacters}</p>
-        <button
-          onClick={onModalClose}
-          className="mt-4 bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded float-right"
-        >
-          Next Snippet
-        </button>
-      </Modal>
+    <>
+      <SnippetCompleteModal isOpen={showModal} />
       <div className="absolute right-0 top-0 z-10 m-4">
         <ChangeSnippetButton changeSnippetDirection="prev" />
         <ChangeSnippetButton changeSnippetDirection="next" />
       </div>
-      <div className="flex flex-col items-center" ref={codeSectionRef}>
-        <div className="w-full text-white tracking-tighter font-mono p-4 relative">
+      <div className="relative overflow-y-auto p-4 max-h-full" ref={codeSectionRef}>
+        <div className="w-full text-white tracking-tighter font-mono p-2">
           {currentSnippet === null
             ? 'Loading Snippet...'
             : currentSnippet.code.split('').map((char, index) => renderChar(char, index))}
         </div>
       </div>
-      {currentCharIndex === 0 && (
-        <div className="absolute bottom-0 left-0 bg-slate-50 bg-opacity-10 w-full flex justify-center items-center">
-          <p className="p-4 text-2xl">Correctly type the first character to begin.</p>
-        </div>
-      )}
-    </div>
+      {currentCharIndex === 0 && <BottomBanner />}
+    </>
   );
 }

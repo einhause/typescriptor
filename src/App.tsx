@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import useKeyboardStore from './store/keyboardStore';
 import useCodeSnippetStore from './store/codeSnippetStore';
+
 import DraggableKeyboard from './components/keyboard/DraggableKeyboard';
 import CodeSection from './components/code/CodeSection';
 import { Sidebar } from './components/sidebar/Sidebar';
@@ -10,8 +11,8 @@ export default function App() {
   const { handleKeyDown, handleKeyUp } = useKeyboardStore();
   const { fetchSnippets } = useCodeSnippetStore();
 
-  const codeSectionContainerRef = useRef<HTMLDivElement | null>(null);
   const [codeSectionWidth, setCodeSectionWidth] = useState<number>(0);
+  const codeSectionContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -46,7 +47,7 @@ export default function App() {
     <div className="grid h-screen grid-cols-[1fr_auto]">
       <main className="flex flex-col">
         <div
-          className="h-[66.6666667%] max-h-[66.6666667%] overflow-auto border-white border rounded-lg bg-gray-800 max-w-screen relative"
+          className="h-[66.6666667%] max-h-[66.6666667%] overflow-hidden border-white border rounded-lg bg-gray-800 max-w-screen relative"
           tabIndex={0}
           ref={codeSectionContainerRef}
         >

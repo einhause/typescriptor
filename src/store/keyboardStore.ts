@@ -50,24 +50,15 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
 
   handleKeyDown: (event: KeyboardEvent) => {
     const { key, code } = event;
-    const { pressedKeys, advanceCharacter } = get();
+    const { pressedKeys, showModal, advanceCharacter } = get();
 
-    if (key === 'Tab') {
-      // Prevent default browser behavior for Tab key+
-      event.preventDefault();
-    }
-    if (key === ' ') {
-      // Prevent auto scrolling down on overflowing content in CodeSecton
-      event.preventDefault();
-    }
-    if (key === 'Enter') {
-      event.preventDefault();
-    }
+    if (showModal) return;
+
+    event.preventDefault();
 
     const newPressedKeys = new Set(pressedKeys);
     if (code === 'ShiftLeft' || code === 'ShiftRight') {
       set({ isShiftActive: true });
-      event.preventDefault();
     }
 
     if (event.getModifierState('CapsLock')) {
@@ -88,7 +79,9 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
 
   handleKeyUp: (event: KeyboardEvent) => {
     const { key, code } = event;
-    const { pressedKeys } = get();
+    const { pressedKeys, showModal } = get();
+
+    if (showModal) return;
 
     const newPressedKeys = new Set(pressedKeys);
 

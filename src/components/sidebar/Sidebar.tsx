@@ -7,13 +7,16 @@ import {
   CircleEllipsis,
 } from 'lucide-react';
 import { ChangeEvent, FormEvent, useState } from 'react';
-import MultiRangeSlider from 'multi-range-slider-react';
 
 import useCodeSnippetStore, {
   SortType,
   LanguageFilter,
   AutoOptions,
 } from '@/store/codeSnippetStore';
+
+import Checkbox from './input/Checkbox';
+import CodeLengthSlider from './input/CodeLengthSlider';
+import Radio from './input/Radio';
 
 export function Sidebar() {
   const codeSnippetStore = useCodeSnippetStore();
@@ -107,129 +110,76 @@ export function Sidebar() {
         <ul className={`flex-1 px-3 ${expanded ? 'block' : 'hidden'}`}>
           <SidebarItem Icon={CodeXml} text="Languages">
             <div className="flex flex-col">
-              <label className="inline-flex items-center my-1">
-                <input
-                  type="checkbox"
-                  name="python"
-                  className="h-5 w-5 rounded"
-                  checked={languageFilter.python}
-                  onChange={handleLanguageChange}
-                />
-                <span className="ml-2">Python</span>
-              </label>
-              <label className="inline-flex items-center my-1">
-                <input
-                  type="checkbox"
-                  name="cpp"
-                  className="h-5 w-5 rounded"
-                  checked={languageFilter.cpp}
-                  onChange={handleLanguageChange}
-                />
-                <span className="ml-2">C++</span>
-              </label>
-              <label className="inline-flex items-center my-1">
-                <input
-                  type="checkbox"
-                  name="java"
-                  className="h-5 w-5 rounded"
-                  checked={languageFilter.java}
-                  onChange={handleLanguageChange}
-                />
-                <span className="ml-2">Java</span>
-              </label>
-              <label className="inline-flex items-center my-1">
-                <input
-                  type="checkbox"
-                  name="javascript"
-                  className="h-5 w-5 rounded"
-                  checked={languageFilter.javascript}
-                  onChange={handleLanguageChange}
-                />
-                <span className="ml-2">JavaScript</span>
-              </label>
+              <Checkbox
+                name="python"
+                label="Python"
+                checked={languageFilter.python}
+                onChangeCallback={handleLanguageChange}
+              />
+              <Checkbox
+                name="cpp"
+                label="C++"
+                checked={languageFilter.cpp}
+                onChangeCallback={handleLanguageChange}
+              />
+              <Checkbox
+                name="java"
+                label="Java"
+                checked={languageFilter.java}
+                onChangeCallback={handleLanguageChange}
+              />
+              <Checkbox
+                name="javascript"
+                label="JavaScript"
+                checked={languageFilter.javascript}
+                onChangeCallback={handleLanguageChange}
+              />
             </div>
           </SidebarItem>
           <SidebarItem Icon={SlidersHorizontal} text="Lines of Code">
-            <MultiRangeSlider
-              min={10}
-              max={30}
-              step={5}
-              stepOnly={true}
-              minValue={minCodeSnippetLength}
-              maxValue={maxCodeSnippetLength}
-              canMinMaxValueSame={false}
-              onChange={(e) => {
-                setMinCodeSnippetLength(e.minValue);
-                setMaxCodeSnippetLength(e.maxValue);
-              }}
-              label={true}
-              ruler={false}
-              className="border-none shadow-none"
-              barLeftColor="gray"
-              barInnerColor="rgb(30 64 175)"
-              barRightColor="gray"
-              thumbLeftColor="white"
-              thumbRightColor="white"
-            ></MultiRangeSlider>
+            <CodeLengthSlider
+              minCodeValue={minCodeSnippetLength}
+              maxCodeValue={maxCodeSnippetLength}
+              minValueChanged={setMinCodeSnippetLength}
+              maxValueChanged={setMaxCodeSnippetLength}
+            />
           </SidebarItem>
           <SidebarItem Icon={ArrowUpDown} text="Sorting">
             <div className="flex flex-col">
-              <label className="inline-flex items-center">
-                <input
-                  type="radio"
-                  value="random"
-                  checked={sortType === 'random'}
-                  onChange={(e) => setFormType(e.target.value as SortType)}
-                  className="form-radio h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500"
-                />
-                <span className="ml-2">Random Order</span>
-              </label>
-
-              <label className="inline-flex items-center">
-                <input
-                  type="radio"
-                  value="ascending"
-                  checked={sortType === 'ascending'}
-                  onChange={(e) => setFormType(e.target.value as SortType)}
-                  className="form-radio h-5 w-5 text-blue-800 border-gray-300 focus:ring-blue-500"
-                />
-                <span className="ml-2">Ascending Lines of Code</span>
-              </label>
-
-              <label className="inline-flex items-center">
-                <input
-                  type="radio"
-                  value="descending"
-                  checked={sortType === 'descending'}
-                  onChange={(e) => setFormType(e.target.value as SortType)}
-                  className="form-radio h-5 w-5 text-blue-800 border-gray-300 focus:ring-blue-500"
-                />
-                <span className="ml-2">Descending Lines of Code</span>
-              </label>
+              <Radio
+                value="random"
+                label="Random Order"
+                checked={sortType === 'random'}
+                onChangeCallback={(e) => setFormType(e.target.value as SortType)}
+              />
+              <Radio
+                value="ascending"
+                label="Ascending Lines of Code"
+                checked={sortType === 'ascending'}
+                onChangeCallback={(e) => setFormType(e.target.value as SortType)}
+              />
+              <Radio
+                value="descending"
+                label="Descending Lines of Code"
+                checked={sortType === 'descending'}
+                onChangeCallback={(e) => setFormType(e.target.value as SortType)}
+              />
             </div>
           </SidebarItem>
           <SidebarItem Icon={CircleEllipsis} text="Options">
             <div className="flex flex-col">
-              <label className="inline-flex items-center my-1">
-                <input
-                  type="checkbox"
-                  name="autoTab"
-                  className="h-5 w-5 rounded"
-                  checked={autoOptions.autoTab}
-                  onChange={handleAutoOptionChange}
-                />
-                <span className="ml-2">Auto-tab</span>
-              </label>
-              <label className="inline-flex items-center my-1">
-                <input
-                  type="checkbox"
-                  name="autoNewline"
-                  className="h-5 w-5 rounded"
-                  checked={autoOptions.autoNewline}
-                  onChange={handleAutoOptionChange}
-                />
-                <span className="ml-2">Auto-newline</span>
-              </label>
+              <Checkbox
+                name="autoTab"
+                label="Auto-tab"
+                checked={autoOptions.autoTab}
+                onChangeCallback={handleAutoOptionChange}
+              />
+              <Checkbox
+                name="autoNewline"
+                label="Auto-newline"
+                checked={autoOptions.autoNewline}
+                onChangeCallback={handleAutoOptionChange}
+              />
             </div>
           </SidebarItem>
         </ul>
