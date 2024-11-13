@@ -13,6 +13,8 @@ export default function SnippetCompleteModal({ isOpen }: ModalProps) {
     wordsPerMinute,
     correctCharacters,
     incorrectCharacters,
+    averageWordsPerMinute,
+    wordsPerMinuteHistory,
     resetKeyboardProgress,
   } = useKeyboardStore();
 
@@ -55,12 +57,31 @@ export default function SnippetCompleteModal({ isOpen }: ModalProps) {
           ✕
         </button>
         <p className="text-3xl font-bold mb-4">Snippet Complete!</p>
-        <p className="text-2xl font-bold mb-4">
-          Words per minute (WPM): <span className="underline">{wordsPerMinute}</span>
+        <p className="text-xl">
+          Characters Typed: <span className="text-blue-400">{charactersTyped}</span>
         </p>
-        <p className="text-lg mb-1">Characters Typed: {charactersTyped}</p>
-        <p>Correct Characters: {correctCharacters}</p>
-        <p>Incorrect Characters: {incorrectCharacters}</p>
+        <p className="text-xl">
+          Correct Characters: <span className="text-green-500">{correctCharacters}</span>
+        </p>
+        <p className="text-xl">
+          Incorrect Characters:{' '}
+          <span className="text-red-500">{incorrectCharacters}</span>
+        </p>
+
+        <p className="text-2xl mt-6">
+          Words per minute (WPM): <span className="font-bold">{wordsPerMinute}</span>
+        </p>
+        <p className="text-2xl">
+          Average WPM: <span className="font-bold">{averageWordsPerMinute}</span>
+        </p>
+        <p className="text-2xl">
+          Last {wordsPerMinuteHistory.length >= 5 ? '5' : wordsPerMinuteHistory.length}{' '}
+          WPM:{' '}
+          <span className="font-bold">
+            {wordsPerMinuteHistory.reverse().slice(0, 5).join(' ')}
+          </span>
+        </p>
+
         <button
           onClick={onNextSnippetClicked}
           className="mt-4 bg-blue-900 hover:bg-blue-800 text-white py-2 px-4 rounded float-right"

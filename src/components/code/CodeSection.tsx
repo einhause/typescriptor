@@ -5,7 +5,7 @@ import useCodeSnippetStore from '../../store/codeSnippetStore';
 
 import ChangeSnippetButton from './ChangeSnippetButton';
 import BottomBanner from './BottomBanner';
-import SnippetCompleteModal from '../modal/SnippetCompleteModal';
+import SnippetCompleteModal from './SnippetCompleteModal';
 
 import './CodeSection.css';
 

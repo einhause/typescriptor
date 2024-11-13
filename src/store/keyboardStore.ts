@@ -19,6 +19,8 @@ interface KeyboardState {
   correctCharacters: number;
   incorrectCharacters: number;
   wordsPerMinute: number;
+  wordsPerMinuteHistory: number[];
+  averageWordsPerMinute: number;
   showModal: boolean;
   handleKeyDown: (event: KeyboardEvent) => void;
   handleKeyUp: (event: KeyboardEvent) => void;
@@ -27,6 +29,9 @@ interface KeyboardState {
   startTimer: () => void;
   stopTimer: () => void;
   calculateSnippetStatistics: () => void;
+  calculateCurrentWordsPerMinute: () => void;
+  updateWordsPerMinuteHistory: () => void;
+  calculateAverageWordsPerMinute: () => void;
   resetKeyboardProgress: () => void;
 }
 
@@ -46,6 +51,10 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
   correctCharacters: 0,
   incorrectCharacters: 0,
   wordsPerMinute: 0,
+  wordsPerMinuteHistory: JSON.parse(
+    localStorage.getItem('wordsPerMinuteHistory') || '[]'
+  ),
+  averageWordsPerMinute: 0,
   showModal: false,
 
   handleKeyDown: (event: KeyboardEvent) => {
@@ -197,6 +206,18 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
   },
 
   calculateSnippetStatistics: () => {
+    const {
+      calculateCurrentWordsPerMinute,
+      calculateAverageWordsPerMinute,
+      updateWordsPerMinuteHistory,
+    } = get();
+
+    calculateCurrentWordsPerMinute();
+    updateWordsPerMinuteHistory();
+    calculateAverageWordsPerMinute();
+  },
+
+  calculateCurrentWordsPerMinute: () => {
     const { startTime, endTime, charactersTyped } = get();
     if (startTime !== null && endTime !== null) {
       const timeElapsed = (endTime - startTime) / MILLISECONDS_PER_SECOND;
@@ -205,6 +226,22 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
       );
       set({ wordsPerMinute });
     }
+  },
+
+  updateWordsPerMinuteHistory: () => {
+    const { wordsPerMinuteHistory, wordsPerMinute } = get();
+    const updatedHistory = [...wordsPerMinuteHistory, wordsPerMinute];
+    localStorage.setItem('wordsPerMinuteHistory', JSON.stringify(updatedHistory));
+    set({ wordsPerMinuteHistory: updatedHistory });
+  },
+
+  calculateAverageWordsPerMinute: () => {
+    const { wordsPerMinuteHistory } = get();
+    const total = wordsPerMinuteHistory.reduce((acc, wpm) => acc + wpm, 0);
+    const average =
+      wordsPerMinuteHistory.length > 0 ? total / wordsPerMinuteHistory.length : 0;
+    set({ averageWordsPerMinute: Math.round(average) });
+    localStorage.setItem('averageWordsPerMinute', JSON.stringify(Math.round(average)));
   },
 
   resetKeyboardProgress: () => {
