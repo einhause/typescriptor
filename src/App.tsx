@@ -45,9 +45,9 @@ export default function App() {
 
   return (
     <div className="grid h-screen grid-cols-[1fr_auto]">
-      <main className="flex flex-col">
+      <main className="flex flex-col mx-2 mt-2">
         <div
-          className="h-[66.6666667%] max-h-[66.6666667%] overflow-hidden border-white border rounded-lg bg-gray-800 max-w-screen relative"
+          className="h-[65vh] max-h-[65vh] overflow-y-auto border-white border rounded-lg bg-gray-800 max-w-screen relative"
           tabIndex={0}
           ref={codeSectionContainerRef}
         >
