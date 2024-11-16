@@ -8,63 +8,93 @@
     },
     {
       "language": "python",
-      "description": "Check if a number is prime",
-      "linesOfCode": 13,
-      "code": "def is_prime(num):\n\tif num < 2:\n\t\treturn False\n\tfor i in range(2, int(num ** 0.5) + 1):\n\t\tif num % i == 0:\n\t\t\treturn False\n\treturn True\n\nfor number in range(1, 21):\n\tif is_prime(number):\n\t\tprint(f\"{number} is a prime number\")"
-    },
-    {
-      "language": "python",
-      "description": "Sort a list using Bubble Sort",
-      "linesOfCode": 16,
-      "code": "def bubble_sort(arr):\n\tn = len(arr)\n\tfor i in range(n):\n\t\tfor j in range(0, n-i-1):\n\t\t\tif arr[j] > arr[j+1]:\n\t\t\t\tarr[j], arr[j+1] = arr[j+1], arr[j]\n\nnumbers = [64, 34, 25, 12, 22, 11, 90]\nbubble_sort(numbers)\nprint(\"Sorted array:\", numbers)"
-    },
-    {
-      "language": "python",
-      "description": "Implement a simple calculator class",
-      "linesOfCode": 20,
-      "code": "class Calculator:\n\tdef add(self, x, y):\n\t\treturn x + y\n\tdef subtract(self, x, y):\n\t\treturn x - y\n\tdef multiply(self, x, y):\n\t\treturn x * y\n\tdef divide(self, x, y):\n\t\tif y != 0:\n\t\t\treturn x / y\n\t\telse:\n\t\t\treturn \"Cannot divide by zero\"\n\ncalc = Calculator()\nprint(calc.add(10, 5))\nprint(calc.subtract(10, 5))\nprint(calc.multiply(10, 5))\nprint(calc.divide(10, 0))"
-    },
-    {
-      "language": "python",
       "description": "Simulate a coin toss",
       "linesOfCode": 10,
-      "code": "import random\n\ndef coin_toss():\n\treturn 'Heads' if random.randint(0, 1) == 1 else 'Tails'\n\nfor _ in range(10):\n\tprint(coin_toss())"
-    },
-    {
-      "language": "python",
-      "description": "Create a timer function using decorators",
-      "linesOfCode": 15,
-      "code": "import time\n\ndef timer(func):\n\tdef wrapper(*args, **kwargs):\n\t\tstart_time = time.time()\n\t\tresult = func(*args, **kwargs)\n\t\tend_time = time.time()\n\t\tprint(f\"Execution time: {end_time - start_time} seconds\")\n\t\treturn result\n\treturn wrapper\n\n@timer\ndef compute():\n\ttime.sleep(1)\n\ncompute()"
-    },
-    {
-      "language": "python",
-      "description": "Generate random password",
-      "linesOfCode": 14,
-      "code": "import random\nimport string\n\ndef generate_password(length=8):\n\tcharacters = string.ascii_letters + string.digits + string.punctuation\n\tpassword = ''.join(random.choice(characters) for _ in range(length))\n\treturn password\n\nprint(\"Generated password:\", generate_password(12))"
-    },
-    {
-      "language": "python",
-      "description": "Count word frequency in a sentence",
-      "linesOfCode": 15,
-      "code": "def word_frequency(sentence):\n\twords = sentence.split()\n\tfrequency = {}\n\tfor word in words:\n\t\tfrequency[word] = frequency.get(word, 0) + 1\n\treturn frequency\n\nsentence = \"hello world hello universe\"\nprint(\"Word frequency:\", word_frequency(sentence))"
-    },
-    {
-      "language": "python",
-      "description": "Plot a sine wave",
-      "linesOfCode": 16,
-      "code": "import numpy as np\nimport matplotlib.pyplot as plt\n\nx = np.linspace(0, 2 * np.pi, 100)\ny = np.sin(x)\n\nplt.plot(x, y)\nplt.title(\"Sine Wave\")\nplt.xlabel(\"x\")\nplt.ylabel(\"sin(x)\")\nplt.grid()\nplt.show()"
+      "code": "import random\n\ndef coin_toss():\n\treturn 'Heads' if random.randint(0, 1) == 1 else 'Tails'\n\nfor _ in range(5):\n\tprint(coin_toss())"
     },
     {
       "language": "python",
       "description": "Find the longest word in a list",
       "linesOfCode": 11,
-      "code": "def longest_word(word_list):\n\tlongest = \"\"\n\tfor word in word_list:\n\t\tif len(word) > len(longest):\n\t\t\tlongest = word\n\treturn longest\n\nwords = [\"apple\", \"banana\", \"watermelon\", \"grape\"]\nprint(\"Longest word:\", longest_word(words))"
+      "code": "def longest_word(words):\n\tlongest = max(words, key=len)\n\treturn longest\n\nwords = ['apple', 'banana', 'grapefruit']\nprint('Longest word:', longest_word(words))"
     },
     {
       "language": "python",
-      "description": "Simulate a simple Tic-Tac-Toe game",
-      "linesOfCode": 29,
-      "code": "board = [['', '', ''], ['', '', ''], ['', '', '']]\n\n\ndef print_board():\n\tfor row in board:\n\t\tprint(' | '.join(row))\n\t\tprint('-' * 9)\n\n\ndef check_win(player):\n\t# Check rows and columns\n\tfor i in range(3):\n\t\tif all(cell == player for cell in board[i]) or all(board[j][i] == player for j in range(3)):\n\t\t\treturn True\n\t# Check diagonals\n\tif (board[0][0] == player and board[1][1] == player and board[2][2] == player) or \\\n\t   (board[0][2] == player and board[1][1] == player and board[2][0] == player):\n\t\treturn True\n\treturn False\n\n\ndef play_move(player, x, y):\n\tif board[x][y] == '':\n\t\tboard[x][y] = player\n\t\tprint_board()\n\t\tif check_win(player):\n\t\t\tprint(f'{player} wins!')\n\t\t\treturn\n\telse:\n\t\tprint('Invalid move. Try again.')\n\n# Sample game play\nplay_move('X', 0, 0)\nplay_move('O', 1, 1)\nplay_move('X', 0, 1)\nplay_move('O', 1, 2)\nplay_move('X', 0, 2)"
+      "description": "Generate random password",
+      "linesOfCode": 13,
+      "code": "import random\nimport string\n\ndef generate_password(length=8):\n\tchars = string.ascii_letters + string.digits\n\treturn ''.join(random.choice(chars) for _ in range(length))\n\nprint(generate_password(10))"
+    },
+    {
+      "language": "python",
+      "description": "Simple prime number checker",
+      "linesOfCode": 14,
+      "code": "def is_prime(num):\n\tif num < 2:\n\t\treturn False\n\tfor i in range(2, int(num ** 0.5) + 1):\n\t\tif num % i == 0:\n\t\t\treturn False\n\treturn True\n\nprint(is_prime(17))"
+    },
+    {
+      "language": "python",
+      "description": "Sort a list using Bubble Sort",
+      "linesOfCode": 16,
+      "code": "def bubble_sort(arr):\n\tn = len(arr)\n\tfor i in range(n):\n\t\tfor j in range(0, n-i-1):\n\t\t\tif arr[j] > arr[j+1]:\n\t\t\t\tarr[j], arr[j+1] = arr[j+1], arr[j]\n\narr = [64, 34, 25, 12]\nbubble_sort(arr)\nprint(arr)"
+    },
+    {
+      "language": "python",
+      "description": "Create a timer decorator",
+      "linesOfCode": 17,
+      "code": "import time\n\ndef timer(func):\n\tdef wrapper(*args, **kwargs):\n\t\tstart = time.time()\n\t\tresult = func(*args, **kwargs)\n\t\tend = time.time()\n\t\tprint(f\"Elapsed: {end - start:.2f} seconds\")\n\t\treturn result\n\treturn wrapper\n\n@timer\ndef sample_task():\n\ttime.sleep(1)\nsample_task()"
+    },
+    {
+      "language": "python",
+      "description": "Basic calculator with class",
+      "linesOfCode": 18,
+      "code": "class Calculator:\n\tdef add(self, a, b): return a + b\n\tdef subtract(self, a, b): return a - b\n\tdef multiply(self, a, b): return a * b\n\tdef divide(self, a, b):\n\t\tif b != 0: return a / b\n\t\telse: return 'Division by zero'\n\ncalc = Calculator()\nprint(calc.add(3, 4))\nprint(calc.divide(10, 0))"
+    },
+    {
+      "language": "python",
+      "description": "Simple Rock-Paper-Scissors game",
+      "linesOfCode": 19,
+      "code": "import random\noptions = ['Rock', 'Paper', 'Scissors']\ndef play(player):\n\tcomputer = random.choice(options)\n\tprint(f'You: {player}, Computer: {computer}')\n\tif player == computer:\n\t\treturn 'Draw'\n\telif (player == 'Rock' and computer == 'Scissors') or \\\n\t\t(player == 'Scissors' and computer == 'Paper') or \\\n\t\t(player == 'Paper' and computer == 'Rock'):\n\t\treturn 'You win'\n\telse:\n\t\treturn 'Computer wins'\n\nprint(play('Rock'))"
+    },
+    {
+      "language": "python",
+      "description": "Implement a stack using list",
+      "linesOfCode": 20,
+      "code": "class Stack:\n\tdef __init__(self):\n\t\tself.items = []\n\n\tdef push(self, item):\n\t\tself.items.append(item)\n\n\tdef pop(self):\n\t\tif not self.is_empty():\n\t\t\treturn self.items.pop()\n\n\tdef is_empty(self):\n\t\treturn len(self.items) == 0\n\nstack = Stack()\nstack.push(1)\nstack.push(2)\nprint(stack.pop())"
+    },
+    {
+      "language": "python",
+      "description": "Check if a string is a palindrome",
+      "linesOfCode": 21,
+      "code": "def is_palindrome(s):\n\ts = s.replace(' ', '').lower()\n\treturn s == s[::-1]\n\nphrases = ['A man a plan a canal Panama', 'Hello World']\nfor phrase in phrases:\n\tif is_palindrome(phrase):\n\t\tprint(f'\"{phrase}\" is a palindrome')\n\telse:\n\t\tprint(f'\"{phrase}\" is not a palindrome')"
+    },
+    {
+      "language": "python",
+      "description": "Merge two sorted lists",
+      "linesOfCode": 22,
+      "code": "def merge_lists(list1, list2):\n\tmerged_list = []\n\ti, j = 0, 0\n\twhile i < len(list1) and j < len(list2):\n\t\tif list1[i] < list2[j]:\n\t\t\tmerged_list.append(list1[i])\n\t\t\ti += 1\n\t\telse:\n\t\t\tmerged_list.append(list2[j])\n\t\t\tj += 1\n\n\tmerged_list.extend(list1[i:])\n\tmerged_list.extend(list2[j:])\n\treturn merged_list\n\nlist1 = [1, 3, 5]\nlist2 = [2, 4, 6]\nprint(\"Merged List:\", merge_lists(list1, list2))"
+    },
+    {
+      "language": "python",
+      "description": "Binary Search Algorithm",
+      "linesOfCode": 23,
+      "code": "def binary_search(arr, target):\n\tlow, high = 0, len(arr) - 1\n\twhile low <= high:\n\t\tmid = (low + high) // 2\n\t\tif arr[mid] == target:\n\t\t\treturn mid\n\t\telif arr[mid] < target:\n\t\t\tlow = mid + 1\n\t\telse:\n\t\t\thigh = mid - 1\n\treturn -1\n\nnumbers = [1, 3, 5, 7, 9, 11]\nresult = binary_search(numbers, 7)\nprint(f\"Element found at index {result}\" if result != -1 else \"Not found\")"
+    },
+    {
+      "language": "python",
+      "description": "Basic linked list implementation",
+      "linesOfCode": 24,
+      "code": "class Node:\n\tdef __init__(self, data):\n\t\tself.data = data\n\t\tself.next = None\n\nclass LinkedList:\n\tdef __init__(self):\n\t\tself.head = None\n\n\tdef append(self, data):\n\t\tnew_node = Node(data)\n\t\tif not self.head:\n\t\t\tself.head = new_node\n\t\telse:\n\t\t\tcurrent = self.head\n\t\t\twhile current.next:\n\t\t\t\tcurrent = current.next\n\t\t\tcurrent.next = new_node\n\nll = LinkedList()\nll.append(10)\nll.append(20)\nll.append(30)"
+    },
+    {
+      "language": "python",
+      "description": "Print Pascal's Triangle",
+      "linesOfCode": 25,
+      "code": "def print_pascals_triangle(n):\n\ttriangle = [[1]]\n\tfor i in range(1, n):\n\t\trow = [1]\n\t\tfor j in range(1, i):\n\t\t\trow.append(triangle[i-1][j-1] + triangle[i-1][j])\n\t\trow.append(1)\n\t\ttriangle.append(row)\n\n\tfor row in triangle:\n\t\tprint(' '.join(map(str, row)))\n\nprint_pascals_triangle(5)"
+    },
+    {
+      "language": "python",
+      "description": "Simple implementation of Rock, Paper, Scissors game",
+      "linesOfCode": 26,
+      "code": "import random\n\nchoices = ['Rock', 'Paper', 'Scissors']\n\ndef get_computer_choice():\n\treturn random.choice(choices)\n\n\ndef get_winner(player_choice, computer_choice):\n\tif player_choice == computer_choice:\n\t\treturn 'Draw'\n\telif (player_choice == 'Rock' and computer_choice == 'Scissors') or \\\n\t\t (player_choice == 'Paper' and computer_choice == 'Rock') or \\\n\t\t (player_choice == 'Scissors' and computer_choice == 'Paper'):\n\t\treturn 'Player wins'\n\telse:\n\t\treturn 'Computer wins'\n\n\ndef play_game(player_choice):\n\tcomputer_choice = get_computer_choice()\n\tprint(f'Player: {player_choice}, Computer: {computer_choice}')\n\tprint(get_winner(player_choice, computer_choice))\n\nplay_game('Rock')\nplay_game('Paper')\nplay_game('Scissors')"
     },
     {
       "language": "python",
@@ -74,21 +104,21 @@
     },
     {
       "language": "python",
-      "description": "Simple stopwatch class with start, stop, and reset methods",
-      "linesOfCode": 29,
-      "code": "import time\n\nclass Stopwatch:\n\tdef __init__(self):\n\t\tself.start_time = 0\n\t\tself.running = False\n\n\tdef start(self):\n\t\tif not self.running:\n\t\t\tself.start_time = time.time()\n\t\t\tself.running = True\n\t\t\tprint('Stopwatch started')\n\n\tdef stop(self):\n\t\tif self.running:\n\t\t\telapsed_time = time.time() - self.start_time\n\t\t\tself.running = False\n\t\t\tprint(f'Stopwatch stopped. Elapsed time: {elapsed_time:.2f} seconds')\n\n\tdef reset(self):\n\t\tself.start_time = 0\n\t\tself.running = False\n\t\tprint('Stopwatch reset')\n\n# Example usage\nwatch = Stopwatch()\nwatch.start()\ntime.sleep(2)\nwatch.stop()\nwatch.reset()"
-    },
-    {
-      "language": "python",
       "description": "Fetch weather data using an API (mocked)",
       "linesOfCode": 28,
       "code": "import requests\n\ndef get_weather(city):\n\t# Mocked response as we can't call an actual API here\n\tfake_response = {'temp': 25, 'condition': 'Sunny'}\n\treturn fake_response\n\n\ndef fetch_weather(city):\n\ttry:\n\t\tdata = get_weather(city)\n\t\tprint(f'Weather in {city}:')\n\t\tprint(f'Temperature: {data['temp']}°C')\n\t\tprint(f'Condition: {data['condition']}')\n\texcept Exception as e:\n\t\tprint('Error fetching weather:', e)\n\nfetch_weather('Paris')\nfetch_weather('New York')\nfetch_weather('Tokyo')"
     },
     {
       "language": "python",
-      "description": "Simple implementation of Rock, Paper, Scissors game",
-      "linesOfCode": 26,
-      "code": "import random\n\nchoices = ['Rock', 'Paper', 'Scissors']\n\ndef get_computer_choice():\n\treturn random.choice(choices)\n\n\ndef get_winner(player_choice, computer_choice):\n\tif player_choice == computer_choice:\n\t\treturn 'Draw'\n\telif (player_choice == 'Rock' and computer_choice == 'Scissors') or \\\n\t\t (player_choice == 'Paper' and computer_choice == 'Rock') or \\\n\t\t (player_choice == 'Scissors' and computer_choice == 'Paper'):\n\t\treturn 'Player wins'\n\telse:\n\t\treturn 'Computer wins'\n\n\ndef play_game(player_choice):\n\tcomputer_choice = get_computer_choice()\n\tprint(f'Player: {player_choice}, Computer: {computer_choice}')\n\tprint(get_winner(player_choice, computer_choice))\n\nplay_game('Rock')\nplay_game('Paper')\nplay_game('Scissors')"
+      "description": "Simple stopwatch class with start, stop, and reset methods",
+      "linesOfCode": 29,
+      "code": "import time\n\nclass Stopwatch:\n\tdef __init__(self):\n\t\tself.start_time = 0\n\t\tself.running = False\n\n\tdef start(self):\n\t\tif not self.running:\n\t\t\tself.start_time = time.time()\n\t\t\tself.running = True\n\t\t\tprint('Stopwatch started')\n\n\tdef stop(self):\n\t\tif self.running:\n\t\t\telapsed_time = time.time() - self.start_time\n\t\t\tself.running = False\n\t\t\tprint(f'Stopwatch stopped. Elapsed time: {elapsed_time:.2f} seconds')\n\n\tdef reset(self):\n\t\tself.start_time = 0\n\t\tself.running = False\n\t\tprint('Stopwatch reset')\n\n# Example usage\nwatch = Stopwatch()\nwatch.start()\ntime.sleep(2)\nwatch.stop()\nwatch.reset()"
+    },
+    {
+      "language": "python",
+      "description": "Implement a simple contact book",
+      "linesOfCode": 30,
+      "code": "class Contact:\n\tdef __init__(self, name, phone, email):\n\t\tself.name = name\n\t\tself.phone = phone\n\t\tself.email = email\n\n\tdef __str__(self):\n\t\treturn f'Name: {self.name}, Phone: {self.phone}, Email: {self.email}'\n\nclass ContactBook:\n\tdef __init__(self):\n\t\tself.contacts = []\n\n\tdef add_contact(self, name, phone, email):\n\t\tcontact = Contact(name, phone, email)\n\t\tself.contacts.append(contact)\n\t\tprint('Contact added successfully!')\n\n\tdef list_contacts(self):\n\t\tif not self.contacts:\n\t\t\tprint('No contacts found.')\n\t\telse:\n\t\t\tfor contact in self.contacts:\n\t\t\t\tprint(contact)\n\n\tdef search_contact(self, search_term):\n\t\tfor contact in self.contacts:\n\t\t\tif search_term.lower() in contact.name.lower():\n\t\t\t\tprint(contact)\n\n# Example usage\nbook = ContactBook()\nbook.add_contact('Alice', '123-456-7890', 'alice@example.com')\nbook.add_contact('Bob', '987-654-3210', 'bob@example.com')\nbook.list_contacts()\nbook.search_contact('Alice')"
     }
   ]
 }

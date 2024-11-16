@@ -2,45 +2,9 @@
   "snippets": [
     {
       "language": "javascript",
-      "description": "Calculate the factorial of a number",
+      "description": "Print Fibonacci sequence up to n terms",
       "linesOfCode": 10,
-      "code": "function factorial(n) {\n\tif (n === 0) return 1;\n\treturn n * factorial(n - 1);\n}\n\nfor (let i = 1; i <= 10; i++) {\n\tconsole.log(`Factorial of ${i}: ${factorial(i)}`);\n}"
-    },
-    {
-      "language": "javascript",
-      "description": "Check if a number is prime",
-      "linesOfCode": 13,
-      "code": "function isPrime(num) {\n\tif (num < 2) return false;\n\tfor (let i = 2; i <= Math.sqrt(num); i++) {\n\t\tif (num % i === 0) return false;\n\t}\n\treturn true;\n}\n\nfor (let i = 1; i <= 20; i++) {\n\tif (isPrime(i)) {\n\t\tconsole.log(`${i} is a prime number`);\n\t}\n}"
-    },
-    {
-      "language": "javascript",
-      "description": "Implement a simple calculator class",
-      "linesOfCode": 16,
-      "code": "class Calculator {\n\tadd(x, y) {\n\t\treturn x + y;\n\t}\n\tsubtract(x, y) {\n\t\treturn x - y;\n\t}\n\tmultiply(x, y) {\n\t\treturn x * y;\n\t}\n\tdivide(x, y) {\n\t\tif (y !== 0) return x / y;\n\t\treturn 'Cannot divide by zero';\n\t}\n}\n\nconst calc = new Calculator();\nconsole.log(calc.add(10, 5));\nconsole.log(calc.divide(10, 0));"
-    },
-    {
-      "language": "javascript",
-      "description": "Generate random password",
-      "linesOfCode": 14,
-      "code": "function generatePassword(length = 8) {\n\tconst chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%';\n\tlet password = '';\n\tfor (let i = 0; i < length; i++) {\n\t\tpassword += chars.charAt(Math.floor(Math.random() * chars.length));\n\t}\n\treturn password;\n}\n\nconsole.log('Generated password:', generatePassword(12));"
-    },
-    {
-      "language": "javascript",
-      "description": "Reverse a string",
-      "linesOfCode": 8,
-      "code": "function reverseString(str) {\n\treturn str.split('').reverse().join('');\n}\n\nconst original = 'hello world';\nconst reversed = reverseString(original);\nconsole.log('Reversed string:', reversed);"
-    },
-    {
-      "language": "javascript",
-      "description": "Sort an array using Bubble Sort",
-      "linesOfCode": 15,
-      "code": "function bubbleSort(arr) {\n\tfor (let i = 0; i < arr.length; i++) {\n\t\tfor (let j = 0; j < arr.length - i - 1; j++) {\n\t\t\tif (arr[j] > arr[j + 1]) {\n\t\t\t\t[arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];\n\t\t\t}\n\t\t}\n\t}\n}\n\nconst numbers = [64, 34, 25, 12, 22, 11, 90];\nbubbleSort(numbers);\nconsole.log('Sorted array:', numbers);"
-    },
-    {
-      "language": "javascript",
-      "description": "Find the longest word in an array",
-      "linesOfCode": 10,
-      "code": "function longestWord(words) {\n\tlet longest = '';\n\tfor (const word of words) {\n\t\tif (word.length > longest.length) {\n\t\t\tlongest = word;\n\t\t}\n\t}\n\treturn longest;\n}\n\nconsole.log('Longest word:', longestWord(['apple', 'banana', 'watermelon', 'grape']));"
+      "code": "function fibonacci(n) {\n\tconst sequence = [0, 1];\n\tfor (let i = 2; i < n; i++) {\n\t\tsequence.push(sequence[i - 1] + sequence[i - 2]);\n\t}\n\treturn sequence;\n}\n\nconsole.log('Fibonacci sequence:', fibonacci(10));"
     },
     {
       "language": "javascript",
@@ -50,45 +14,111 @@
     },
     {
       "language": "javascript",
-      "description": "Simulate a dice roll",
-      "linesOfCode": 8,
-      "code": "function rollDice(sides = 6) {\n\treturn Math.floor(Math.random() * sides) + 1;\n}\n\nfor (let i = 0; i < 10; i++) {\n\tconsole.log('Dice roll:', rollDice());\n}"
+      "description": "Check if a number is prime",
+      "linesOfCode": 13,
+      "code": "function isPrime(num) {\n\tif (num < 2) return false;\n\tfor (let i = 2; i <= Math.sqrt(num); i++) {\n\t\tif (num % i === 0) return false;\n\t}\n\treturn true;\n}\n\nfor (let i = 1; i <= 20; i++) {\n\tif (isPrime(i)) {\n\t\tconsole.log(`${i} is a prime number`);\n\t}\n}"
     },
     {
       "language": "javascript",
-      "description": "Print Fibonacci sequence up to n terms",
-      "linesOfCode": 10,
-      "code": "function fibonacci(n) {\n\tconst sequence = [0, 1];\n\tfor (let i = 2; i < n; i++) {\n\t\tsequence.push(sequence[i - 1] + sequence[i - 2]);\n\t}\n\treturn sequence;\n}\n\nconsole.log('Fibonacci sequence:', fibonacci(10));"
+      "description": "Generate random password",
+      "linesOfCode": 14,
+      "code": "function generatePassword(length = 8) {\n\tconst chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%';\n\tlet password = '';\n\tfor (let i = 0; i < length; i++) {\n\t\tpassword += chars.charAt(Math.floor(Math.random() * chars.length));\n\t}\n\treturn password;\n}\n\nconsole.log('Generated password:', generatePassword(12));"
     },
     {
       "language": "javascript",
-      "description": "Simulate a simple Tic-Tac-Toe game",
-      "linesOfCode": 28,
-      "code": "const board = [['', '', ''], ['', '', ''], ['', '', '']];\n\nfunction printBoard() {\n\tboard.forEach(row => console.log(row.join(' | ')));\n\tconsole.log('\\n');\n}\n\nfunction checkWin(player) {\n\tfor (let i = 0; i < 3; i++) {\n\t\tif (board[i].every(cell => cell === player) || board.map(row => row[i]).every(cell => cell === player)) return true;\n\t}\n\treturn (board[0][0] === player && board[1][1] === player && board[2][2] === player) ||\n\t\t   (board[0][2] === player && board[1][1] === player && board[2][0] === player);\n}\n\nfunction playMove(player, x, y) {\n\tif (board[x][y] === '') {\n\t\tboard[x][y] = player;\n\t\tprintBoard();\n\t\tif (checkWin(player)) {\n\t\t\tconsole.log(`${player} wins!`);\n\t\t\treturn;\n\t\t}\n\t}\n}\n\nplayMove('X', 0, 0);\nplayMove('O', 1, 1);\nplayMove('X', 0, 1);\nplayMove('O', 1, 2);\nplayMove('X', 0, 2);"
+      "description": "Sort an array using Bubble Sort",
+      "linesOfCode": 15,
+      "code": "function bubbleSort(arr) {\n\tfor (let i = 0; i < arr.length; i++) {\n\t\tfor (let j = 0; j < arr.length - i - 1; j++) {\n\t\t\tif (arr[j] > arr[j + 1]) {\n\t\t\t\t[arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];\n\t\t\t}\n\t\t}\n}\n\nconst numbers = [64, 34, 25, 12, 22, 11, 90];\nbubbleSort(numbers);\nconsole.log('Sorted array:', numbers);"
     },
     {
       "language": "javascript",
-      "description": "Class representing a basic bank account with deposit and withdrawal",
+      "description": "Implement a simple calculator class",
+      "linesOfCode": 16,
+      "code": "class Calculator {\n\tadd(x, y) {\n\t\treturn x + y;\n\t}\n\tsubtract(x, y) {\n\t\treturn x - y;\n\t}\n\tmultiply(x, y) {\n\t\treturn x * y;\n\t}\n\tdivide(x, y) {\n\t\tif (y !== 0) return x / y;\n\t\treturn 'Cannot divide by zero';\n\t}\n}\n\nconst calc = new Calculator();\nconsole.log(calc.add(10, 5));\nconsole.log(calc.divide(10, 0));"
+    },
+    {
+      "language": "javascript",
+      "description": "Calculate power of a number recursively",
+      "linesOfCode": 17,
+      "code": "function power(base, exponent) {\n\tif (exponent === 0) return 1;\n\tif (exponent < 0) return 1 / power(base, -exponent);\n\treturn base * power(base, exponent - 1);\n}\nconsole.log('2^3:', power(2, 3));\nconsole.log('5^4:', power(5, 4));\nconsole.log('10^-2:', power(10, -2));"
+    },
+    {
+      "language": "javascript",
+      "description": "Merge two sorted arrays",
+      "linesOfCode": 18,
+      "code": "function mergeSortedArrays(arr1, arr2) {\n\tlet mergedArray = [];\n\tlet i = 0, j = 0;\n\twhile (i < arr1.length && j < arr2.length) {\n\t\tif (arr1[i] < arr2[j]) {\n\t\t\tmergedArray.push(arr1[i]);\n\t\t\ti++;\n\t\t} else {\n\t\t\tmergedArray.push(arr2[j]);\n\t\t\tj++;\n\t\t}\n\t}\n\twhile (i < arr1.length) mergedArray.push(arr1[i++]);\n\twhile (j < arr2.length) mergedArray.push(arr2[j++]);\n\treturn mergedArray;\n}\nconst array1 = [1, 3, 5];\nconst array2 = [2, 4, 6];\nconsole.log('Merged Array:', mergeSortedArrays(array1, array2));"
+    },
+    {
+      "language": "javascript",
+      "description": "Find unique elements in an array",
+      "linesOfCode": 19,
+      "code": "function findUniqueElements(arr) {\n\tconst uniqueElements = [];\n\tconst elementCount = {};\n\tfor (const num of arr) {\n\t\telementCount[num] = (elementCount[num] || 0) + 1;\n\t}\n\tfor (const num in elementCount) {\n\t\tif (elementCount[num] === 1) {\n\t\t\tuniqueElements.push(parseInt(num));\n\t\t}\n\t}\n\treturn uniqueElements;\n}\nconst numbers = [1, 2, 2, 3, 4, 4, 5];\nconsole.log('Unique elements:', findUniqueElements(numbers));"
+    },
+    {
+      "language": "javascript",
+      "description": "Flatten a nested array",
+      "linesOfCode": 20,
+      "code": "function flattenArray(arr) {\n\tconst result = [];\n\tfunction flatten(current) {\n\t\tfor (const element of current) {\n\t\t\tif (Array.isArray(element)) {\n\t\t\t\tflatten(element);\n\t\t\t} else {\n\t\t\t\tresult.push(element);\n\t\t\t}\n\t\t}\n\t}\n\tflatten(arr);\n\treturn result;\n}\nconst nestedArray = [1, [2, [3, [4, 5]], 6], 7];\nconsole.log('Flattened array:', flattenArray(nestedArray));"
+    },
+    {
+      "language": "javascript",
+      "description": "Check if a string is a palindrome",
+      "linesOfCode": 21,
+      "code": "function isPalindrome(str) {\n\tconst cleanStr = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();\n\tlet left = 0, right = cleanStr.length - 1;\n\twhile (left < right) {\n\t\tif (cleanStr[left] !== cleanStr[right]) return false;\n\t\tleft++;\n\t\tright--;\n\t}\n\treturn true;\n}\nconsole.log('Is palindrome (madam):', isPalindrome('madam')); \nconsole.log('Is palindrome (hello):', isPalindrome('hello'));"
+    },
+    {
+      "language": "javascript",
+      "description": "Create a simple to-do list app",
+      "linesOfCode": 22,
+      "code": "class TodoApp {\n\tconstructor() {\n\t\tthis.todos = [];\n\t}\n\n\taddTodo(task) {\n\t\tthis.todos.push({ task, completed: false });\n\t}\n\n\tcompleteTodo(index) {\n\t\tthis.todos[index].completed = true;\n\t}\n\n\tlistTodos() {\n\t\treturn this.todos.map(todo => `${todo.task} ${todo.completed ? '(Completed)' : '(Pending)'}`).join('\\n');\n\t}\n}\nconst app = new TodoApp();\napp.addTodo('Finish homework');\napp.addTodo('Buy groceries');\nconsole.log(app.listTodos());"
+    },
+    {
+      "language": "javascript",
+      "description": "Convert a number to Roman numeral",
+      "linesOfCode": 23,
+      "code": "function toRoman(num) {\n\tconst romanNumerals = [\n\t\t['I', 'IV', 'V', 'IX'],\n\t\t['X', 'XL', 'L', 'XC'],\n\t\t['C', 'CD', 'D', 'CM'],\n\t\t['M']\n\t];\n\tlet result = '';\n\tlet divisor = 1;\n\tlet placeValue = 0;\n\twhile (num > 0) {\n\t\tconst digit = Math.floor(num % 10);\n\t\tresult = romanNumerals[placeValue][digit] + result;\n\t\tnum = Math.floor(num / 10);\n\t\tplaceValue++;\n\t}\n\treturn result;\n}\nconsole.log('Roman numeral for 1990:', toRoman(1990));"
+    },
+    {
+      "language": "javascript",
+      "description": "Sort an array of objects by property",
+      "linesOfCode": 24,
+      "code": "function sortByProperty(arr, property) {\n\treturn arr.sort((a, b) => {\n\t\tif (a[property] < b[property]) return -1;\n\t\tif (a[property] > b[property]) return 1;\n\t\treturn 0;\n\t});\n}\nconst users = [\n\t{ name: 'John', age: 25 },\n\t{ name: 'Jane', age: 20 },\n\t{ name: 'Alex', age: 30 }\n];\nconsole.log('Sorted by name:', sortByProperty(users, 'name'));\nconsole.log('Sorted by age:', sortByProperty(users, 'age'));\n"
+    },
+    {
+      "language": "javascript",
+      "description": "Count the frequency of each character in a string",
       "linesOfCode": 25,
-      "code": "class BankAccount {\n\tconstructor(owner, balance = 0) {\n\t\tthis.owner = owner;\n\t\tthis.balance = balance;\n\t}\n\n\tdeposit(amount) {\n\t\tif (amount > 0) {\n\t\t\tthis.balance += amount;\n\t\t\tconsole.log(`Deposited $${amount}. New balance: $${this.balance}`);\n\t\t} else {\n\t\t\tconsole.log('Deposit amount must be positive');\n\t\t}\n\t}\n\n\twithdraw(amount) {\n\t\tif (amount > 0 && amount <= this.balance) {\n\t\t\tthis.balance -= amount;\n\t\t\tconsole.log(`Withdrew $${amount}. New balance: $${this.balance}`);\n\t\t} else {\n\t\t\tconsole.log('Insufficient balance or invalid amount');\n\t\t}\n\t}\n}\n\nconst account = new BankAccount('Alice', 1000);\naccount.deposit(500);\naccount.withdraw(300);"
+      "code": "function countCharacterFrequency(str) {\n\tconst frequency = {};\n\tfor (let char of str) {\n\t\tchar = char.toLowerCase();\n\t\tif (frequency[char]) {\n\t\t\tfrequency[char] += 1;\n\t\t} else {\n\t\t\tfrequency[char] = 1;\n\t\t}\n\t}\n\treturn frequency;\n}\nconst sentence = 'JavaScript is awesome!';\nconsole.log('Character frequencies:', countCharacterFrequency(sentence));\n"
     },
     {
       "language": "javascript",
-      "description": "Create a stopwatch with start, stop, and reset functionality",
-      "linesOfCode": 28,
-      "code": "class Stopwatch {\n\tconstructor() {\n\t\tthis.startTime = 0;\n\t\tthis.endTime = 0;\n\t\tthis.running = false;\n\t}\n\n\tstart() {\n\t\tif (!this.running) {\n\t\t\tthis.startTime = Date.now();\n\t\t\tthis.running = true;\n\t\t\tconsole.log('Stopwatch started');\n\t\t}\n\t}\n\n\tstop() {\n\t\tif (this.running) {\n\t\t\tthis.endTime = Date.now();\n\t\t\tthis.running = false;\n\t\t\tconsole.log(`Stopwatch stopped. Duration: ${(this.endTime - this.startTime) / 1000} seconds`);\n\t\t}\n\t}\n\n\treset() {\n\t\tthis.startTime = 0;\n\t\tthis.endTime = 0;\n\t\tthis.running = false;\n\t\tconsole.log('Stopwatch reset');\n\t}\n}\n\nconst stopwatch = new Stopwatch();\nstopwatch.start();\nsetTimeout(() => stopwatch.stop(), 3000);"
-    },
-    {
-      "language": "javascript",
-      "description": "Weather data fetcher using promises",
+      "description": "Simulate a simple banking system with deposit and withdrawal",
       "linesOfCode": 26,
+      "code": "class BankAccount {\n\tconstructor(owner, balance = 0) {\n\t\tthis.owner = owner;\n\t\tthis.balance = balance;\n\t}\n\n\tdeposit(amount) {\n\t\tif (amount > 0) {\n\t\t\tthis.balance += amount;\n\t\t\tconsole.log(`Deposited $${amount}. Balance: $${this.balance}`);\n\t\t} else {\n\t\t\tconsole.log('Deposit amount must be positive');\n\t\t}\n\t}\n\n\twithdraw(amount) {\n\t\tif (amount > 0 && amount <= this.balance) {\n\t\t\tthis.balance -= amount;\n\t\t\tconsole.log(`Withdrew $${amount}. Balance: $${this.balance}`);\n\t\t} else {\n\t\t\tconsole.log('Insufficient balance or invalid amount');\n\t\t}\n\t}\n}\n\nconst account = new BankAccount('Alice', 1000);\naccount.deposit(500);\naccount.withdraw(200);"
+    },
+    {
+      "language": "javascript",
+      "description": "Create a simple stopwatch with start, stop, and reset functions",
+      "linesOfCode": 27,
+      "code": "class Stopwatch {\n\tconstructor() {\n\t\tthis.startTime = 0;\n\t\tthis.endTime = 0;\n\t\tthis.running = false;\n\t}\n\n\tstart() {\n\t\tif (!this.running) {\n\t\t\tthis.startTime = Date.now() - (this.endTime - this.startTime);\n\t\t\tthis.running = true;\n\t\t}\n\t}\n\n\tstop() {\n\t\tif (this.running) {\n\t\t\tthis.endTime = Date.now();\n\t\t\tthis.running = false;\n\t\t}\n\t}\n\n\treset() {\n\t\tthis.startTime = 0;\n\t\tthis.endTime = 0;\n\t\tthis.running = false;\n\t}\n\n\tgetElapsedTime() {\n\t\tif (this.running) {\n\t\t\treturn (Date.now() - this.startTime) / 1000;\n\t\t}\n\t\treturn (this.endTime - this.startTime) / 1000;\n\t}\n}\nconst stopwatch = new Stopwatch();\nstopwatch.start();\nsetTimeout(() => {\n\tstopwatch.stop();\n\tconsole.log('Elapsed Time:', stopwatch.getElapsedTime(), 'seconds');\n}, 2000);"
+    },
+    {
+      "language": "javascript",
+      "description": "Fetch weather data and display it using promises",
+      "linesOfCode": 28,
       "code": "function getWeather(city) {\n\treturn new Promise((resolve, reject) => {\n\t\tsetTimeout(() => {\n\t\t\tconst fakeData = { temp: 25, condition: 'Sunny' };\n\t\t\tresolve(fakeData);\n\t\t}, 1000);\n\t});\n}\n\nfunction fetchWeather(city) {\n\tgetWeather(city)\n\t\t.then(data => {\n\t\t\tconsole.log(`Weather in ${city}:`);\n\t\t\tconsole.log(`Temperature: ${data.temp}°C`);\n\t\t\tconsole.log(`Condition: ${data.condition}`);\n\t\t})\n\t\t.catch(err => console.error('Error fetching weather:', err));\n}\n\nfetchWeather('Paris');\nfetchWeather('New York');\nfetchWeather('Tokyo');"
     },
     {
       "language": "javascript",
-      "description": "Simulate a Rock, Paper, Scissors game",
-      "linesOfCode": 27,
+      "description": "Create a simple Rock, Paper, Scissors game",
+      "linesOfCode": 28,
       "code": "const choices = ['Rock', 'Paper', 'Scissors'];\n\nfunction getComputerChoice() {\n\treturn choices[Math.floor(Math.random() * choices.length)];\n}\n\nfunction getWinner(playerChoice, computerChoice) {\n\tif (playerChoice === computerChoice) return 'Draw';\n\tif (\n\t\t(playerChoice === 'Rock' && computerChoice === 'Scissors') ||\n\t\t(playerChoice === 'Paper' && computerChoice === 'Rock') ||\n\t\t(playerChoice === 'Scissors' && computerChoice === 'Paper')\n\t) {\n\t\treturn 'Player wins';\n\t}\n\treturn 'Computer wins';\n}\n\nfunction playGame(playerChoice) {\n\tconst computerChoice = getComputerChoice();\n\tconsole.log(`Player: ${playerChoice}, Computer: ${computerChoice}`);\n\tconsole.log(getWinner(playerChoice, computerChoice));\n}\n\nplayGame('Rock');\nplayGame('Paper');\nplayGame('Scissors');"
+    },
+    {
+      "language": "javascript",
+      "description": "Simulate a simple Tic-Tac-Toe game",
+      "linesOfCode": 29,
+      "code": "const board = [['', '', ''], ['', '', ''], ['', '', '']];\n\nfunction printBoard() {\n\tboard.forEach(row => console.log(row.join(' | ')));\n\tconsole.log('\\n');\n}\n\nfunction checkWin(player) {\n\tfor (let i = 0; i < 3; i++) {\n\t\tif (board[i].every(cell => cell === player) || board.map(row => row[i]).every(cell => cell === player)) return true;\n\t}\n\treturn (\n\t\t(board[0][0] === player && board[1][1] === player && board[2][2] === player) ||\n\t\t(board[0][2] === player && board[1][1] === player && board[2][0] === player)\n\t);\n}\n\nfunction playMove(player, x, y) {\n\tif (board[x][y] === '') {\n\t\tboard[x][y] = player;\n\t\tprintBoard();\n\t\tif (checkWin(player)) {\n\t\t\tconsole.log(`${player} wins!`);\n\t\t\treturn;\n\t\t}\n\t}\n}\n\nplayMove('X', 0, 0);\nplayMove('O', 1, 1);\nplayMove('X', 0, 1);\nplayMove('O', 1, 2);\nplayMove('X', 0, 2);"
     }
   ]
 }

@@ -2,9 +2,27 @@
   "snippets": [
     {
       "language": "java",
+      "description": "Print the Fibonacci series up to a given number",
+      "linesOfCode": 10,
+      "code": "public class Fibonacci {\n\tpublic static void main(String[] args) {\n\t\tint n = 10, a = 0, b = 1;\n\t\tSystem.out.print(a + \" \" + b + \" \");\n\t\tfor (int i = 2; i < n; i++) {\n\t\t\tint c = a + b;\n\t\t\tSystem.out.print(c + \" \");\n\t\t\ta = b;\n\t\t\tb = c;\n\t\t}\n\t}\n}"
+    },
+    {
+      "language": "java",
       "description": "Calculate the factorial of a number",
       "linesOfCode": 11,
       "code": "public class Factorial {\n\tpublic static int factorial(int n) {\n\t\tif (n == 0) return 1;\n\t\treturn n * factorial(n - 1);\n\t}\n\n\tpublic static void main(String[] args) {\n\t\tfor (int i = 1; i <= 10; i++) {\n\t\t\tSystem.out.println(\"Factorial of \" + i + \": \" + factorial(i));\n\t\t}\n\t}\n}"
+    },
+    {
+      "language": "java",
+      "description": "Swap two numbers using a helper function",
+      "linesOfCode": 13,
+      "code": "public class SwapNumbers {\n\tpublic static void swap(int[] nums) {\n\t\tint temp = nums[0];\n\t\tnums[0] = nums[1];\n\t\tnums[1] = temp;\n\t}\n\n\tpublic static void main(String[] args) {\n\t\tint[] nums = {5, 10};\n\t\tswap(nums);\n\t\tSystem.out.println(\"x: \" + nums[0] + \", y: \" + nums[1]);\n\t}\n}"
+    },
+    {
+      "language": "java",
+      "description": "Check if a number is even or odd",
+      "linesOfCode": 14,
+      "code": "public class EvenOdd {\n\tpublic static void checkEvenOdd(int num) {\n\t\tif (num % 2 == 0) {\n\t\t\tSystem.out.println(num + \" is even\");\n\t\t} else {\n\t\t\tSystem.out.println(num + \" is odd\");\n\t\t}\n\t}\n\n\tpublic static void main(String[] args) {\n\t\tfor (int i = 1; i <= 5; i++) {\n\t\t\tcheckEvenOdd(i);\n\t\t}\n\t}\n}"
     },
     {
       "language": "java",
@@ -20,15 +38,21 @@
     },
     {
       "language": "java",
-      "description": "Swap two numbers using a helper function",
-      "linesOfCode": 13,
-      "code": "public class SwapNumbers {\n\tpublic static void swap(int[] nums) {\n\t\tint temp = nums[0];\n\t\tnums[0] = nums[1];\n\t\tnums[1] = temp;\n\t}\n\n\tpublic static void main(String[] args) {\n\t\tint[] nums = {5, 10};\n\t\tswap(nums);\n\t\tSystem.out.println(\"x: \" + nums[0] + \", y: \" + nums[1]);\n\t}\n}"
-    },
-    {
-      "language": "java",
       "description": "Convert Celsius to Fahrenheit",
       "linesOfCode": 17,
       "code": "public class TemperatureConverter {\n\tpublic static double celsiusToFahrenheit(double celsius) {\n\t\treturn (celsius * 9.0 / 5.0) + 32;\n\t}\n\n\tpublic static void main(String[] args) {\n\t\tfor (double c = 0; c <= 100; c += 10) {\n\t\t\tSystem.out.printf(\"%.1f°C = %.1f°F%n\", c, celsiusToFahrenheit(c));\n\t\t}\n\t}\n}"
+    },
+    {
+      "language": "java",
+      "description": "Find the sum of digits of a number",
+      "linesOfCode": 18,
+      "code": "public class SumOfDigits {\n\tpublic static int sumDigits(int number) {\n\t\tint sum = 0;\n\t\twhile (number > 0) {\n\t\t\tsum += number % 10;\n\t\t\tnumber /= 10;\n\t\t}\n\t\treturn sum;\n\t}\n\n\tpublic static void main(String[] args) {\n\t\tint number = 12345;\n\t\tSystem.out.println(\"Sum of digits: \" + sumDigits(number));\n\t}\n}"
+    },
+    {
+      "language": "java",
+      "description": "Check if a number is a perfect number",
+      "linesOfCode": 19,
+      "code": "public class PerfectNumber {\n\tpublic static boolean isPerfect(int num) {\n\t\tint sum = 0;\n\t\tfor (int i = 1; i <= num / 2; i++) {\n\t\t\tif (num % i == 0) {\n\t\t\t\tsum += i;\n\t\t\t}\n\t\t}\n\t\treturn sum == num;\n\t}\n\n\tpublic static void main(String[] args) {\n\t\tint number = 28;\n\t\tif (isPerfect(number)) {\n\t\t\tSystem.out.println(number + \" is a perfect number\");\n\t\t} else {\n\t\t\tSystem.out.println(number + \" is not a perfect number\");\n\t\t}\n\t}\n}"
     },
     {
       "language": "java",
@@ -38,9 +62,21 @@
     },
     {
       "language": "java",
+      "description": "Reverse a string",
+      "linesOfCode": 21,
+      "code": "public class ReverseString {\n\tpublic static String reverse(String str) {\n\t\tString reversed = \"\";\n\t\tfor (int i = str.length() - 1; i >= 0; i--) {\n\t\t\treversed += str.charAt(i);\n\t\t}\n\t\treturn reversed;\n\t}\n\n\tpublic static void main(String[] args) {\n\t\tString input = \"hello\";\n\t\tString result = reverse(input);\n\t\tSystem.out.println(\"Reversed string: \" + result);\n\t}\n}"
+    },
+    {
+      "language": "java",
       "description": "Find the largest element in an array",
       "linesOfCode": 22,
       "code": "public class LargestElement {\n\tpublic static int findLargest(int[] arr) {\n\t\tint largest = arr[0];\n\t\tfor (int i = 1; i < arr.length; i++) {\n\t\t\tif (arr[i] > largest) {\n\t\t\t\tlargest = arr[i];\n\t\t\t}\n\t\t}\n\t\treturn largest;\n\t}\n\n\tpublic static void main(String[] args) {\n\t\tint[] numbers = {3, 5, 7, 2, 8};\n\t\tSystem.out.println(\"Largest number: \" + findLargest(numbers));\n\t}\n}"
+    },
+    {
+      "language": "java",
+      "description": "Count the number of vowels in a string",
+      "linesOfCode": 23,
+      "code": "public class CountVowels {\n\tpublic static int countVowels(String str) {\n\t\tint count = 0;\n\t\tstr = str.toLowerCase();\n\t\tfor (int i = 0; i < str.length(); i++) {\n\t\t\tchar ch = str.charAt(i);\n\t\t\tif (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {\n\t\t\t\tcount++;\n\t\t\t}\n\t\t}\n\t\treturn count;\n\t}\n\n\tpublic static void main(String[] args) {\n\t\tString input = \"Hello, world!\";\n\t\tint result = countVowels(input);\n\t\tSystem.out.println(\"Number of vowels: \" + result);\n\t}\n}"
     },
     {
       "language": "java",
@@ -50,27 +86,15 @@
     },
     {
       "language": "java",
-      "description": "Bubble sort algorithm implementation",
-      "linesOfCode": 27,
-      "code": "public class BubbleSort {\n\tpublic static void bubbleSort(int[] arr) {\n\t\tint n = arr.length;\n\t\tfor (int i = 0; i < n - 1; i++) {\n\t\t\tfor (int j = 0; j < n - i - 1; j++) {\n\t\t\t\tif (arr[j] > arr[j + 1]) {\n\t\t\t\t\tint temp = arr[j];\n\t\t\t\t\tarr[j] = arr[j + 1];\n\t\t\t\t\tarr[j + 1] = temp;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\tpublic static void main(String[] args) {\n\t\tint[] arr = {64, 34, 25, 12, 22, 11, 90};\n\t\tbubbleSort(arr);\n\t\tSystem.out.print(\"Sorted array: \");\n\t\tfor (int num : arr) System.out.print(num + \" \");\n\t}\n}"
-    },
-    {
-      "language": "java",
-      "description": "Implement a simple queue using an array",
-      "linesOfCode": 29,
-      "code": "class Queue {\n\tprivate int[] arr;\n\tprivate int front, rear, capacity;\n\n\tpublic Queue(int c) {\n\t\tcapacity = c;\n\t\tarr = new int[capacity];\n\t\tfront = rear = 0;\n\t}\n\n\tpublic void enqueue(int item) {\n\t\tif (rear == capacity) {\n\t\t\tSystem.out.println(\"Queue is full\");\n\t\t\treturn;\n\t\t}\n\t\tarr[rear++] = item;\n\t}\n\n\tpublic void dequeue() {\n\t\tif (front == rear) {\n\t\t\tSystem.out.println(\"Queue is empty\");\n\t\t\treturn;\n\t\t}\n\t\tfront++;\n\t}\n\n\tpublic void display() {\n\t\tfor (int i = front; i < rear; i++) {\n\t\t\tSystem.out.print(arr[i] + \" \");\n\t\t}\n\t\tSystem.out.println();\n\t}\n}\n\npublic class Main {\n\tpublic static void main(String[] args) {\n\t\tQueue q = new Queue(5);\n\t\tq.enqueue(10);\n\t\tq.enqueue(20);\n\t\tq.display();\n\t\tq.dequeue();\n\t\tq.display();\n\t}\n}"
-    },
-    {
-      "language": "java",
-      "description": "Create a simple linked list with insertion and display",
-      "linesOfCode": 28,
-      "code": "class Node {\n\tint data;\n\tNode next;\n\tNode(int val) { data = val; next = null; }\n}\n\nclass LinkedList {\n\tNode head;\n\n\tpublic void insert(int data) {\n\t\tNode newNode = new Node(data);\n\t\tif (head == null) {\n\t\t\thead = newNode;\n\t\t} else {\n\t\t\tNode temp = head;\n\t\t\twhile (temp.next != null) {\n\t\t\t\ttemp = temp.next;\n\t\t\t}\n\t\t\ttemp.next = newNode;\n\t\t}\n\t}\n\n\tpublic void display() {\n\t\tNode temp = head;\n\t\twhile (temp != null) {\n\t\t\tSystem.out.print(temp.data + \" \");\n\t\t\ttemp = temp.next;\n\t\t}\n\t\tSystem.out.println();\n\t}\n}\n\npublic class Main {\n\tpublic static void main(String[] args) {\n\t\tLinkedList list = new LinkedList();\n\t\tlist.insert(1);\n\t\tlist.insert(2);\n\t\tlist.insert(3);\n\t\tlist.display();\n\t}\n}"
-    },
-    {
-      "language": "java",
       "description": "Binary search algorithm implementation",
       "linesOfCode": 26,
       "code": "public class BinarySearch {\n\tpublic static int binarySearch(int[] arr, int x) {\n\t\tint left = 0, right = arr.length - 1;\n\t\twhile (left <= right) {\n\t\t\tint mid = left + (right - left) / 2;\n\t\t\tif (arr[mid] == x) return mid;\n\t\t\tif (arr[mid] < x) left = mid + 1;\n\t\t\telse right = mid - 1;\n\t\t}\n\t\treturn -1;\n\t}\n\n\tpublic static void main(String[] args) {\n\t\tint[] arr = {2, 3, 4, 10, 40};\n\t\tint x = 10;\n\t\tint result = binarySearch(arr, x);\n\t\tif (result == -1) System.out.println(\"Element not present\");\n\t\telse System.out.println(\"Element found at index \" + result);\n\t}\n}"
+    },
+    {
+      "language": "java",
+      "description": "Bubble sort algorithm implementation",
+      "linesOfCode": 27,
+      "code": "public class BubbleSort {\n\tpublic static void bubbleSort(int[] arr) {\n\t\tint n = arr.length;\n\t\tfor (int i = 0; i < n - 1; i++) {\n\t\t\tfor (int j = 0; j < n - i - 1; j++) {\n\t\t\t\tif (arr[j] > arr[j + 1]) {\n\t\t\t\t\tint temp = arr[j];\n\t\t\t\t\tarr[j] = arr[j + 1];\n\t\t\t\t\tarr[j + 1] = temp;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\tpublic static void main(String[] args) {\n\t\tint[] arr = {64, 34, 25, 12, 22, 11, 90};\n\t\tbubbleSort(arr);\n\t\tSystem.out.print(\"Sorted array: \");\n\t\tfor (int num : arr) System.out.print(num + \" \");\n\t}\n}"
     },
     {
       "language": "java",
@@ -80,15 +104,27 @@
     },
     {
       "language": "java",
-      "description": "Create a simple student grading system",
-      "linesOfCode": 30,
-      "code": "class Student {\n\tString name;\n\tint[] grades;\n\n\tpublic Student(String name, int[] grades) {\n\t\tthis.name = name;\n\t\tthis.grades = grades;\n\t}\n\n\tpublic double calculateAverage() {\n\t\tint sum = 0;\n\t\tfor (int grade : grades) {\n\t\t\tsum += grade;\n\t\t}\n\t\treturn (double) sum / grades.length;\n\t}\n\n\tpublic void displayInfo() {\n\t\tSystem.out.println(\"Name: \" + name);\n\t\tSystem.out.println(\"Grades: \");\n\t\tfor (int grade : grades) {\n\t\t\tSystem.out.print(grade + \" \");\n\t\t}\n\t\tSystem.out.println(\"\\nAverage: \" + calculateAverage());\n\t}\n}\n\npublic class Main {\n\tpublic static void main(String[] args) {\n\t\tint[] grades = {85, 90, 78, 92};\n\t\tStudent student = new Student(\"Alice\", grades);\n\t\tstudent.displayInfo();\n\t}\n}"
+      "description": "Create a simple linked list with insertion and display",
+      "linesOfCode": 28,
+      "code": "class Node {\n\tint data;\n\tNode next;\n\tNode(int val) { data = val; next = null; }\n}\n\nclass LinkedList {\n\tNode head;\n\n\tpublic void insert(int data) {\n\t\tNode newNode = new Node(data);\n\t\tif (head == null) {\n\t\t\thead = newNode;\n\t\t} else {\n\t\t\tNode temp = head;\n\t\t\twhile (temp.next != null) {\n\t\t\t\ttemp = temp.next;\n\t\t\t}\n\t\t\ttemp.next = newNode;\n\t\t}\n\t}\n\n\tpublic void display() {\n\t\tNode temp = head;\n\t\twhile (temp != null) {\n\t\t\tSystem.out.print(temp.data + \" \");\n\t\t\ttemp = temp.next;\n\t\t}\n\t\tSystem.out.println();\n\t}\n}\n\npublic class Main {\n\tpublic static void main(String[] args) {\n\t\tLinkedList list = new LinkedList();\n\t\tlist.insert(1);\n\t\tlist.insert(2);\n\t\tlist.insert(3);\n\t\tlist.display();\n\t}\n}"
     },
     {
       "language": "java",
       "description": "Simple Tic Tac Toe game board setup and display",
       "linesOfCode": 28,
       "code": "public class TicTacToe {\n\tprivate char[][] board;\n\n\tpublic TicTacToe() {\n\t\tboard = new char[3][3];\n\t\tfor (int i = 0; i < 3; i++) {\n\t\t\tfor (int j = 0; j < 3; j++) {\n\t\t\t\tboard[i][j] = '-';\n\t\t\t}\n\t\t}\n\t}\n\n\tpublic void displayBoard() {\n\t\tfor (int i = 0; i < 3; i++) {\n\t\t\tfor (int j = 0; j < 3; j++) {\n\t\t\t\tSystem.out.print(board[i][j] + \" \");\n\t\t\t}\n\t\t\tSystem.out.println();\n\t\t}\n\t}\n\n\tpublic static void main(String[] args) {\n\t\tTicTacToe game = new TicTacToe();\n\t\tgame.displayBoard();\n\t}\n}"
+    },
+    {
+      "language": "java",
+      "description": "Implement a simple queue using an array",
+      "linesOfCode": 29,
+      "code": "class Queue {\n\tprivate int[] arr;\n\tprivate int front, rear, capacity;\n\n\tpublic Queue(int c) {\n\t\tcapacity = c;\n\t\tarr = new int[capacity];\n\t\tfront = rear = 0;\n\t}\n\n\tpublic void enqueue(int item) {\n\t\tif (rear == capacity) {\n\t\t\tSystem.out.println(\"Queue is full\");\n\t\t\treturn;\n\t\t}\n\t\tarr[rear++] = item;\n\t}\n\n\tpublic void dequeue() {\n\t\tif (front == rear) {\n\t\t\tSystem.out.println(\"Queue is empty\");\n\t\t\treturn;\n\t\t}\n\t\tfront++;\n\t}\n\n\tpublic void display() {\n\t\tfor (int i = front; i < rear; i++) {\n\t\t\tSystem.out.print(arr[i] + \" \");\n\t\t}\n\t\tSystem.out.println();\n\t}\n}\n\npublic class Main {\n\tpublic static void main(String[] args) {\n\t\tQueue q = new Queue(5);\n\t\tq.enqueue(10);\n\t\tq.enqueue(20);\n\t\tq.display();\n\t\tq.dequeue();\n\t\tq.display();\n\t}\n}"
+    },
+    {
+      "language": "java",
+      "description": "Create a simple student grading system",
+      "linesOfCode": 30,
+      "code": "class Student {\n\tString name;\n\tint[] grades;\n\n\tpublic Student(String name, int[] grades) {\n\t\tthis.name = name;\n\t\tthis.grades = grades;\n\t}\n\n\tpublic double calculateAverage() {\n\t\tint sum = 0;\n\t\tfor (int grade : grades) {\n\t\t\tsum += grade;\n\t\t}\n\t\treturn (double) sum / grades.length;\n\t}\n\n\tpublic void displayInfo() {\n\t\tSystem.out.println(\"Name: \" + name);\n\t\tSystem.out.println(\"Grades: \");\n\t\tfor (int grade : grades) {\n\t\t\tSystem.out.print(grade + \" \");\n\t\t}\n\t\tSystem.out.println(\"\\nAverage: \" + calculateAverage());\n\t}\n}\n\npublic class Main {\n\tpublic static void main(String[] args) {\n\t\tint[] grades = {85, 90, 78, 92};\n\t\tStudent student = new Student(\"Alice\", grades);\n\t\tstudent.displayInfo();\n\t}\n}"
     }
   ]
 }

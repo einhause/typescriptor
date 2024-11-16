@@ -123,6 +123,12 @@ export function Sidebar() {
                 onChangeCallback={handleLanguageChange}
               />
               <Checkbox
+                name="csharp"
+                label="C#"
+                checked={languageFilter.csharp}
+                onChangeCallback={handleLanguageChange}
+              />
+              <Checkbox
                 name="java"
                 label="Java"
                 checked={languageFilter.java}

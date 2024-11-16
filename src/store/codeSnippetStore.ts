@@ -9,7 +9,7 @@ interface CodeSnippet {
   code: string;
 }
 
-type Language = 'python' | 'cpp' | 'java' | 'javascript';
+type Language = 'python' | 'cpp' | 'csharp' | 'java' | 'javascript';
 type AutoOption = 'autoTab' | 'autoNewline';
 
 export type LanguageFilter = {
@@ -49,9 +49,10 @@ const useCodeSnippetStore = create<CodeSnippetStore>((set, get) => ({
   filteredSnippets: [],
   languageFilter: {
     python: true,
-    cpp: false,
-    java: false,
-    javascript: false,
+    cpp: true,
+    csharp: true,
+    java: true,
+    javascript: true,
   },
   autoOptions: {
     autoTab: true,
@@ -65,7 +66,13 @@ const useCodeSnippetStore = create<CodeSnippetStore>((set, get) => ({
 
   fetchSnippets: async () => {
     try {
-      const files = ['cpp.json', 'java.json', 'javascript.json', 'python.json'];
+      const files = [
+        'cpp.json',
+        'csharp.json',
+        'java.json',
+        'javascript.json',
+        'python.json',
+      ];
       const fetchPromises = files.map((file) =>
         fetch(`/${file}`).then((res) => res.json())
       );

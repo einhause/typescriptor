@@ -173,7 +173,7 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
       if (nextIndex === codeSnippet.length) {
         stopTimer();
         calculateSnippetStatistics();
-        set({ showModal: true });
+        set({ showModal: true, pressedKeys: new Set() });
       }
     } else {
       // Mark as incorrect if the character doesn’t match
@@ -254,6 +254,7 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
       charactersTyped: 0,
       wordsPerMinute: 0,
       showModal: false,
+      pressedKeys: new Set(),
     });
   },
 }));

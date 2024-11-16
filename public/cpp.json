@@ -8,15 +8,15 @@
     },
     {
       "language": "cpp",
-      "description": "Check if a number is prime",
-      "linesOfCode": 15,
-      "code": "#include <iostream>\nusing namespace std;\n\nbool isPrime(int num) {\n\tif (num < 2) return false;\n\tfor (int i = 2; i * i <= num; i++) {\n\t\tif (num % i == 0) return false;\n\t}\n\treturn true;\n}\n\nint main() {\n\tfor (int i = 1; i <= 20; i++) {\n\t\tif (isPrime(i)) cout << i << \" is a prime number\" << endl;\n\t}\n\treturn 0;\n}"
+      "description": "Check if a number is a palindrome",
+      "linesOfCode": 12,
+      "code": "#include <iostream>\nusing namespace std;\n\nbool isPalindrome(int num) {\n\tint original = num, reversed = 0, remainder;\n\twhile (num != 0) {\n\t\tremainder = num % 10;\n\t\treversed = reversed * 10 + remainder;\n\t\tnum /= 10;\n\t}\n\treturn original == reversed;\n}\n\nint main() {\n\tcout << isPalindrome(121) << endl;\n\treturn 0;\n}"
     },
     {
       "language": "cpp",
-      "description": "Simple class representing a rectangle",
-      "linesOfCode": 16,
-      "code": "#include <iostream>\nusing namespace std;\n\nclass Rectangle {\n\tprivate:\n\t\tdouble length, width;\n\tpublic:\n\t\tRectangle(double l, double w) : length(l), width(w) {}\n\t\tdouble area() { return length * width; }\n};\n\nint main() {\n\tRectangle rect(5, 3);\n\tcout << \"Area: \" << rect.area() << endl;\n\treturn 0;\n}"
+      "description": "Find the minimum element in an array",
+      "linesOfCode": 13,
+      "code": "#include <iostream>\nusing namespace std;\n\nint findMin(int arr[], int size) {\n\tint min = arr[0];\n\tfor (int i = 1; i < size; i++) {\n\t\tif (arr[i] < min) min = arr[i];\n\t}\n\treturn min;\n}\n\nint main() {\n\tint arr[] = {3, 1, 4, 1, 5};\n\tcout << \"Minimum: \" << findMin(arr, 5) << endl;\n\treturn 0;\n}"
     },
     {
       "language": "cpp",
@@ -26,9 +26,51 @@
     },
     {
       "language": "cpp",
+      "description": "Print Fibonacci sequence up to n terms",
+      "linesOfCode": 14,
+      "code": "#include <iostream>\nusing namespace std;\n\nvoid fibonacci(int n) {\n\tint a = 0, b = 1;\n\tfor (int i = 0; i < n; i++) {\n\t\tcout << a << \" \";\n\t\tint next = a + b;\n\t\ta = b;\n\t\tb = next;\n\t}\n}\n\nint main() {\n\tfibonacci(10);\n\treturn 0;\n}"
+    },
+    {
+      "language": "cpp",
+      "description": "Check if a number is prime",
+      "linesOfCode": 15,
+      "code": "#include <iostream>\nusing namespace std;\n\nbool isPrime(int num) {\n\tif (num < 2) return false;\n\tfor (int i = 2; i * i <= num; i++) {\n\t\tif (num % i == 0) return false;\n\t}\n\treturn true;\n}\n\nint main() {\n\tfor (int i = 1; i <= 20; i++) {\n\t\tif (isPrime(i)) cout << i << \" is a prime number\" << endl;\n\t}\n\treturn 0;\n}"
+    },
+    {
+      "language": "cpp",
+      "description": "Reverse a string",
+      "linesOfCode": 15,
+      "code": "#include <iostream>\n#include <string>\nusing namespace std;\n\nstring reverseString(string str) {\n\tint n = str.length();\n\tfor (int i = 0; i < n / 2; i++) {\n\t\tswap(str[i], str[n - i - 1]);\n\t}\n\treturn str;\n}\n\nint main() {\n\tcout << reverseString(\"hello\") << endl;\n\treturn 0;\n}"
+    },
+    {
+      "language": "cpp",
+      "description": "Simple class representing a rectangle",
+      "linesOfCode": 16,
+      "code": "#include <iostream>\nusing namespace std;\n\nclass Rectangle {\n\tprivate:\n\t\tdouble length, width;\n\tpublic:\n\t\tRectangle(double l, double w) : length(l), width(w) {}\n\t\tdouble area() { return length * width; }\n};\n\nint main() {\n\tRectangle rect(5, 3);\n\tcout << \"Area: \" << rect.area() << endl;\n\treturn 0;\n}"
+    },
+    {
+      "language": "cpp",
       "description": "Convert Celsius to Fahrenheit",
       "linesOfCode": 17,
       "code": "#include <iostream>\nusing namespace std;\n\ndouble celsiusToFahrenheit(double celsius) {\n\treturn (celsius * 9.0 / 5.0) + 32;\n}\n\nint main() {\n\tfor (double c = 0; c <= 100; c += 10) {\n\t\tcout << c << \"°C = \" << celsiusToFahrenheit(c) << \"°F\" << endl;\n\t}\n\treturn 0;\n}"
+    },
+    {
+      "language": "cpp",
+      "description": "Implement a basic calculator (addition, subtraction)",
+      "linesOfCode": 17,
+      "code": "#include <iostream>\nusing namespace std;\n\nint add(int a, int b) { return a + b; }\nint subtract(int a, int b) { return a - b; }\n\nint main() {\n\tint x = 10, y = 5;\n\tcout << \"Addition: \" << add(x, y) << endl;\n\tcout << \"Subtraction: \" << subtract(x, y) << endl;\n\treturn 0;\n}"
+    },
+    {
+      "language": "cpp",
+      "description": "Check if a number is a perfect number",
+      "linesOfCode": 18,
+      "code": "#include <iostream>\nusing namespace std;\n\nbool isPerfectNumber(int num) {\n\tint sum = 0;\n\tfor (int i = 1; i <= num / 2; i++) {\n\t\tif (num % i == 0) sum += i;\n\t}\n\treturn sum == num;\n}\n\nint main() {\n\tcout << isPerfectNumber(6) << endl;\n\tcout << isPerfectNumber(28) << endl;\n\treturn 0;\n}"
+    },
+    {
+      "language": "cpp",
+      "description": "Count the number of vowels in a string",
+      "linesOfCode": 19,
+      "code": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint countVowels(string str) {\n\tint count = 0;\n\tfor (char c : str) {\n\t\tif (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') count++;\n\t}\n\treturn count;\n}\n\nint main() {\n\tcout << countVowels(\"hello world\") << endl;\n\treturn 0;\n}"
     },
     {
       "language": "cpp",
@@ -44,21 +86,27 @@
     },
     {
       "language": "cpp",
+      "description": "Find the GCD of two numbers using Euclidean algorithm",
+      "linesOfCode": 22,
+      "code": "#include <iostream>\nusing namespace std;\n\nint gcd(int a, int b) {\n\twhile (b != 0) {\n\t\tint temp = b;\n\t\tb = a % b;\n\t\ta = temp;\n\t}\n\treturn a;\n}\n\nint main() {\n\tcout << gcd(56, 98) << endl;\n\tcout << gcd(101, 10) << endl;\n\treturn 0;\n}"
+    },
+    {
+      "language": "cpp",
       "description": "Calculate the sum of an array of integers",
       "linesOfCode": 24,
       "code": "#include <iostream>\nusing namespace std;\n\nint sumArray(int arr[], int size) {\n\tint sum = 0;\n\tfor (int i = 0; i < size; i++) {\n\t\tsum += arr[i];\n\t}\n\treturn sum;\n}\n\nint main() {\n\tint numbers[] = {1, 2, 3, 4, 5};\n\tint size = sizeof(numbers) / sizeof(numbers[0]);\n\tcout << \"Sum of array: \" << sumArray(numbers, size) << endl;\n\treturn 0;\n}"
     },
     {
       "language": "cpp",
-      "description": "Bubble sort algorithm implementation",
-      "linesOfCode": 26,
-      "code": "#include <iostream>\nusing namespace std;\n\nvoid bubbleSort(int arr[], int size) {\n\tfor (int i = 0; i < size - 1; i++) {\n\t\tfor (int j = 0; j < size - i - 1; j++) {\n\t\t\tif (arr[j] > arr[j + 1]) {\n\t\t\t\tswap(arr[j], arr[j + 1]);\n\t\t\t}\n\t\t}\n\t}\n}\n\nint main() {\n\tint arr[] = {64, 34, 25, 12, 22, 11, 90};\n\tint size = sizeof(arr) / sizeof(arr[0]);\n\tbubbleSort(arr, size);\n\tcout << \"Sorted array: \";\n\tfor (int i = 0; i < size; i++) cout << arr[i] << \" \";\n\treturn 0;\n}"
+      "description": "Find the sum of diagonal elements in a 2D array",
+      "linesOfCode": 25,
+      "code": "#include <iostream>\nusing namespace std;\n\nint sumDiagonal(int arr[3][3], int size) {\n\tint sum = 0;\n\tfor (int i = 0; i < size; i++) {\n\t\tsum += arr[i][i];\n\t\tsum += arr[i][size - i - 1];\n\t}\n\treturn sum;\n}\n\nint main() {\n\tint matrix[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};\n\tcout << \"Sum of diagonals: \" << sumDiagonal(matrix, 3) << endl;\n\treturn 0;\n}"
     },
     {
       "language": "cpp",
-      "description": "Implement a simple queue using an array",
-      "linesOfCode": 30,
-      "code": "#include <iostream>\nusing namespace std;\n\nclass Queue {\n\tprivate:\n\t\tint arr[100];\n\t\tint front, rear;\n\t\tint capacity;\n\tpublic:\n\t\tQueue(int c) {\n\t\t\tcapacity = c;\n\t\t\tfront = rear = 0;\n\t\t}\n\n\t\tvoid enqueue(int item) {\n\t\t\tif (rear == capacity) {\n\t\t\t\tcout << \"Queue is full\" << endl;\n\t\t\t\treturn;\n\t\t\t}\n\t\t\tarr[rear++] = item;\n\t\t}\n\n\t\tvoid dequeue() {\n\t\t\tif (front == rear) {\n\t\t\t\tcout << \"Queue is empty\" << endl;\n\t\t\t\treturn;\n\t\t\t}\n\t\t\tfront++;\n\t\t}\n\n\t\tvoid display() {\n\t\t\tfor (int i = front; i < rear; i++) {\n\t\t\t\tcout << arr[i] << \" \";\n\t\t\t}\n\t\t\tcout << endl;\n\t\t}\n};\n\nint main() {\n\tQueue q(5);\n\tq.enqueue(10);\n\tq.enqueue(20);\n\tq.display();\n\tq.dequeue();\n\tq.display();\n\treturn 0;\n}"
+      "description": "Bubble sort algorithm implementation",
+      "linesOfCode": 26,
+      "code": "#include <iostream>\nusing namespace std;\n\nvoid bubbleSort(int arr[], int size) {\n\tfor (int i = 0; i < size - 1; i++) {\n\t\tfor (int j = 0; j < size - i - 1; j++) {\n\t\t\tif (arr[j] > arr[j + 1]) {\n\t\t\t\tswap(arr[j], arr[j + 1]);\n\t\t\t}\n\t\t}\n\t}\n}\n\nint main() {\n\tint arr[] = {64, 34, 25, 12, 22, 11, 90};\n\tint size = sizeof(arr) / sizeof(arr[0]);\n\tbubbleSort(arr, size);\n\tcout << \"Sorted array: \";\n\tfor (int i = 0; i < size; i++) cout << arr[i] << \" \";\n\treturn 0;\n}"
     },
     {
       "language": "cpp",
@@ -77,6 +125,12 @@
       "description": "Create a simple binary search tree with insertion and in-order traversal",
       "linesOfCode": 30,
       "code": "#include <iostream>\nusing namespace std;\n\nclass Node {\n\tpublic:\n\t\tint data;\n\t\tNode* left;\n\t\tNode* right;\n\t\tNode(int val) : data(val), left(nullptr), right(nullptr) {}\n};\n\nclass BST {\n\tprivate:\n\t\tNode* root;\n\t\tvoid insert(Node*& node, int val) {\n\t\t\tif (!node) {\n\t\t\t\tnode = new Node(val);\n\t\t\t} else if (val < node->data) {\n\t\t\t\tinsert(node->left, val);\n\t\t\t} else {\n\t\t\t\tinsert(node->right, val);\n\t\t\t}\n\t\t}\n\t\tvoid inorder(Node* node) {\n\t\t\tif (node) {\n\t\t\t\tinorder(node->left);\n\t\t\t\tcout << node->data << \" \";\n\t\t\t\tinorder(node->right);\n\t\t\t}\n\t\t}\n\tpublic:\n\t\tBST() : root(nullptr) {}\n\t\tvoid insert(int val) {\n\t\t\tinsert(root, val);\n\t\t}\n\t\tvoid inorder() {\n\t\t\tinorder(root);\n\t\t}\n};\n\nint main() {\n\tBST tree;\n\ttree.insert(5);\n\ttree.insert(3);\n\ttree.insert(7);\n\ttree.insert(1);\n\tcout << \"In-order Traversal: \";\n\ttree.inorder();\n\tcout << endl;\n\treturn 0;\n}"
+    },
+    {
+      "language": "cpp",
+      "description": "Implement a simple queue using an array",
+      "linesOfCode": 30,
+      "code": "#include <iostream>\nusing namespace std;\n\nclass Queue {\n\tprivate:\n\t\tint arr[100];\n\t\tint front, rear;\n\t\tint capacity;\n\tpublic:\n\t\tQueue(int c) {\n\t\t\tcapacity = c;\n\t\t\tfront = rear = 0;\n\t\t}\n\n\t\tvoid enqueue(int item) {\n\t\t\tif (rear == capacity) {\n\t\t\t\tcout << \"Queue is full\" << endl;\n\t\t\t\treturn;\n\t\t\t}\n\t\t\tarr[rear++] = item;\n\t\t}\n\n\t\tvoid dequeue() {\n\t\t\tif (front == rear) {\n\t\t\t\tcout << \"Queue is empty\" << endl;\n\t\t\t\treturn;\n\t\t\t}\n\t\t\tfront++;\n\t\t}\n\n\t\tvoid display() {\n\t\t\tfor (int i = front; i < rear; i++) {\n\t\t\t\tcout << arr[i] << \" \";\n\t\t\t}\n\t\t\tcout << endl;\n\t\t}\n};\n\nint main() {\n\tQueue q(5);\n\tq.enqueue(10);\n\tq.enqueue(20);\n\tq.display();\n\tq.dequeue();\n\tq.display();\n\treturn 0;\n}"
     }
   ]
 }

@@ -1,0 +1,160 @@
+{
+  "snippets": [
+    {
+      "language": "csharp",
+      "description": "Calculate sum of an integer array",
+      "linesOfCode": 10,
+      "code": "using System;\n\nclass Program {\n\tstatic int SumArray(int[] arr) {\n\t\tint sum = 0;\n\t\tforeach (int num in arr) sum += num;\n\t\treturn sum;\n\t}\n\n\tstatic void Main() {\n\t\tConsole.WriteLine(SumArray(new int[] {1, 2, 3, 4, 5}));\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Convert Celsius to Fahrenheit",
+      "linesOfCode": 10,
+      "code": "using System;\n\nclass Program {\n\tstatic double CelsiusToFahrenheit(double celsius) {\n\t\treturn (celsius * 9 / 5) + 32;\n\t}\n\n\tstatic void Main() {\n\t\tConsole.WriteLine(CelsiusToFahrenheit(25));\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Reverse a string",
+      "linesOfCode": 11,
+      "code": "using System;\n\nclass Program {\n\tstatic string ReverseString(string s) {\n\t\tchar[] charArray = s.ToCharArray();\n\t\tArray.Reverse(charArray);\n\t\treturn new string(charArray);\n\t}\n\n\tstatic void Main() {\n\t\tConsole.WriteLine(ReverseString(\"Hello World\"));\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Check if a year is a leap year",
+      "linesOfCode": 12,
+      "code": "using System;\n\nclass Program {\n\tstatic bool IsLeapYear(int year) {\n\t\treturn (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);\n\t}\n\n\tstatic void Main() {\n\t\tConsole.WriteLine(IsLeapYear(2024));\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Find the largest element in an array",
+      "linesOfCode": 12,
+      "code": "using System;\n\nclass Program {\n\tstatic int FindMax(int[] arr) {\n\t\tint max = arr[0];\n\t\tforeach (int num in arr) {\n\t\t\tif (num > max) max = num;\n\t\t}\n\t\treturn max;\n\t}\n\n\tstatic void Main() {\n\t\tConsole.WriteLine(FindMax(new int[] {1, 7, 3, 9, 5}));\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Calculate factorial of a number using recursion",
+      "linesOfCode": 13,
+      "code": "using System;\n\nclass Program {\n\tstatic int Factorial(int n) {\n\t\tif (n <= 1)\n\t\t\treturn 1;\n\t\treturn n * Factorial(n - 1);\n\t}\n\n\tstatic void Main() {\n\t\tint num = 5;\n\t\tConsole.WriteLine($\"Factorial of {num} is: {Factorial(num)}\");\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Find the GCD of two numbers",
+      "linesOfCode": 14,
+      "code": "using System;\n\nclass Program {\n\tstatic int GCD(int a, int b) {\n\t\twhile (b != 0) {\n\t\t\tint temp = b;\n\t\t\tb = a % b;\n\t\t\ta = temp;\n\t\t}\n\t\treturn a;\n\t}\n\n\tstatic void Main() {\n\t\tConsole.WriteLine(GCD(24, 36));\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Check if a string is a palindrome",
+      "linesOfCode": 15,
+      "code": "using System;\n\nclass Program {\n\tstatic bool IsPalindrome(string s) {\n\t\tint len = s.Length;\n\t\tfor (int i = 0; i < len / 2; i++) {\n\t\t\tif (s[i] != s[len - i - 1]) return false;\n\t\t}\n\t\treturn true;\n\t}\n\n\tstatic void Main() {\n\t\tConsole.WriteLine(IsPalindrome(\"madam\"));\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Generate Fibonacci sequence up to n terms",
+      "linesOfCode": 16,
+      "code": "using System;\n\nclass Program {\n\tstatic void Fibonacci(int n) {\n\t\tint a = 0, b = 1, c;\n\t\tConsole.Write(\"0 1 \");\n\t\tfor (int i = 2; i < n; i++) {\n\t\t\tc = a + b;\n\t\t\tConsole.Write(c + \" \");\n\t\t\ta = b;\n\t\t\tb = c;\n\t\t}\n\t}\n\n\tstatic void Main() {\n\t\tFibonacci(10);\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Convert a string to uppercase",
+      "linesOfCode": 17,
+      "code": "using System;\n\nclass Program {\n\tstatic string ToUpperCase(string str) {\n\t\treturn str.ToUpper();\n\t}\n\n\tstatic void Main() {\n\t\tConsole.WriteLine(ToUpperCase(\"hello\"));\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Check if a number is even or odd",
+      "linesOfCode": 17,
+      "code": "using System;\n\nclass Program {\n\tstatic string EvenOdd(int num) {\n\t\treturn (num % 2 == 0) ? \"Even\" : \"Odd\";\n\t}\n\n\tstatic void Main() {\n\t\tConsole.WriteLine(EvenOdd(12));\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Check if a number is prime",
+      "linesOfCode": 18,
+      "code": "using System;\n\nclass Program {\n\tstatic bool IsPrime(int num) {\n\t\tif (num <= 1) return false;\n\t\tfor (int i = 2; i <= Math.Sqrt(num); i++) {\n\t\t\tif (num % i == 0) return false;\n\t\t}\n\t\treturn true;\n\t}\n\n\tstatic void Main() {\n\t\tint num = 17;\n\t\tConsole.WriteLine($\"Is {num} prime? {IsPrime(num)}\");\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Calculate the sum of all digits of a number",
+      "linesOfCode": 18,
+      "code": "using System;\n\nclass Program {\n\tstatic int SumDigits(int num) {\n\t\tint sum = 0;\n\t\twhile (num > 0) {\n\t\t\tsum += num % 10;\n\t\t\tnum /= 10;\n\t\t}\n\t\treturn sum;\n\t}\n\n\tstatic void Main() {\n\t\tConsole.WriteLine(SumDigits(12345));\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Merge two sorted arrays",
+      "linesOfCode": 19,
+      "code": "using System;\n\nclass Program {\n\tstatic int[] MergeArrays(int[] arr1, int[] arr2) {\n\t\tint[] merged = new int[arr1.Length + arr2.Length];\n\t\tint i = 0, j = 0, k = 0;\n\t\twhile (i < arr1.Length && j < arr2.Length) {\n\t\t\tmerged[k++] = arr1[i++] < arr2[j++] ? arr1[i - 1] : arr2[j - 1];\n\t\t}\n\t\twhile (i < arr1.Length) merged[k++] = arr1[i++];\n\t\twhile (j < arr2.Length) merged[k++] = arr2[j++];\n\t\treturn merged;\n\t}\n\n\tstatic void Main() {\n\t\tConsole.WriteLine(string.Join(\", \", MergeArrays(new int[]{1, 3, 5}, new int[]{2, 4, 6}))); \n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Find the second largest element in an array",
+      "linesOfCode": 19,
+      "code": "using System;\n\nclass Program {\n\tstatic int FindSecondLargest(int[] arr) {\n\t\tint first = int.MinValue, second = int.MinValue;\n\t\tforeach (int num in arr) {\n\t\t\tif (num > first) {\n\t\t\t\tsecond = first;\n\t\t\t\tfirst = num;\n\t\t\t} else if (num > second && num != first) {\n\t\t\t\tsecond = num;\n\t\t\t}\n\t\t}\n\t\treturn second;\n\t}\n\n\tstatic void Main() {\n\t\tConsole.WriteLine(FindSecondLargest(new int[] {5, 3, 9, 1, 7}));\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Sort an array using Bubble Sort",
+      "linesOfCode": 20,
+      "code": "using System;\n\nclass Program {\n\tstatic void BubbleSort(int[] arr) {\n\t\tfor (int i = 0; i < arr.Length - 1; i++) {\n\t\t\tfor (int j = 0; j < arr.Length - i - 1; j++) {\n\t\t\t\tif (arr[j] > arr[j + 1]) {\n\t\t\t\t\tint temp = arr[j];\n\t\t\t\t\tarr[j] = arr[j + 1];\n\t\t\t\t\tarr[j + 1] = temp;\n\t\t\t}\n\t\t}\n\t}\n\t}\n\n\tstatic void Main() {\n\t\tint[] arr = {5, 2, 9, 1, 5};\n\t\tBubbleSort(arr);\n\t\tConsole.WriteLine(string.Join(\", \", arr));\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Generate the nth Fibonacci number using iteration",
+      "linesOfCode": 21,
+      "code": "using System;\n\nclass Program {\n\tstatic int Fibonacci(int n) {\n\t\tif (n <= 1) return n;\n\t\tint a = 0, b = 1;\n\t\tfor (int i = 2; i <= n; i++) {\n\t\t\tint temp = a + b;\n\t\t\ta = b;\n\t\t\tb = temp;\n\t\t}\n\t\treturn b;\n\t}\n\n\tstatic void Main() {\n\t\tConsole.WriteLine(Fibonacci(10));\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Find the second largest number in an array",
+      "linesOfCode": 22,
+      "code": "using System;\n\nclass Program {\n\tstatic int FindSecondLargest(int[] arr) {\n\t\tint largest = int.MinValue;\n\t\tint secondLargest = int.MinValue;\n\t\tforeach (int num in arr) {\n\t\t\tif (num > largest) {\n\t\t\t\tsecondLargest = largest;\n\t\t\t\tlargest = num;\n\t\t} else if (num > secondLargest && num != largest) {\n\t\t\tsecondLargest = num;\n\t\t}\n\t\t}\n\t\treturn secondLargest;\n\t}\n\n\tstatic void Main() {\n\t\tint[] arr = { 12, 35, 1, 10, 34, 1 };\n\t\tConsole.WriteLine(FindSecondLargest(arr));\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Count the frequency of each character in a string",
+      "linesOfCode": 24,
+      "code": "using System;\nusing System.Collections.Generic;\n\nclass Program {\n\tstatic void CountCharacterFrequency(string str) {\n\t\tDictionary<char, int> frequency = new Dictionary<char, int>();\n\t\tforeach (char c in str) {\n\t\t\tif (frequency.ContainsKey(c))\n\t\t\t\tfrequency[c]++;\n\t\t\telse\n\t\t\t\tfrequency[c] = 1;\n\t\t}\n\t\tforeach (var pair in frequency) {\n\t\t\tConsole.WriteLine($\"{pair.Key}: {pair.Value}\");\n\t\t}\n\t}\n\n\tstatic void Main() {\n\t\tCountCharacterFrequency(\"hello world\");\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Find common elements between two arrays",
+      "linesOfCode": 25,
+      "code": "using System;\nusing System.Collections.Generic;\n\nclass Program {\n\tstatic void FindCommonElements(int[] arr1, int[] arr2) {\n\t\tHashSet<int> set1 = new HashSet<int>(arr1);\n\t\tHashSet<int> set2 = new HashSet<int>(arr2);\n\t\tset1.IntersectWith(set2);\n\t\tConsole.WriteLine(string.Join(\", \", set1));\n\t}\n\n\tstatic void Main() {\n\t\tFindCommonElements(new int[]{1, 2, 3, 4}, new int[]{3, 4, 5, 6});\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Convert an integer to its binary representation",
+      "linesOfCode": 26,
+      "code": "using System;\n\nclass Program {\n\tstatic string ToBinary(int num) {\n\t\tstring result = \"\";\n\t\twhile (num > 0) {\n\t\t\tresult = (num % 2) + result;\n\t\t\tnum /= 2;\n\t\t}\n\t\treturn result == \"\" ? \"0\" : result;\n\t}\n\n\tstatic void Main() {\n\t\tConsole.WriteLine(ToBinary(25));\n\t\tConsole.WriteLine(ToBinary(0));\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Implement binary search on a sorted array",
+      "linesOfCode": 27,
+      "code": "using System;\n\nclass Program {\n\tstatic int BinarySearch(int[] arr, int target) {\n\t\tint left = 0, right = arr.Length - 1;\n\t\twhile (left <= right) {\n\t\t\tint mid = left + (right - left) / 2;\n\t\t\tif (arr[mid] == target) return mid;\n\t\t\tif (arr[mid] < target) left = mid + 1;\n\t\t\telse right = mid - 1;\n\t\t}\n\t\treturn -1;\n\t}\n\n\tstatic void Main() {\n\t\tint[] arr = {2, 3, 5, 7, 11, 13, 17, 19};\n\t\tint target = 13;\n\t\tint result = BinarySearch(arr, target);\n\t\tif (result != -1)\n\t\t\tConsole.WriteLine($\"Element found at index {result}\");\n\t\telse\n\t\t\tConsole.WriteLine(\"Element not found\");\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Find the GCD of two numbers using Euclidean algorithm",
+      "linesOfCode": 27,
+      "code": "using System;\n\nclass Program {\n\tstatic int GCD(int a, int b) {\n\t\twhile (b != 0) {\n\t\t\tint temp = b;\n\t\t\tb = a % b;\n\t\t\ta = temp;\n\t\t}\n\t\treturn a;\n\t}\n\n\tstatic void Main() {\n\t\tint a = 56, b = 98;\n\t\tConsole.WriteLine($\"GCD of {a} and {b} is: {GCD(a, b)}\");\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Implement a simple linked list and add nodes",
+      "linesOfCode": 28,
+      "code": "using System;\n\nclass Node {\n\tpublic int Data;\n\tpublic Node Next;\n\tpublic Node(int data) {\n\t\tData = data;\n\t\tNext = null;\n\t}\n}\n\nclass LinkedList {\n\tpublic Node Head;\n\n\tpublic void Add(int data) {\n\t\tNode newNode = new Node(data);\n\t\tif (Head == null) Head = newNode;\n\t\telse {\n\t\t\tNode current = Head;\n\t\t\twhile (current.Next != null) current = current.Next;\n\t\t\tcurrent.Next = newNode;\n\t\t}\n\t}\n\n\tpublic void PrintList() {\n\t\tNode current = Head;\n\t\twhile (current != null) {\n\t\t\tConsole.Write(current.Data + \" -> \");\n\t\t\tcurrent = current.Next;\n\t\t}\n\t\tConsole.WriteLine(\"null\");\n\t}\n\n\tstatic void Main() {\n\t\tLinkedList list = new LinkedList();\n\t\tlist.Add(1);\n\t\tlist.Add(2);\n\t\tlist.Add(3);\n\t\tlist.PrintList();\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Merge two sorted arrays into one sorted array",
+      "linesOfCode": 28,
+      "code": "using System;\n\nclass Program {\n\tstatic int[] MergeArrays(int[] arr1, int[] arr2) {\n\t\tint[] merged = new int[arr1.Length + arr2.Length];\n\t\tint i = 0, j = 0, k = 0;\n\t\twhile (i < arr1.Length && j < arr2.Length) {\n\t\t\tmerged[k++] = arr1[i] < arr2[j] ? arr1[i++] : arr2[j++];\n\t\t}\n\t\twhile (i < arr1.Length) merged[k++] = arr1[i++];\n\t\twhile (j < arr2.Length) merged[k++] = arr2[j++];\n\t\treturn merged;\n\t}\n\n\tstatic void Main() {\n\t\tint[] arr1 = {1, 3, 5};\n\t\tint[] arr2 = {2, 4, 6};\n\t\tint[] result = MergeArrays(arr1, arr2);\n\t\tConsole.WriteLine(string.Join(\", \", result));\n\t}\n}"
+    },
+    {
+      "language": "csharp",
+      "description": "Simulate a basic bank account with deposit and withdraw methods",
+      "linesOfCode": 29,
+      "code": "using System;\n\nclass BankAccount {\n\tpublic string AccountHolder;\n\tpublic double Balance;\n\n\tpublic BankAccount(string holder, double balance) {\n\t\tAccountHolder = holder;\n\t\tBalance = balance;\n\t}\n\n\tpublic void Deposit(double amount) {\n\t\tBalance += amount;\n\t\tConsole.WriteLine($\"Deposited: {amount:C}. New Balance: {Balance:C}\");\n\t}\n\n\tpublic void Withdraw(double amount) {\n\t\tif (amount <= Balance) {\n\t\t\tBalance -= amount;\n\t\t\tConsole.WriteLine($\"Withdrew: {amount:C}. Remaining Balance: {Balance:C}\");\n\t\t} else {\n\t\t\tConsole.WriteLine(\"Insufficient funds\");\n\t\t}\n\t}\n\n\tstatic void Main() {\n\t\tBankAccount account = new BankAccount(\"John Doe\", 1000.0);\n\t\taccount.Deposit(500);\n\t\taccount.Withdraw(300);\n\t\taccount.Withdraw(1500);\n\t}\n}"
+    }
+  ]
+}
