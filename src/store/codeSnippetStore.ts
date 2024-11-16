@@ -74,7 +74,7 @@ const useCodeSnippetStore = create<CodeSnippetStore>((set, get) => ({
         'python.json',
       ];
       const fetchPromises = files.map((file) =>
-        fetch(`/${file}`).then((res) => res.json())
+        fetch(`json/${file}`).then((res) => res.json())
       );
       const data = await Promise.all(fetchPromises);
       const snippets = data.reduce((prev, curr) => [...prev, curr.snippets], []).flat();

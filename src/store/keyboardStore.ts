@@ -63,7 +63,10 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
 
     if (showModal) return;
 
-    event.preventDefault();
+    if (key === 'Tab' || key === ' ' || key === 'Enter') {
+      // Prevent default browser behavior
+      event.preventDefault();
+    }
 
     const newPressedKeys = new Set(pressedKeys);
     if (code === 'ShiftLeft' || code === 'ShiftRight') {
