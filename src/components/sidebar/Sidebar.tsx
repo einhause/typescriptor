@@ -6,7 +6,7 @@ import {
   LucideIcon,
   CircleEllipsis,
 } from 'lucide-react';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useRef, useState } from 'react';
 
 import useCodeSnippetStore, {
   SortType,
@@ -19,6 +19,7 @@ import CodeLengthSlider from './input/CodeLengthSlider';
 import Radio from './input/Radio';
 
 export function Sidebar() {
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const codeSnippetStore = useCodeSnippetStore();
 
   const [expanded, setExpanded] = useState<boolean>(false);
@@ -35,6 +36,8 @@ export function Sidebar() {
   const [autoOptions, setAutoOptions] = useState<AutoOptions>(
     codeSnippetStore.autoOptions
   );
+
+  const [filterChangeText, setFilterChangedText] = useState<string>('');
 
   const handleLanguageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
@@ -73,6 +76,9 @@ export function Sidebar() {
       minCodeSnippetLength !== codeSnippetStore.minCodeSnippetLength ||
       maxCodeSnippetLength !== codeSnippetStore.maxCodeSnippetLength;
 
+    const FILTER_TIMEOUT_TIME: number = 2000;
+    let anythingChanged: boolean = false;
+
     if (sortTypeChanged) {
       if (sortType === 'ascending') {
         sortByIncreasingLength();
@@ -81,20 +87,34 @@ export function Sidebar() {
       } else {
         sortRandomly();
       }
+      anythingChanged = true;
     }
     if (languageFilterChanged) {
       setLanguageFilter(languageFilter);
+      anythingChanged = true;
     }
     if (autoOptionsChanged) {
       setAutoOptions(autoOptions);
+      anythingChanged = true;
     }
     if (lengthChanged) {
       setCodeSnippetLengthFilter(minCodeSnippetLength, maxCodeSnippetLength);
+      anythingChanged = true;
     }
+
+    setFilterChangedText(anythingChanged ? 'Filters Applied!' : 'No Filters Applied.');
+
+    if (timeoutRef.current) {
+      // Clear timeout if it exists
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setFilterChangedText('');
+    }, FILTER_TIMEOUT_TIME);
   };
 
   return (
-    <aside className="float-end z-50">
+    <aside className="float-end z-50 h-screen overflow-y-hidden">
       <div className="h-full flex flex-col bg-gray-600 border-l border-indigo-300 shadow-sm">
         <div className="p-4 pb-2 flex justify-between items-center mb-4">
           <button
@@ -189,7 +209,12 @@ export function Sidebar() {
             </div>
           </SidebarItem>
         </ul>
-        <div className={`p-4 ${expanded ? 'block' : 'hidden'}`}>
+        <div
+          className={`p-4 flex flex-col justify-center items-center ${
+            expanded ? 'block' : 'hidden'
+          }`}
+        >
+          <div className="mb-4 text-lg">{filterChangeText}</div>
           <button
             className="w-full p-1 bg-blue-900 hover:bg-blue-800 border border-indigo-300 rounded-lg text-lg"
             type="submit"
