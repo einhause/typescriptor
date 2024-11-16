@@ -63,7 +63,7 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
 
     if (showModal) return;
 
-    if (key === 'Tab' || key === ' ' || key === 'Enter') {
+    if (key === 'Tab' || key === ' ' || key === 'Enter' || key === "'" || key === '/') {
       // Prevent default browser behavior
       event.preventDefault();
     }
