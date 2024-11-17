@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 import useKeyboardStore from './keyboardStore';
 
-interface CodeSnippet {
+export interface CodeSnippet {
   language: Language;
   description: string;
   linesOfCode: number;
