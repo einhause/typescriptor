@@ -29,7 +29,7 @@ export default function App() {
 
     // Cleanup on component unmount
     return () => resizeObserver.disconnect();
-  }, []);
+  }, [fetchSnippets]);
 
   return (
     <div className="grid h-screen grid-cols-[1fr_auto]">

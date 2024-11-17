@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { describe, it, beforeEach, expect, vi } from 'vitest';
+import { describe, it, beforeEach, expect } from 'vitest';
 
 import VirtualKeyboard from '../VirtualKeyboard';
 import useKeyboardStore from '@/store/keyboardStore';

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 import useKeyboardStore from '@/store/keyboardStore';
 import useCodeSnippetStore from '@/store/codeSnippetStore';
@@ -25,9 +25,9 @@ export default function SnippetCompleteModal({ isOpen }: ModalProps) {
     resetKeyboardProgress();
   };
 
-  const onModalClose = () => {
+  const onModalClose = useCallback(() => {
     resetKeyboardProgress();
-  };
+  }, [resetKeyboardProgress]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -43,7 +43,7 @@ export default function SnippetCompleteModal({ isOpen }: ModalProps) {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen]);
+  }, [isOpen, onModalClose]);
 
   if (!isOpen) return null;
 

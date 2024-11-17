@@ -36,7 +36,7 @@ interface KeyboardState {
 }
 
 // Regular expression to filter valid character keys
-const validCharRegex = /^[a-zA-Z0-9`~!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/? ]$/;
+const validCharRegex = /^[a-zA-Z0-9`~!@#$%^&*()_+\-=[\]{};':"\\|,.<>/? ]$/;
 
 const useKeyboardStore = create<KeyboardState>((set, get) => ({
   pressedKeys: new Set<string>(),

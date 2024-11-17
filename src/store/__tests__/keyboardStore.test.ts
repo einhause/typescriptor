@@ -1,4 +1,4 @@
-import { describe, it, beforeEach, expect, vi } from 'vitest';
+import { describe, it, beforeEach, expect } from 'vitest';
 import { act } from '@testing-library/react';
 import useKeyboardStore from '../keyboardStore';
 import useCodeSnippetStore, { CodeSnippet } from '../codeSnippetStore';

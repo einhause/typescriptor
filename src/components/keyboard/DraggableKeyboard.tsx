@@ -25,7 +25,7 @@ export default function DraggableKeyboard({ codeSectionWidth }: DraggableKeyboar
 
       const keyboardWidth: number = keyboardRef.current.offsetWidth;
 
-      setKeyboardPosition((_prev) => {
+      setKeyboardPosition(() => {
         return {
           x: (codeSectionWidth - keyboardWidth) / 2,
           y: bottomOfScreen - keyboardHeight - yOffset,
