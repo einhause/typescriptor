@@ -1,4 +1,4 @@
-import { Fragment } from 'react/jsx-runtime';
+import { Fragment, useEffect } from 'react';
 import useKeyboardStore from '../../store/keyboardStore';
 import VirtuakKeyboardKey from './VirtualKeyboardKey';
 
@@ -27,7 +27,18 @@ const capsLockKeys: string[][] = [
 ];
 
 export default function VirtualKeyboard() {
-  const { isShiftActive, isCapsLockActive } = useKeyboardStore();
+  const { isShiftActive, isCapsLockActive, handleKeyUp, handleKeyDown } =
+    useKeyboardStore();
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, [handleKeyDown, handleKeyUp]);
 
   const getKeysToShow = (): string[][] => {
     if (isShiftActive) {

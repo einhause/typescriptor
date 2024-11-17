@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 
-import useKeyboardStore from './store/keyboardStore';
 import useCodeSnippetStore from './store/codeSnippetStore';
 
 import DraggableKeyboard from './components/keyboard/DraggableKeyboard';
@@ -8,21 +7,10 @@ import CodeSection from './components/code/CodeSection';
 import { Sidebar } from './components/sidebar/Sidebar';
 
 export default function App() {
-  const { handleKeyDown, handleKeyUp } = useKeyboardStore();
   const { fetchSnippets } = useCodeSnippetStore();
 
   const [codeSectionWidth, setCodeSectionWidth] = useState<number>(0);
   const codeSectionContainerRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
-    };
-  }, [handleKeyDown, handleKeyUp]);
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
