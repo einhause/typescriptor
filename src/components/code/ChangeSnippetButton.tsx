@@ -26,6 +26,7 @@ export default function ChangeSnippetButton({
   return (
     <button
       type="button"
+      data-testid={`${changeSnippetDirection}`}
       onClick={handleChangeSnippetClicked}
       className={`p-1.5 mx-1 rounded-lg bg-blue-900 hover:bg-blue-800 border border-indigo-300 ${
         showModal && 'cursor-not-allowed'

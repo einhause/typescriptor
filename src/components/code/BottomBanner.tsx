@@ -21,7 +21,10 @@ export default function BottomBanner() {
   };
 
   return (
-    <div className="absolute bottom-0 left-0 bg-blue-900 bg-opacity-50 w-full flex justify-center items-center">
+    <div
+      className="absolute bottom-0 left-0 bg-blue-900 bg-opacity-50 w-full flex justify-center items-center"
+      data-testid="BottomBanner"
+    >
       <div className="p-4 text-center">
         <p className="text-2xl mb-2">
           <span className="font-bold">{getLanguageLabel()}</span> |{' '}

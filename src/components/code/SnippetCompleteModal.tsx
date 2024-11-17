@@ -48,7 +48,10 @@ export default function SnippetCompleteModal({ isOpen }: ModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center z-10">
+    <div
+      className="absolute inset-0 flex items-center justify-center z-10"
+      data-testid="SnippetCompleteModal"
+    >
       <div className="bg-gray-600 text-white p-6 rounded-lg w-[80%] max-w-lg relative border">
         <button
           onClick={onModalClose}
