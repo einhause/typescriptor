@@ -1,50 +1,80 @@
-# React + TypeScript + Vite
+# Typescriptor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Improve your typing speed and efficiency with this interactive typing practice app designed for developers! Whether you're just getting started or looking to sharpen your skills, this app is built to help you type faster and more accurately using real code snippets.
 
-Currently, two official plugins are available:
+## 🔗 Link
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- **100+ Code Snippets**: Practice typing with snippets in popular programming languages including:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+  - Python
+  - Java
+  - JavaScript
+  - TypeScript
+  - C++
+  - C#
 
-- Configure the top-level `parserOptions` property like this:
+- **Real-Time Feedback**: Characters are marked as correct or incorrect as you type, so you can spot errors immediately.
+- **Track your Words Per Minute (WPM)**: Track your progress and improve over time with your calculated current and average WPM.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🛠️ Getting Started
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Prerequisites
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Make sure you have the following installed on your machine:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/einhause/typescriptor.git
+   cd typescriptor
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser and navigate to::
+
+   ```bash
+   http://localhost:5173
+   ```
+
+## 📚 How to Use
+
+1. Open the right sidebar to select your languages, code snippet lengths, sorting options, and auto options.
+2. Apply the filters with the 'Apply Filters' Button.
+3. A timer will begin once you type the first character of the snippet correctly.
+4. Watch as the app highlights correct and incorrect characters in real-time, and your keys are highlighted in the Virtual Keyboard.
+5. Once you complete that snippet, see how your current and average Words Per Minute (WPM) changes!
+
+## 🤖 Tech Stack
+
+- Frontend: React, TypeScript
+- Styling: TailwindCSS, CSS
+- State Management: Zustand
+- Tests: Vitest, React Testing Library, JSDOM
+- Data: JSON files for storing code snippets
+
+## 📧 Contact
+
+Feel free to reach out if you have any questions or suggestions!
+
+- Email: eeinhaus17@gmail.com
+- GitHub: einhause
+
+## Happy typing! 💻
