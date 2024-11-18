@@ -58,7 +58,8 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
   showModal: false,
 
   handleKeyDown: (event: KeyboardEvent) => {
-    const { key, code } = event;
+    const { key, code, repeat } = event;
+    if (repeat) return;
     const { pressedKeys, showModal, advanceCharacter } = get();
 
     if (showModal) return;
@@ -77,9 +78,11 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
       set({ isCapsLockActive: true });
     }
 
-    newPressedKeys.add(key === ' ' ? 'Space' : key);
-    if (code === 'ShiftLeft') newPressedKeys.add('ShiftLeft');
-    if (code === 'ShiftRight') newPressedKeys.add('ShiftRight');
+    if (code === 'ShiftLeft' || code === 'ShiftRight') {
+      newPressedKeys.add(code);
+    } else {
+      newPressedKeys.add(key === ' ' ? 'Space' : key);
+    }
 
     // Only process if the key is a valid character
     if (validCharRegex.test(key) || key === 'Enter' || key === 'Tab') {
@@ -90,14 +93,16 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
   },
 
   handleKeyUp: (event: KeyboardEvent) => {
-    const { key, code } = event;
+    const { key, code, repeat } = event;
+    if (repeat) return;
     const { pressedKeys, showModal } = get();
 
     if (showModal) return;
 
     const newPressedKeys = new Set(pressedKeys);
+    const shiftReleased = code === 'ShiftLeft' || code === 'ShiftRight';
 
-    if (code === 'ShiftLeft' || code === 'ShiftRight') {
+    if (shiftReleased) {
       set({ isShiftActive: false });
     }
 
@@ -105,9 +110,12 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
       set({ isCapsLockActive: false });
     }
 
-    newPressedKeys.delete(key === ' ' ? 'Space' : key);
-    if (code === 'ShiftLeft') newPressedKeys.delete('ShiftLeft');
-    if (code === 'ShiftRight') newPressedKeys.delete('ShiftRight');
+    if (shiftReleased) {
+      newPressedKeys.delete('ShiftLeft');
+      newPressedKeys.delete('ShiftRight');
+    } else {
+      newPressedKeys.delete(key === ' ' ? 'Space' : key);
+    }
 
     set({ pressedKeys: newPressedKeys });
   },
