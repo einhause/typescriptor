@@ -1,0 +1,124 @@
+{
+  "snippets": [
+    {
+      "language": "typescript",
+      "description": "Reverse a given string",
+      "linesOfCode": 10,
+      "code": "function reverseString(str: string): string {\n\treturn str.split('').reverse().join('');\n}\n\nconst input = 'hello';\nconsole.log('Reversed:', reverseString(input));"
+    },
+    {
+      "language": "typescript",
+      "description": "Calculate factorial of a number",
+      "linesOfCode": 12,
+      "code": "function factorial(n: number): number {\n\tif (n === 0) return 1;\n\treturn n * factorial(n - 1);\n}\n\nconst num = 5;\nconsole.log(`Factorial of ${num} is:`, factorial(num));"
+    },
+    {
+      "language": "typescript",
+      "description": "Check if a number is a palindrome",
+      "linesOfCode": 11,
+      "code": "function isPalindrome(num: number): boolean {\n\tconst str = num.toString();\n\treturn str === str.split('').reverse().join('');\n}\n\nconsole.log('Is palindrome:', isPalindrome(121));\nconsole.log('Is palindrome:', isPalindrome(123));"
+    },
+    {
+      "language": "typescript",
+      "description": "Find the largest number in an array",
+      "linesOfCode": 13,
+      "code": "function findLargest(arr: number[]): number {\n\treturn arr.reduce((max, curr) => (curr > max ? curr : max), arr[0]);\n}\n\nconst numbers = [3, 56, 12, 89, 44];\nconsole.log('Largest number:', findLargest(numbers));"
+    },
+    {
+      "language": "typescript",
+      "description": "Remove duplicates from an array",
+      "linesOfCode": 12,
+      "code": "function removeDuplicates(arr: number[]): number[] {\n\treturn [...new Set(arr)];\n}\n\nconst data = [1, 2, 3, 2, 4, 5, 4, 6];\nconsole.log('Array without duplicates:', removeDuplicates(data));"
+    },
+    {
+      "language": "typescript",
+      "description": "Merge two sorted arrays into one sorted array",
+      "linesOfCode": 16,
+      "code": "function mergeSortedArrays(arr1: number[], arr2: number[]): number[] {\n\tlet i = 0, j = 0;\n\tconst merged: number[] = [];\n\twhile (i < arr1.length && j < arr2.length) {\n\t\tif (arr1[i] < arr2[j]) merged.push(arr1[i++]);\n\t\telse merged.push(arr2[j++]);\n\t}\n\treturn merged.concat(arr1.slice(i), arr2.slice(j));\n}\n\nconst arr1 = [1, 3, 5];\nconst arr2 = [2, 4, 6];\nconsole.log('Merged array:', mergeSortedArrays(arr1, arr2));"
+    },
+    {
+      "language": "typescript",
+      "description": "Flatten a nested array",
+      "linesOfCode": 18,
+      "code": "function flattenArray(arr: any[]): any[] {\n\treturn arr.reduce((flat: any[], item) => {\n\t\treturn flat.concat(Array.isArray(item) ? flattenArray(item) : item);\n\t}, []);\n}\n\nconst nestedArr = [1, [2, [3, [4]], 5]];\nconsole.log('Flattened array:', flattenArray(nestedArr));"
+    },
+    {
+      "language": "typescript",
+      "description": "Group an array of objects by a key",
+      "linesOfCode": 17,
+      "code": "type Person = { name: string; age: number };\nfunction groupBy<T>(arr: T[], key: keyof T): Record<string, T[]> {\n\treturn arr.reduce((result, obj) => {\n\t\tconst value = obj[key];\n\t\t(result[value as string] = result[value as string] || []).push(obj);\n\t\treturn result;\n\t}, {});\n}\n\nconst people: Person[] = [\n\t{ name: 'Alice', age: 25 },\n\t{ name: 'Bob', age: 30 },\n\t{ name: 'Charlie', age: 25 }\n];\nconsole.log('Grouped by age:', groupBy(people, 'age'));"
+    },
+    {
+      "language": "typescript",
+      "description": "Generate a random string of given length",
+      "linesOfCode": 15,
+      "code": "function randomString(length: number): string {\n\tconst chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\n\tlet result = '';\n\tfor (let i = 0; i < length; i++) {\n\t\tconst randomIndex = Math.floor(Math.random() * chars.length);\n\t\tresult += chars[randomIndex];\n\t}\n\treturn result;\n}\n\nconsole.log('Random string:', randomString(10));"
+    },
+    {
+      "language": "typescript",
+      "description": "Calculate the sum of all numbers in a matrix",
+      "linesOfCode": 19,
+      "code": "function sumMatrix(matrix: number[][]): number {\n\tlet total = 0;\n\tfor (const row of matrix) {\n\t\tfor (const num of row) {\n\t\t\ttotal += num;\n\t\t}\n\t}\n\treturn total;\n}\n\nconst matrix = [\n\t[1, 2, 3],\n\t[4, 5, 6],\n\t[7, 8, 9]\n];\nconsole.log('Sum of matrix:', sumMatrix(matrix));"
+    },
+    {
+      "language": "typescript",
+      "description": "Implement binary search on a sorted array",
+      "linesOfCode": 23,
+      "code": "function binarySearch(arr: number[], target: number): number {\n\tlet left = 0;\n\tlet right = arr.length - 1;\n\twhile (left <= right) {\n\t\tconst mid = Math.floor((left + right) / 2);\n\t\tif (arr[mid] === target) return mid;\n\t\tif (arr[mid] < target) left = mid + 1;\n\t\telse right = mid - 1;\n\t}\n\treturn -1;\n}\n\nconst sortedArray = [1, 3, 5, 7, 9, 11, 13];\nconst target = 7;\nconst result = binarySearch(sortedArray, target);\nconsole.log(\n\tresult !== -1 ? `Found at index: ${result}` : 'Not found'\n);"
+    },
+    {
+      "language": "typescript",
+      "description": "Sort an array of objects by a property",
+      "linesOfCode": 22,
+      "code": "type Product = { name: string; price: number };\nfunction sortByPrice(products: Product[]): Product[] {\n\treturn products.sort((a, b) => a.price - b.price);\n}\n\nconst items: Product[] = [\n\t{ name: 'Laptop', price: 1000 },\n\t{ name: 'Phone', price: 500 },\n\t{ name: 'Tablet', price: 700 }\n];\n\nconst sortedItems = sortByPrice(items);\nsortedItems.forEach(item => \n\tconsole.log(`Product: ${item.name}, Price: $${item.price}`)\n);"
+    },
+    {
+      "language": "typescript",
+      "description": "Calculate the transpose of a matrix",
+      "linesOfCode": 24,
+      "code": "function transposeMatrix(matrix: number[][]): number[][] {\n\tconst rows = matrix.length;\n\tconst cols = matrix[0].length;\n\tconst transposed: number[][] = [];\n\tfor (let i = 0; i < cols; i++) {\n\t\tconst row: number[] = [];\n\t\tfor (let j = 0; j < rows; j++) {\n\t\t\trow.push(matrix[j][i]);\n\t\t}\n\t\ttransposed.push(row);\n\t}\n\treturn transposed;\n}\n\nconst matrix = [\n\t[1, 2, 3],\n\t[4, 5, 6]\n];\nconsole.log('Transposed matrix:', transposeMatrix(matrix));"
+    },
+    {
+      "language": "typescript",
+      "description": "Find the intersection of two arrays",
+      "linesOfCode": 21,
+      "code": "function arrayIntersection(arr1: number[], arr2: number[]): number[] {\n\tconst set1 = new Set(arr1);\n\treturn arr2.filter(num => set1.has(num));\n}\n\nconst array1 = [1, 2, 3, 4, 5];\nconst array2 = [4, 5, 6, 7, 8];\nconst intersection = arrayIntersection(array1, array2);\nconsole.log('Intersection:', intersection);\n\nconst array3 = [10, 20, 30];\nconst array4 = [15, 20, 25];\nconsole.log('Intersection:', arrayIntersection(array3, array4));"
+    },
+    {
+      "language": "typescript",
+      "description": "Check if two strings are anagrams",
+      "linesOfCode": 25,
+      "code": "function areAnagrams(str1: string, str2: string): boolean {\n\tconst normalize = (str: string) =>\n\t\tstr.toLowerCase().replace(/[^a-z]/g, '').split('').sort().join('');\n\treturn normalize(str1) === normalize(str2);\n}\n\nconst word1 = 'Listen';\nconst word2 = 'Silent';\nconsole.log(`Are anagrams: ${areAnagrams(word1, word2)}`);\n\nconst word3 = 'Hello';\nconst word4 = 'World';\nconsole.log(`Are anagrams: ${areAnagrams(word3, word4)}`);\n"
+    },
+    {
+      "language": "typescript",
+      "description": "Implement the QuickSort algorithm",
+      "linesOfCode": 29,
+      "code": "function quickSort(arr: number[]): number[] {\n\tif (arr.length <= 1) return arr;\n\tconst pivot = arr[Math.floor(arr.length / 2)];\n\tconst left = arr.filter(num => num < pivot);\n\tconst middle = arr.filter(num => num === pivot);\n\tconst right = arr.filter(num => num > pivot);\n\treturn [...quickSort(left), ...middle, ...quickSort(right)];\n}\n\nconst numbers = [33, 10, 55, 26, 64, 8, 7];\nconsole.log('Sorted array:', quickSort(numbers));\n\nconst moreNumbers = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3];\nconsole.log('Sorted array:', quickSort(moreNumbers));"
+    },
+    {
+      "language": "typescript",
+      "description": "Create a simple event emitter class",
+      "linesOfCode": 27,
+      "code": "class EventEmitter {\n\tprivate events: { [key: string]: Function[] } = {};\n\n\ton(event: string, listener: Function) {\n\t\tif (!this.events[event]) this.events[event] = [];\n\t\tthis.events[event].push(listener);\n\t}\n\n\temit(event: string, ...args: any[]) {\n\t\tif (this.events[event]) {\n\t\t\tthis.events[event].forEach(listener => listener(...args));\n\t\t}\n\t}\n}\n\nconst emitter = new EventEmitter();\nemitter.on('greet', (name: string) => console.log(`Hello, ${name}!`));\nemitter.emit('greet', 'Alice');"
+    },
+    {
+      "language": "typescript",
+      "description": "Implement a basic debounce function",
+      "linesOfCode": 28,
+      "code": "function debounce(func: Function, delay: number) {\n\tlet timeoutId: NodeJS.Timeout;\n\treturn function (...args: any[]) {\n\t\tclearTimeout(timeoutId);\n\t\ttimeoutId = setTimeout(() => func(...args), delay);\n\t};\n}\n\nconst logMessage = (message: string) => console.log('Debounced:', message);\nconst debouncedLog = debounce(logMessage, 1000);\n\ndebouncedLog('Hello');\nsetTimeout(() => debouncedLog('World'), 500);\nsetTimeout(() => debouncedLog('Typescript'), 1500);"
+    },
+    {
+      "language": "typescript",
+      "description": "Implement a Linked List with basic methods",
+      "linesOfCode": 30,
+      "code": "class Node<T> {\n\tvalue: T;\n\tnext: Node<T> | null = null;\n\tconstructor(value: T) {\n\t\tthis.value = value;\n\t}\n}\n\nclass LinkedList<T> {\n\thead: Node<T> | null = null;\n\tadd(value: T): void {\n\t\tconst newNode = new Node(value);\n\t\tif (!this.head) this.head = newNode;\n\t\telse {\n\t\t\tlet current = this.head;\n\t\t\twhile (current.next) current = current.next;\n\t\t\tcurrent.next = newNode;\n\t\t}\n\t}\n\tprint(): void {\n\t\tlet current = this.head;\n\t\twhile (current) {\n\t\t\tconsole.log(current.value);\n\t\t\tcurrent = current.next;\n\t\t}\n\t}\n}\n\nconst list = new LinkedList<number>();\nlist.add(1);\nlist.add(2);\nlist.add(3);\nlist.print();"
+    },
+    {
+      "language": "typescript",
+      "description": "Create a simple promise-based delay function",
+      "linesOfCode": 26,
+      "code": "function delay(ms: number): Promise<void> {\n\treturn new Promise(resolve => setTimeout(resolve, ms));\n}\n\nasync function delayedMessage() {\n\tconsole.log('Waiting...');\n\tawait delay(2000);\n\tconsole.log('Hello after 2 seconds');\n\tawait delay(1000);\n\tconsole.log('Another 1 second passed');\n}\n\ndelayedMessage();"
+    }
+  ]
+}

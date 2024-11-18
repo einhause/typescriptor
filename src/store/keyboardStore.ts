@@ -177,7 +177,7 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
       newPressedKeys.delete('ShiftLeft');
       newPressedKeys.delete('ShiftRight');
       // Remove all keys that require Shift modifiers
-      for (const [modifier, _baseKey] of modifierToKey.entries()) {
+      for (const modifier of modifierToKey.keys()) {
         newPressedKeys.delete(modifier);
       }
 

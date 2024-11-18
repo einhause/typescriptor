@@ -160,6 +160,12 @@ export function Sidebar() {
                 checked={languageFilter.javascript}
                 onChangeCallback={handleLanguageChange}
               />
+              <Checkbox
+                name="typescript"
+                label="TypeScript"
+                checked={languageFilter.typescript}
+                onChangeCallback={handleLanguageChange}
+              />
             </div>
           </SidebarItem>
           <SidebarItem Icon={SlidersHorizontal} text="Lines of Code">

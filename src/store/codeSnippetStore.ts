@@ -9,7 +9,7 @@ export interface CodeSnippet {
   code: string;
 }
 
-type Language = 'python' | 'cpp' | 'csharp' | 'java' | 'javascript';
+type Language = 'python' | 'cpp' | 'csharp' | 'java' | 'javascript' | 'typescript';
 type AutoOption = 'autoTab' | 'autoNewline';
 
 export type LanguageFilter = {
@@ -53,6 +53,7 @@ const useCodeSnippetStore = create<CodeSnippetStore>((set, get) => ({
     csharp: true,
     java: true,
     javascript: true,
+    typescript: true,
   },
   autoOptions: {
     autoTab: true,
@@ -72,6 +73,7 @@ const useCodeSnippetStore = create<CodeSnippetStore>((set, get) => ({
         'java.json',
         'javascript.json',
         'python.json',
+        'typescript.json',
       ];
       const fetchPromises = files.map((file) =>
         fetch(`json/${file}`).then((res) => res.json())

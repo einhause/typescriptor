@@ -18,6 +18,7 @@ beforeEach(() => {
       csharp: true,
       java: false,
       javascript: true,
+      typescript: true,
     },
     autoOptions: {
       autoTab: true,
@@ -57,6 +58,7 @@ describe('Sidebar Component', () => {
       csharp: true,
       java: false,
       javascript: true,
+      typescript: true,
     });
 
     expect(screen.getByText('Filters Applied!')).toBeInTheDocument();

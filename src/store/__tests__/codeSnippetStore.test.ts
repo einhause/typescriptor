@@ -13,6 +13,7 @@ beforeEach(() => {
       csharp: true,
       java: true,
       javascript: true,
+      typescript: true,
     },
     autoOptions: {
       autoTab: true,
@@ -37,6 +38,7 @@ describe('useCodeSnippetStore', () => {
       csharp: true,
       java: true,
       javascript: true,
+      typescript: true,
     });
     expect(state.autoOptions).toEqual({
       autoTab: true,
@@ -81,6 +83,7 @@ describe('useCodeSnippetStore', () => {
         csharp: false,
         java: true,
         javascript: true,
+        typescript: true,
       });
     });
 
@@ -92,6 +95,7 @@ describe('useCodeSnippetStore', () => {
       csharp: false,
       java: true,
       javascript: true,
+      typescript: true,
     });
   });
 

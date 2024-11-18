@@ -32,7 +32,7 @@ describe('useKeyboardStore', () => {
       handleKeyUp(new KeyboardEvent('keyup', { key: 'Shift', code: 'ShiftLeft' }));
     });
 
-    expect(isKeyPressed('Shift')).toBe(false);
+    expect(isKeyPressed('ShiftLeft')).toBe(false);
   });
 
   it('should start and stop timer correctly', () => {

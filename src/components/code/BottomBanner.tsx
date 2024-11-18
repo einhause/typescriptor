@@ -15,6 +15,8 @@ export default function BottomBanner() {
         return 'JavaScript';
       case 'python':
         return 'Python';
+      case 'typescript':
+        return 'TypeScript';
       default:
         return '';
     }

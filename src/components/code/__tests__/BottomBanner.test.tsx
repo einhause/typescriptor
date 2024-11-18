@@ -75,6 +75,27 @@ describe('BottomBanner Component', () => {
     ).toBeInTheDocument();
   });
 
+  it('should display the correct language label for JavaScript', () => {
+    // Set Zustand store with a JavaScript snippet
+    useCodeSnippetStore.setState({
+      currentSnippet: {
+        language: 'typescript',
+        description: 'A TypeScript snippet',
+        code: 'const a: string = "Hi"',
+        linesOfCode: 10,
+      },
+    });
+
+    render(<BottomBanner />);
+
+    const languageLabel = screen.getByText('TypeScript');
+    expect(languageLabel).toBeInTheDocument();
+    expect(screen.getByText('| A TypeScript snippet')).toBeInTheDocument();
+    expect(
+      screen.getByText('Correctly type the first character to begin.')
+    ).toBeInTheDocument();
+  });
+
   it('should display the correct language label for Python', () => {
     // Set Zustand store with a Python snippet
     useCodeSnippetStore.setState({
