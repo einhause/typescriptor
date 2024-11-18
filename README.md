@@ -4,6 +4,8 @@ Improve your typing speed and efficiency with this interactive typing practice a
 
 ## 🔗 Link
 
+[See Live Application](https://typescriptor.vercel.app/)
+
 ## 🚀 Features
 
 - **100+ Code Snippets**: Practice typing with snippets in popular programming languages including:
