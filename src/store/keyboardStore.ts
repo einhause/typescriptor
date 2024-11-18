@@ -70,15 +70,13 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
     }
 
     const newPressedKeys = new Set(pressedKeys);
-    if (code === 'ShiftLeft' || code === 'ShiftRight') {
-      set({ isShiftActive: true });
-    }
 
     if (event.getModifierState('CapsLock')) {
       set({ isCapsLockActive: true });
     }
 
     if (code === 'ShiftLeft' || code === 'ShiftRight') {
+      set({ isShiftActive: true });
       newPressedKeys.add(code);
     } else {
       newPressedKeys.add(key === ' ' ? 'Space' : key);
@@ -102,15 +100,12 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
     const newPressedKeys = new Set(pressedKeys);
     const shiftReleased = code === 'ShiftLeft' || code === 'ShiftRight';
 
-    if (shiftReleased) {
-      set({ isShiftActive: false });
-    }
-
     if (!event.getModifierState('CapsLock')) {
       set({ isCapsLockActive: false });
     }
 
     if (shiftReleased) {
+      set({ isShiftActive: false });
       newPressedKeys.delete('ShiftLeft');
       newPressedKeys.delete('ShiftRight');
     } else {
