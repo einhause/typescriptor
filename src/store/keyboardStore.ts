@@ -6,6 +6,56 @@ const AVERAGE_WORD_LENGTH = 5;
 const SECONDS_PER_MINUTE = 60;
 const MILLISECONDS_PER_SECOND = 1000;
 
+// Key with modifier to its modifier
+const keyToModifier = new Map([
+  ['1', '!'],
+  ['2', '@'],
+  ['3', '#'],
+  ['4', '$'],
+  ['5', '%'],
+  ['6', '^'],
+  ['7', '&'],
+  ['8', '*'],
+  ['9', '('],
+  ['0', ')'],
+  ['-', '_'],
+  ['=', '+'],
+  ['[', '{'],
+  [']', '}'],
+  ['\\', '|'],
+  [';', ':'],
+  ["'", '"'],
+  [',', '<'],
+  ['.', '>'],
+  ['/', '?'],
+  ['`', '~'],
+]);
+
+// Modifier key to the normal state key
+const modifierToKey = new Map([
+  ['!', '1'],
+  ['@', '2'],
+  ['#', '3'],
+  ['$', '4'],
+  ['%', '5'],
+  ['^', '6'],
+  ['&', '7'],
+  ['*', '8'],
+  ['(', '9'],
+  [')', '0'],
+  ['_', '-'],
+  ['+', '='],
+  ['{', '['],
+  ['}', ']'],
+  ['|', '\\'],
+  [':', ';'],
+  ['"', "'"],
+  ['<', ','],
+  ['>', '.'],
+  ['?', '/'],
+  ['~', '`'],
+]);
+
 interface KeyboardState {
   pressedKeys: Set<string>;
   isShiftActive: boolean;
@@ -58,10 +108,11 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
   showModal: false,
 
   handleKeyDown: (event: KeyboardEvent) => {
-    const { key, code, repeat } = event;
+    const { key, code, repeat, shiftKey } = event;
     if (repeat) return;
-    const { pressedKeys, showModal, advanceCharacter } = get();
 
+    const { pressedKeys, showModal, isCapsLockActive, isShiftActive, advanceCharacter } =
+      get();
     if (showModal) return;
 
     if (key === 'Tab' || key === ' ' || key === 'Enter' || key === "'" || key === '/') {
@@ -78,8 +129,24 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
     if (code === 'ShiftLeft' || code === 'ShiftRight') {
       set({ isShiftActive: true });
       newPressedKeys.add(code);
+    }
+
+    // Handle letters considering CapsLock and Shift
+    if (key.length === 1 && key.match(/[a-z]/i)) {
+      let modifiedKey;
+      if (isCapsLockActive || isShiftActive) {
+        modifiedKey = key.toUpperCase();
+      } else {
+        modifiedKey = key.toLowerCase();
+      }
+      newPressedKeys.add(modifiedKey);
+    } else if (shiftKey && keyToModifier.has(key)) {
+      // Handle special character keys with Shift
+      newPressedKeys.add(keyToModifier.get(key) as string);
+    } else if (key === ' ') {
+      newPressedKeys.add('Space');
     } else {
-      newPressedKeys.add(key === ' ' ? 'Space' : key);
+      newPressedKeys.add(key);
     }
 
     // Only process if the key is a valid character
@@ -93,8 +160,8 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
   handleKeyUp: (event: KeyboardEvent) => {
     const { key, code, repeat } = event;
     if (repeat) return;
-    const { pressedKeys, showModal } = get();
 
+    const { pressedKeys, showModal, isCapsLockActive, isShiftActive } = get();
     if (showModal) return;
 
     const newPressedKeys = new Set(pressedKeys);
@@ -104,12 +171,36 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
       set({ isCapsLockActive: false });
     }
 
+    // Handle releasing Shift key
     if (shiftReleased) {
       set({ isShiftActive: false });
       newPressedKeys.delete('ShiftLeft');
       newPressedKeys.delete('ShiftRight');
+      // Remove all keys that require Shift modifiers
+      for (const [modifier, _baseKey] of modifierToKey.entries()) {
+        newPressedKeys.delete(modifier);
+      }
+
+      // Remove any uppercase letters that were added while Shift was held
+      for (const key of newPressedKeys) {
+        if (key.length === 1 && key.match(/[A-Z]/)) {
+          newPressedKeys.delete(key);
+        }
+      }
+    } else if (key.length === 1 && key.match(/[a-z]/i)) {
+      let modifiedKey;
+      if (isCapsLockActive || isShiftActive) {
+        modifiedKey = key.toUpperCase();
+      } else {
+        modifiedKey = key.toLowerCase();
+      }
+      newPressedKeys.delete(modifiedKey);
+    } else if (key === ' ') {
+      newPressedKeys.delete('Space');
+    } else if (modifierToKey.has(key)) {
+      newPressedKeys.delete(modifierToKey.get(key) as string);
     } else {
-      newPressedKeys.delete(key === ' ' ? 'Space' : key);
+      newPressedKeys.delete(key);
     }
 
     set({ pressedKeys: newPressedKeys });
@@ -260,6 +351,7 @@ const useKeyboardStore = create<KeyboardState>((set, get) => ({
       charactersTyped: 0,
       wordsPerMinute: 0,
       showModal: false,
+      isShiftActive: false,
       pressedKeys: new Set(),
     });
   },
